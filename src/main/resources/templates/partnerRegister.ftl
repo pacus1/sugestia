@@ -57,10 +57,10 @@
           <ul class="nav navbar-nav" style="float:right; font-weight:300;">
             <li><a href="./">Acasa</a></li>
             <li><a href="/sugestii-reclamatii">Vezi Sugestii si Reclamatii</a></li>
-            <li><a href="/parteneri">Parteneri</a></li>
-            <li><a href="/desprenoi">Despre Noi</a></li>
+            <li><a href="/partnerInformation">Parteneri</a></li>
+            <li><a href="/aboutUs">Despre Noi</a></li>
             <li><a href="/contact">Contact</a></li>
-<li><div class=btn-group style="padding-top:8px;"> <button type=button class="btn btn-success dropdown-toggle" data-toggle=dropdown aria-haspopup=true aria-expanded=false style="color:white;">AUTENTIFICARE <span class=caret></span></button> <ul class=dropdown-menu> <li><a href="/autentificare">Intra in cont</a></li> <li><a href=/contnou>Inregistreaza un cont nou</a></li> <li><a href=/inregistrarepartener>Inregistrare partener</a></li></ul> </div> </li>
+<li><div class=btn-group style="padding-top:8px;"> <button type=button class="btn btn-success dropdown-toggle" data-toggle=dropdown aria-haspopup=true aria-expanded=false style="color:white;">AUTENTIFICARE <span class=caret></span></button> <ul class=dropdown-menu> <li><a href="/login">Intra in cont</a></li> <li><a href="/register">Inregistreaza un cont nou</a></li> <li><a href="/partnerRegister">Inregistrare partener</a></li></ul> </div> </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
