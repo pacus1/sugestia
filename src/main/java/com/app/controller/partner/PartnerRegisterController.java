@@ -1,4 +1,4 @@
-package com.app.controller;
+package com.app.controller.partner;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,11 +6,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class LoginController {
+public class PartnerRegisterController {
 
-	@RequestMapping("/login")
-	public ModelAndView login() {
-		return new ModelAndView("/login");
+	@RequestMapping("/partnerRegister")
+	public ModelAndView partnerRegister() {
+		return new ModelAndView("/partnerRegister");
 	}
 
 }

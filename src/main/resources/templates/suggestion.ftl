@@ -118,34 +118,96 @@
             </a>
           </div>
        </div>
-       <div class="col-md-6" align="center" style="border-radius: 5px; padding-bottom:223px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
-       <h1>AUTENTIFICARE</h1></br>
-</br></br>
+       <div class="col-md-6" align="center" style="border-radius: 5px; padding-bottom:30px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
+       <h2>Adauga o sugestie noua</h2></br>
+</br>
              <div style="padding-left:50px; padding-right:50px;">
     <div class="row">
 		<div>
     		<div class="panel panel-default" style="text-align:left;">
 			  	<div class="panel-heading">
-			    	<h3 class="panel-title">Va rugam sa va autentificati</h3>
+			    	<h3 class="panel-title" align="center">Va rugam sa introduceti urmatoarele informatii:</h3>
 			 	</div>
 			  	<div class="panel-body">
 			    	<form accept-charset="UTF-8" role="form">
                     <fieldset>
-			    	  	<div class="form-group" style="padding-top:20px;">
-			    		    <input class="form-control" placeholder="E-mail" name="email" type="text">
+                                        <div class="form-group" style="padding-top:12px;" align="center">
+                                        <label for="selectcategorie">Alege categoria din care face parte compania/institutia caruia vreti sa-i trimiteti sugestia:</label>
+			    		    <select name="categorie" id="selectcategorie" required style="font-size:25px;">
+                                               <optgroup label="Institutii Publice">
+                                                  <option value="volvo">Primaria</option>
+                                                  <option value="saab">Consiliul Local</option>
+                                                  <option value="saab">Politie</option>
+                                               </optgroup>
+                                               <optgroup label="Servicii Publice">
+                                                  <option value="volvo">Cluj Bike</option>
+                                                  <option value="saab">Parcuri</option>
+                                                  <option value="saab">ADP</option>
+                                                  <option value="saab">RATUC</option>
+                                               </optgroup>
+                                               <optgroup label="Servicii Private">
+                                                  <option value="volvo">Telefonie</option>
+                                                  <option value="saab">Internet</option>
+                                                  <option value="saab">Gunoi/Reciclare</option>
+                                                  <option value="saab">Taxi</option>
+                                                  <option value="saab">Curierat</option>
+                                               </optgroup>
+                                               <optgroup label="Utilitati">
+                                                  <option value="volvo">Apa</option>
+                                                  <option value="saab">Gaze</option>
+                                                  <option value="saab">Electricitate</option>
+                                               </optgroup>
+                                               <optgroup label="Localuri">
+                                                  <option value="volvo">Cafenele</option>
+                                                  <option value="saab">Restaurante</option>
+                                                  <option value="saab">Baruri</option>
+                                               </optgroup>
+                                               <optgroup label="Cazare">
+                                                  <option value="volvo">Hotele</option>
+                                                  <option value="saab">Pensiuni</option>
+                                               </optgroup>
+                                               <optgroup label="Evenimente">
+                                                  <option value="volvo">Festivaluri</option>
+                                                  <option value="saab">Targuri</option>
+                                                  <option value="saab">Concerte</option>
+                                               </optgroup>
+                                               <optgroup label="Cultura">
+                                                  <option value="volvo">Teatru</option>
+                                                  <option value="saab">Opera</option>
+                                                  <option value="saab">Film</option>
+                                               </optgroup>
+                                               <optgroup label="Evenimente">
+                                                  <option value="volvo">Mall-uri</option>
+                                                  <option value="saab">Centre Comerciale</option>
+                                                  <option value="saab">Second-Hand</option>
+                                                  <option value="volvo">Outlet-uri</option>
+                                                  <option value="saab">Electronice</option>
+                                                  <option value="saab">Farmacii</option>
+                                               </optgroup>
+                                               <optgroup label="Sanatate">
+                                                  <option value="volvo">Clinici</option>
+                                                  <option value="saab">Spitale</option>
+                                                  <option value="saab">Cabinete individuale</option>
+                                               </optgroup>
+                                            </select>
 			    		</div>
-			    		<div class="form-group">
-			    			<input class="form-control" placeholder="Parola" name="password" type="password" value="">
+			    	  	<div class="form-group">
+			    		    <input class="form-control" placeholder="Numele Companiei / Institutiei" name="nume" type="text">
 			    		</div>
-			    		<div class="checkbox">
-			    	    	<label>
-			    	    		<input name="remember" type="checkbox" value="Remember Me"> Tine-ma minte
-			    	    	</label>
-			    	    </div>
-			    		<input class="btn btn-lg btn-success btn-block btnlogin" style="color:#FFFFFF;" type="submit" value="Login">
+                                        <div class="form-group">
+			    		    <input class="form-control" placeholder="Titlul Sugestiei *" name="titlu" type="text" required>
+			    		</div>
+                                        <div class="form-group">
+			    		    <textarea class="form-control" placeholder="Descriere *" name="descriere" type="textarea" rows="4" required></textarea>
+			    		</div>
+                                        <p>Adauga poze: (optional)</p>
+			    		<input type="file" name="pic1" accept="image/*" style="padding-top:10px; padding-bottom:10px;">
+			    		<input type="file" name="pic2" accept="image/*" style="padding-top:10px; padding-bottom:10px;">
+                                        <input type="file" name="pic3" accept="image/*" style="padding-top:10px; padding-bottom:25px;">
+			    		<input class="btn btn-lg btn-primary" style="color:#FFFFFF; width:100%;" type="submit" value="Adauga">
 			    	</fieldset>
 			      	</form>
-                              <a href="/register"><button type="button" class="btn btn-lg btn-primary" style="margin-top:25px; color:#FFFFFF;  width:100%; margin-bottom:20px;">Inregistreaza un cont nou</button></a>
+
 			    </div>
 			</div>
 		</div>

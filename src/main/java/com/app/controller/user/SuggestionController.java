@@ -1,4 +1,4 @@
-package com.app.controller;
+package com.app.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,11 +6,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class AboutUsController {
+public class SuggestionController {
 
-	@RequestMapping("/aboutUs")
-	public ModelAndView aboutUs() {
-		return new ModelAndView("/aboutUs");
+	@RequestMapping("/suggestion")
+	public ModelAndView partnerInformation() {
+		return new ModelAndView("/suggestion");
 	}
 
 }

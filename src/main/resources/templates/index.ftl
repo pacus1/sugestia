@@ -56,7 +56,7 @@
           <ul class="nav navbar-nav" style="float:right; font-weight:300;">
             <li><a href="./">Acasa</a></li>
             <li><a href="/sugestii-reclamatii">Vezi Sugestii si Reclamatii</a></li>
-            <li><a href="/parteneri">Parteneri</a></li>
+            <li><a href="/partnerInformation">Parteneri</a></li>
             <li><a href="/aboutUs">Despre Noi</a></li>
             <li><a href="/contact">Contact</a></li>
 <li><div class=btn-group style="padding-top:8px;"> <button type=button class="btn btn-success dropdown-toggle" data-toggle=dropdown aria-haspopup=true aria-expanded=false style="color:white;">AUTENTIFICARE <span class=caret></span></button> <ul class=dropdown-menu> <li><a href="/login">Intra in cont</a></li> <li><a href="/register">Inregistreaza un cont nou</a></li> <li><a href="/partnerRegister">Inregistrare partener</a></li></ul> </div> </li>
@@ -118,8 +118,8 @@
           </div>
        </div>
        <div class="col-md-6" align="center" style="border-radius: 5px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
-             <button type="button" class="btn btn-lg btn-success" style="padding: 15px 70px 15px 70px; "><span class="glyphicon glyphicon-send" aria-hidden="true"></span> &nbsp; ADAUGA O SUGESTIE </button></br></br>
-             <button type="button" class="btn btn-lg btn-danger" style="padding: 15px 58px 15px 58px; "><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>&nbsp; ADAUGA O RECLAMATIE </button></br>
+             <a href="/suggestion" type="button" class="btn btn-lg btn-success" style="padding: 15px 70px 15px 70px; "><span class="glyphicon glyphicon-send" aria-hidden="true"></span> &nbsp; ADAUGA O SUGESTIE </a></br></br>
+             <a  href="/complaint" type="button" class="btn btn-lg btn-danger" style="padding: 15px 58px 15px 58px; "><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>&nbsp; ADAUGA O RECLAMATIE </a></br>
              <hr style="margin-left:0px; padding-left:0px;">
              <h3 id=list-group-contextual-classes style="color:#337AB7; font-weight:200;">Cele mai noi:</h3></br> 
                    <div style="text-align:left;  overflow: scroll; overflow: -moz-scrollbars-vertical; overflow-y: scroll;  height:498px;"   > 

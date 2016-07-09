@@ -1,4 +1,4 @@
-package com.app.controller;
+package com.app.controller.other;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,11 +6,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class HelpController {
+public class ContactController {
 
-	@RequestMapping("/help")
-	public ModelAndView index() {
-		return new ModelAndView("/help");
+	@RequestMapping("/contact")
+	public ModelAndView login() {
+		return new ModelAndView("/contact");
 	}
 
 }

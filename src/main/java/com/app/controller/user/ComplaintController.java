@@ -1,4 +1,4 @@
-package com.app.controller;
+package com.app.controller.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,11 +6,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class IndexController {
+public class ComplaintController {
 
-	@RequestMapping("/")
-	public ModelAndView index() {
-		return new ModelAndView("/index");
+	@RequestMapping("/complaint")
+	public ModelAndView partnerInformation() {
+		return new ModelAndView("/complaint");
 	}
 
 }
