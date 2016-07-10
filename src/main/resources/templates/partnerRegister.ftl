@@ -1,5 +1,5 @@
 [#ftl]
-<!DOCTYPE html>
+[#import "/spring.ftl" as spring /]
 <html lang="en">
   <head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
     
@@ -12,22 +12,23 @@
 
     <title>SUGESTIA.RO</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/custom.css" rel="stylesheet/less">
-    <link href="css/login.css" rel="stylesheet/less">
-    <link rel="stylesheet" href="css/footer-basic-centered.css">
-    <link href="less/navbar.less" rel="stylesheet/less">
-    <link href="less/navs.less" rel="stylesheet/less">
-    <link href="less/dropdowns.less" rel="stylesheet/less">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/theme.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+     <!-- Bootstrap core CSS -->
+<link href="[@spring.url '/css/custom.css' /]" rel="stylesheet/less" media="screen" /> 
+<link href="[@spring.url '/css/login.css' /]" rel="stylesheet/less" media="screen" /> 
+<link href="[@spring.url '/css/footer-basic-centered.css' /]" rel="stylesheet" media="screen" />    
+<link href="[@spring.url '/less/navbar.less' /]" rel="stylesheet/less" media="screen" />  
+<link href="[@spring.url '/less/navs.less' /]" rel="stylesheet/less" media="screen" />
+<link href="[@spring.url '/less/dropdowns.less' /]" rel="stylesheet/less" media="screen" />
+<link href="[@spring.url '/css/bootstrap.css' /]" rel="stylesheet"/>
+<link href="[@spring.url '/css/theme.css' /]" rel="stylesheet" media="screen" />
+<link href="[@spring.url '/css/bootstrap.min.css' /]" rel="stylesheet" media="screen" />
 
+   
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="[@spring.url '/css/ie10-viewport-bug-workaround.css' /]" rel="stylesheet" media="screen" /> 
 
     <!-- Custom styles for this template -->
-    <link href="css/starter-template.css" rel="stylesheet">
+    <link href="[@spring.url '/css/starter-template.css' /]" rel="stylesheet"/> 
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -38,7 +39,10 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+   
   </head>
+    [#escape x as x?html]
 
   <body style="background-color:#E9EBEE;">
 
@@ -129,95 +133,108 @@
 			    	<h3 class="panel-title">Va rugam sa introduceti urmatoarele informatii:</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8" role="form">
+			  	
+			  	<!-- PARTNER REGISTER FORM-->
+			  	
+			    	<form action="/partnerRegister/submit" method="POST" accept-charset="UTF-8" role="form">
                     <fieldset>
 			    	  	<div class="form-group" style="padding-top:20px;">
-			    		    <input class="form-control" placeholder="Nume Reprezentant" name="nume" type="text">
+			    		    <input class="form-control" placeholder="Nume Reprezentant" name="partnerLastName" type="text">
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Prenume Reprezentant" name="prenume" type="text">
+			    		    <input class="form-control" placeholder="Prenume Reprezentant" name="partnerFirstName" type="text">
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Nume Companie/Institutie *" name="companie" type="text" required>
+			    		    <input class="form-control" placeholder="Nume Companie/Institutie *" name="partnerCompanyOrInstitutionName" type="text" required>
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Adresa *" name="adresa" type="text" required>
+			    		    <input class="form-control" placeholder="Adresa *" name="partnerAddress" type="text" required>
 			    		</div>
                                         <div class="form-group">
                                         <label for="selectcategorie">Alege categoria din care face parte compania/institutia ta:</label>
-			    		    <select name="categorie" id="selectcategorie" required>
+			    		    <select name="partnerCategory" id="selectcategorie" required>
                                                <optgroup label="Institutii Publice">
-                                                  <option value="volvo">Primaria</option>
-                                                  <option value="saab">Consiliul Local</option>
-                                                  <option value="saab">Politie</option>
+                                                  <option  value="cityHall">Primaria</option> 
+                                                  <option  value="council">Consiliul Local</option>
+                                                  <option  value="police">Politie</option>
                                                </optgroup>
                                                <optgroup label="Servicii Publice">
-                                                  <option value="volvo">Cluj Bike</option>
-                                                  <option value="saab">Parcuri</option>
-                                                  <option value="saab">ADP</option>
-                                                  <option value="saab">RATUC</option>
+                                                  <option   value="clujBike">Cluj Bike</option>
+                                                  <option  value="parks">Parcuri</option>
+                                                  <option   value="ADP">ADP</option>
+                                                  <option name="partnerCategory"    value="RATUC">RATUC</option>
                                                </optgroup>
                                                <optgroup label="Servicii Private">
-                                                  <option value="volvo">Telefonie</option>
-                                                  <option value="saab">Internet</option>
-                                                  <option value="saab">Gunoi/Reciclare</option>
-                                                  <option value="saab">Taxi</option>
-                                                  <option value="saab">Curierat</option>
+                                                  <option   value="telephony">Telefonie</option>
+                                                  <option   value="internet">Internet</option>
+                                                  <option   value="garbage">Gunoi/Reciclare</option>
+                                                  <option  value="taxi">Taxi</option>
+                                                  <option   value="courier">Curierat</option>
                                                </optgroup>
                                                <optgroup label="Utilitati">
-                                                  <option value="volvo">Apa</option>
-                                                  <option value="saab">Gaze</option>
-                                                  <option value="saab">Electricitate</option>
+                                                  <option  value="water">Apa</option>
+                                                  <option   value="gases">Gaze</option>
+                                                  <option "  value="electricity">Electricitate</option>
                                                </optgroup>
                                                <optgroup label="Localuri">
-                                                  <option value="volvo">Cafenele</option>
-                                                  <option value="saab">Restaurante</option>
-                                                  <option value="saab">Baruri</option>
+                                                  <option   value="coffeShops">Cafenele</option>
+                                                  <option   value="restaurants">Restaurante</option>
+                                                  <option "  value="bars">Baruri</option>
                                                </optgroup>
                                                <optgroup label="Cazare">
-                                                  <option value="volvo">Hotele</option>
-                                                  <option value="saab">Pensiuni</option>
+                                                  <option value="hotels">Hotele</option>
+                                                  <option    value="pensions">Pensiuni</option>
                                                </optgroup>
                                                <optgroup label="Evenimente">
-                                                  <option value="volvo">Festivaluri</option>
-                                                  <option value="saab">Targuri</option>
-                                                  <option value="saab">Concerte</option>
+                                                  <option  value="festivals">Festivaluri</option>
+                                                  <option   value="market">Targuri</option>
+                                                  <option   value="concerts">Concerte</option>
                                                </optgroup>
                                                <optgroup label="Cultura">
-                                                  <option value="volvo">Teatru</option>
-                                                  <option value="saab">Opera</option>
-                                                  <option value="saab">Film</option>
+                                                  <option  value="theater">Teatru</option>
+                                                  <option  value="opera">Opera</option>
+                                                  <option   value="movie">Film</option>
                                                </optgroup>
                                                <optgroup label="Evenimente">
-                                                  <option value="volvo">Mall-uri</option>
-                                                  <option value="saab">Centre Comerciale</option>
-                                                  <option value="saab">Second-Hand</option>
-                                                  <option value="volvo">Outlet-uri</option>
-                                                  <option value="saab">Electronice</option>
-                                                  <option value="saab">Farmacii</option>
+                                                  <option  value="malls">Mall-uri</option>
+                                                  <option  value="emporium">Centre Comerciale</option>
+                                                  <option   value="secondHand">Second-Hand</option>
+                                                  <option  value="outlet">Outlet-uri</option>
+                                                  <option   value="electronics">Electronice</option>
+                                                  <option   value="pharmacy">Farmacii</option>
                                                </optgroup>
                                                <optgroup label="Sanatate">
-                                                  <option value="volvo">Clinici</option>
-                                                  <option value="saab">Spitale</option>
-                                                  <option value="saab">Cabinete individuale</option>
+                                                  <option  value="clinics">Clinici</option>
+                                                  <option   value="hospitals">Spitale</option>
+                                                  <option   value="individualOffices">Cabinete individuale</option>
                                                </optgroup>
                                             </select>
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="E-mail *" name="email" type="email" required>
+			    		    <input class="form-control" placeholder="E-mail *" name="partnerEmail" type="email" required>
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Telefon" name="telefon" type="text" >
+			    		    <input class="form-control" placeholder="Telefon" name="partnerPhone" type="text" >
 			    		</div>
                                       
 			    		<div class="form-group">
-			    			<input class="form-control" placeholder="Parola *" name="password" type="password" value="" required>
+			    			<input class="form-control" placeholder="Parola *" name="partnerPassword" type="password" value="" required>
 			    		</div>
 			    		
 			    		<input class="btn btn-lg btn-primary" style="color:#FFFFFF; width:100%;" type="submit" value="Inregistreaza Contul">
 			    	</fieldset>
 			      	</form>
+				
+					<!-- PARTNER REGISTER FORM-->
+					[#if message??]
+			      	${message}
+			      	[/#if]
 
+			      	[#if errors ??]
+			      		[#list errors as error]
+			      		<p>${error}</p>
+			      		[/#list]
+			      	[/#if]
 			    </div>
 			</div>
 		</div>
@@ -286,12 +303,13 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="js/bootstrap.min.js"></script>
+ 	<script src="[@spring.url '/js/bootstrap.min.js' /] "></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script src="js/contact.js"></script>
+    <script src="[@spring.url '/js/contact.js' /] "></script>
     <script> $('.message a').click(function(){
    $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
 }); </script>
   </body>
 </html>
+[/#escape]

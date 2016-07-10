@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+[#ftl]
+[#import "/spring.ftl" as spring /]
 <html lang="en">
   <head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
     
@@ -10,23 +11,25 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>SUGESTIA.RO</title>
-
+	
+    
     <!-- Bootstrap core CSS -->
-    <link href="css/custom.css" rel="stylesheet/less">
-    <link href="css/login.css" rel="stylesheet/less">
-    <link rel="stylesheet" href="css/footer-basic-centered.css">
-    <link href="less/navbar.less" rel="stylesheet/less">
-    <link href="less/navs.less" rel="stylesheet/less">
-    <link href="less/dropdowns.less" rel="stylesheet/less">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/theme.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="[@spring.url '/css/custom.css' /]" rel="stylesheet/less" media="screen" /> 
+<link href="[@spring.url '/css/login.css' /]" rel="stylesheet/less" media="screen" /> 
+<link href="[@spring.url '/css/footer-basic-centered.css' /]" rel="stylesheet" media="screen" />    
+<link href="[@spring.url '/less/navbar.less' /]" rel="stylesheet/less" media="screen" />  
+<link href="[@spring.url '/less/navs.less' /]" rel="stylesheet/less" media="screen" />
+<link href="[@spring.url '/less/dropdowns.less' /]" rel="stylesheet/less" media="screen" />
+<link href="[@spring.url '/css/bootstrap.css' /]" rel="stylesheet"/>
+<link href="[@spring.url '/css/theme.css' /]" rel="stylesheet" media="screen" />
+<link href="[@spring.url '/css/bootstrap.min.css' /]" rel="stylesheet" media="screen" />
 
+   
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="[@spring.url '/css/ie10-viewport-bug-workaround.css' /]" rel="stylesheet" media="screen" /> 
 
     <!-- Custom styles for this template -->
-    <link href="css/starter-template.css" rel="stylesheet">
+    <link href="[@spring.url '/css/starter-template.css' /]" rel="stylesheet"/> 
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -37,10 +40,12 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+   
+    
   </head>
-
+  [#escape x as x?html]
   <body style="background-color:#E9EBEE;">
-
     <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#337AB7;">
       <div class="container" >
         <div class="navbar-header" >
@@ -128,31 +133,49 @@
 			    	<h3 class="panel-title">Va rugam sa introduceti urmatoarele informatii:</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8" role="form">
+			    	
+			    	
+			    	
+			    	
+			    	<!--REGISTER FORM-->
+			    	
+			    	<form accept-charset="UTF-8" role="form" action="/register/submit" method="POST">
                     <fieldset>
 			    	  	<div class="form-group" style="padding-top:20px;">
-			    		    <input class="form-control" placeholder="Nume" name="nume" type="text">
+			    		    <input class="form-control" placeholder="Nume" name="userLastName" type="text">
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Prenume *" name="prenume" type="text" required>
+			    		    <input class="form-control" placeholder="Prenume *" name="userFirstName" type="text" required>
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="E-mail *" name="email" type="email" required>
+			    		    <input class="form-control" placeholder="E-mail *" name="userEmail" type="email" required>
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Telefon" name="telefon" type="text" >
+			    		    <input class="form-control" placeholder="Telefon" name="userMobilePhone" type="text" >
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Orasul de provenienta" name="oras" type="text" >
+			    		    <input class="form-control" placeholder="Orasul de provenienta" name="userHomeTown" type="text" >
 			    		</div>
 			    		<div class="form-group">
-			    			<input class="form-control" placeholder="Parola *" name="password" type="password" value="" required>
+			    			<input class="form-control" placeholder="Parola *" name="userPassword" type="password" value="" required>
+			    			
 			    		</div>
-			    		
+			    			<input hidden name="userRole" value="USER"> 
+			    			
 			    		<input class="btn btn-lg btn-primary" style="color:#FFFFFF; width:100%;" type="submit" value="Inregistreaza Contul">
 			    	</fieldset>
 			      	</form>
+			     
+			      	<!--REGISTER FORM-->
+			      	[#if message??]
+			      	${message}
+			      	[/#if]
 
+			      	[#if errors ??]
+			      		[#list errors as error]
+			      		<p>${error}</p>
+			      		[/#list]
+			      	[/#if]
 			    </div>
 			</div>
 		</div>
@@ -221,12 +244,13 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="js/bootstrap.min.js"></script>
+ 	<script src="[@spring.url '/js/bootstrap.min.js' /] "></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script src="js/contact.js"></script>
+    <script src="[@spring.url '/js/contact.js' /] "></script>
     <script> $('.message a').click(function(){
    $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
 }); </script>
   </body>
 </html>
+[/#escape]

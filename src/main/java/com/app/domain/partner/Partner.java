@@ -1,75 +1,86 @@
 package com.app.domain.partner;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+
 public class Partner {
 
+	@Size(min = 4, max = 10, message = "Last name minim 4 characters and maximum 10 characters.")
 	private String partnerLastName;
+	@Size(min = 4, max = 20, message = "First name minimum 4 characters and maximum 20 characters.")
 	private String partnerFirstName;
+	@Size(min = 6, max = 30, message = "First name minimum 6 characters and maximum 30 characters.")
 	private String partnerCompanyOrInstitutionName;
+	@Size(min = 4, max = 30, message = "Home town minimum 4 characters maximum 30")
 	private String partnerAddress;
 	private String partnerCategory;
+	@Email(message = "Invalid email form.")
 	private String partnerEmail;
+	@Pattern(regexp = "^[0-9\\-\\+]{9,15}$", message = "Invalid phone number")
 	private String partnerPhone;
+	@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])[^\\s]{8,}$", message = "Password must be at least 8 characters, need to contain at least one number,at least one lowercase character uppercase character and one special characater(#,@,!)")
 	private String partnerPassword;
-	
 
 	public String getPartnerLastName() {
 		return partnerLastName;
-	}
-
-	public void setPartnerLastName(String partnerLastName) {
-		this.partnerLastName = partnerLastName;
 	}
 
 	public String getPartnerFirstName() {
 		return partnerFirstName;
 	}
 
-	public void setPartnerFirstName(String partnerFirstName) {
-		this.partnerFirstName = partnerFirstName;
-	}
-
 	public String getPartnerCompanyOrInstitutionName() {
 		return partnerCompanyOrInstitutionName;
-	}
-
-	public void setPartnerCompanyOrInstitutionName(String partnerCompanyOrInstitutionName) {
-		this.partnerCompanyOrInstitutionName = partnerCompanyOrInstitutionName;
 	}
 
 	public String getPartnerAddress() {
 		return partnerAddress;
 	}
 
-	public void setPartnerAddress(String partnerAddress) {
-		this.partnerAddress = partnerAddress;
-	}
-
 	public String getPartnerCategory() {
 		return partnerCategory;
-	}
-
-	public void setPartnerCategory(String partnerCategory) {
-		this.partnerCategory = partnerCategory;
 	}
 
 	public String getPartnerEmail() {
 		return partnerEmail;
 	}
 
-	public void setPartnerEmail(String partnerEmail) {
-		this.partnerEmail = partnerEmail;
-	}
-
 	public String getPartnerPhone() {
 		return partnerPhone;
 	}
 
-	public void setPartnerPhone(String partnerPhone) {
-		this.partnerPhone = partnerPhone;
-	}
-
 	public String getPartnerPassword() {
 		return partnerPassword;
+	}
+
+	public void setPartnerLastName(String partnerLastName) {
+		this.partnerLastName = partnerLastName;
+	}
+
+	public void setPartnerFirstName(String partnerFirstName) {
+		this.partnerFirstName = partnerFirstName;
+	}
+
+	public void setPartnerCompanyOrInstitutionName(String partnerCompanyOrInstitutionName) {
+		this.partnerCompanyOrInstitutionName = partnerCompanyOrInstitutionName;
+	}
+
+	public void setPartnerAddress(String partnerAddress) {
+		this.partnerAddress = partnerAddress;
+	}
+
+	public void setPartnerCategory(String partnerCategory) {
+		this.partnerCategory = partnerCategory;
+	}
+
+	public void setPartnerEmail(String partnerEmail) {
+		this.partnerEmail = partnerEmail;
+	}
+
+	public void setPartnerPhone(String partnerPhone) {
+		this.partnerPhone = partnerPhone;
 	}
 
 	public void setPartnerPassword(String partnerPassword) {
