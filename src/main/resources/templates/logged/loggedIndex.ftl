@@ -12,7 +12,6 @@
 
     <title>SUGESTIA.RO</title>
 
-
      <!-- Bootstrap core CSS -->
 <link href="[@spring.url '/css/custom.css' /]" rel="stylesheet/less" media="screen" /> 
 <link href="[@spring.url '/css/login.css' /]" rel="stylesheet/less" media="screen" /> 
@@ -42,7 +41,6 @@
     <![endif]-->
   </head>
 [#escape x as x?html]
-
   <body style="background-color:#E9EBEE;">
 
     <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#337AB7;">
@@ -63,7 +61,18 @@
             <li><a href="/partnerInformation">Parteneri</a></li>
             <li><a href="/aboutUs">Despre Noi</a></li>
             <li><a href="/contact">Contact</a></li>
-<li><div class=btn-group style="padding-top:8px;"> <button type=button class="btn btn-success dropdown-toggle" data-toggle=dropdown aria-haspopup=true aria-expanded=false style="color:white;">AUTENTIFICARE <span class=caret></span></button> <ul class=dropdown-menu> <li><a href="/login">Intra in cont</a></li> <li><a href="/register">Inregistreaza un cont nou</a></li> <li><a href="/partnerRegister">Inregistrare partener</a></li></ul> </div> </li>
+            
+           [#if currentUser ??]
+            	<p>${currentUser}</p>
+             [/#if]
+             [#if currentPartner ??]
+            	<p>${currentPartner}</p>
+             [/#if]
+           
+           
+             [#if message??]
+             <p>${message}</p>
+             [/#if]
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -121,15 +130,61 @@
             </a>
           </div>
        </div>
-       <div class="col-md-6" align="center" style="border-radius: 5px; padding-bottom:270px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
-       <h1>Cum adaug o sugestie/reclamatie noua?</h1></br></br>
-             <p style="text-align:left;">Sugestia.ro este o platforma prin care poti educa institutiile publice si proprietarii de business-uri din Cluj-Napoca. Noi ne asiguram ca nevoile si nemultumirile tale vor fi auzite, iar acest lucru va fi pentru tine o experienta rapida �0�2i usoara. </br></br>
+       <div class="col-md-6" align="center" style="border-radius: 5px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
+             <a href="/suggestion" type="button" class="btn btn-lg btn-success" style="padding: 15px 70px 15px 70px; "><span class="glyphicon glyphicon-send" aria-hidden="true"></span> &nbsp; ADAUGA O SUGESTIE </a></br></br>
+             <a  href="/complaint" type="button" class="btn btn-lg btn-danger" style="padding: 15px 58px 15px 58px; "><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>&nbsp; ADAUGA O RECLAMATIE </a></br>
+             <hr style="margin-left:0px; padding-left:0px;">
+             <h3 id=list-group-contextual-classes style="color:#337AB7; font-weight:200;">Cele mai noi:</h3></br> 
+                   <div style="text-align:left;  overflow: scroll; overflow: -moz-scrollbars-vertical; overflow-y: scroll;  height:498px;"   > 
+                      <div class=pre-scrollable bs-example data-example-id=panel-with-list-group style="max-height:494px;"> 
+                             <div class="panel panel-default"> 
+                                   <div class=panel-heading><span class="sugestie">SUGESTIE</span>Titlu Sugestie</div>
+                                        <div class=panel-body>
+                                                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
+                                        </div> 
+                                   </div>
 
-Ave�0�4i posibilitatea sa trimiteti o sugestie sau o reclamatie pentru orice institutie sau business din orasul nostru, iar noi vom incerca sa ajungem la ei in numele dumneavoastra. Acestia pot sa raspunda reclamatiei prin intermediul nostru si sa va propuna o metoda de reconciliere. Dumneavoastra aveti optiunea de a face publica sugestia/reclamatia sau de a o face in mod privat. In momentul in care ati primit un raspuns, o sa fiti notificat pe e-mail, iar statusul reclamatiei dumneavoastra se ve modifica.</br></br>
+                          
+                             <div class="panel panel-default"> 
+                                   <div class=panel-heading><span class="reclamatie">RECLAMATIE</span>Titlu Reclamatie</div>
+                                        <div class=panel-body>
+                                                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
+                                        </div> 
+                                   </div>
 
-Daca cel vizat ignora doleantele dumneavoastra, reclamatia va fi publicata pe site, iar cel vizat va fi inclus in topul ignorantilor.</br></br> 
-</p>
+                           
+                             <div class="panel panel-default"> 
+                                   <div class=panel-heading><span class="sugestie">SUGESTIE</span>Titlu Sugestie</div>
+                                        <div class=panel-body>
+                                                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
+                                        </div> 
+                                   </div>
+                              <div class="panel panel-default"> 
+                                   <div class=panel-heading><span class="sugestie">SUGESTIE</span>Titlu Sugestie</div>
+                                        <div class=panel-body>
+                                                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
+                                        </div> 
+                                   </div>
+
+                          
+                             <div class="panel panel-default"> 
+                                   <div class=panel-heading><span class="reclamatie">RECLAMATIE</span>Titlu Reclamatie</div>
+                                        <div class=panel-body>
+                                                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
+                                        </div> 
+                                   </div>
+
+                           
+                             <div class="panel panel-default"> 
+                                   <div class=panel-heading><span class="sugestie">SUGESTIE</span>Titlu Sugestie</div>
+                                        <div class=panel-body>
+                                                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
+                                        </div> 
+                                   </div>
+                             </div>
+                     </div>
 </div>
+
 
        
 

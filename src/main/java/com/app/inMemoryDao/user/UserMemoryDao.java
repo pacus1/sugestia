@@ -51,4 +51,24 @@ public class UserMemoryDao {
 		return false;
 	}
 
+	public User getCurrentUser(String email, String password) {
+
+		for (int x = 0; x < users.size(); x++) {
+			if (email.equals(users.get(x).getUserEmail()) && password.equals(users.get(x).getUserPassword())) {
+
+				User user = new User();
+				user.setUserLastName(users.get(x).getUserEmail());
+				user.setUserFirstName(users.get(x).getUserFirstName());
+				user.setUserHomeTown(users.get(x).getUserHomeTown());
+				user.setUserMobilePhone(users.get(x).getUserMobilePhone());
+				user.setUserEmail(users.get(x).getUserEmail());
+				user.setUserPassword(users.get(x).getUserPassword());
+				user.setUserRole(users.get(x).getUserRole());
+				return user;
+			}
+		}
+		return null;
+
+	}
+
 }

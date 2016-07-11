@@ -63,7 +63,15 @@
             <li><a href="/partnerInformation">Parteneri</a></li>
             <li><a href="/aboutUs">Despre Noi</a></li>
             <li><a href="/contact">Contact</a></li>
-<li><div class=btn-group style="padding-top:8px;"> <button type=button class="btn btn-success dropdown-toggle" data-toggle=dropdown aria-haspopup=true aria-expanded=false style="color:white;">AUTENTIFICARE <span class=caret></span></button> <ul class=dropdown-menu> <li><a href="/login">Intra in cont</a></li> <li><a href="/register">Inregistreaza un cont nou</a></li> <li><a href="/partnerRegister">Inregistrare partener</a></li></ul> </div> </li>
+            
+             
+           [#if currentUser ??]
+            	<p>${currentUser}</p>
+             [/#if]
+             [#if currentPartner ??]
+            	<p>${currentPartner}</p>
+             [/#if]
+           
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -121,15 +129,21 @@
             </a>
           </div>
        </div>
-       <div class="col-md-6" align="center" style="border-radius: 5px; padding-bottom:270px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
-       <h1>Cum adaug o sugestie/reclamatie noua?</h1></br></br>
-             <p style="text-align:left;">Sugestia.ro este o platforma prin care poti educa institutiile publice si proprietarii de business-uri din Cluj-Napoca. Noi ne asiguram ca nevoile si nemultumirile tale vor fi auzite, iar acest lucru va fi pentru tine o experienta rapida �0�2i usoara. </br></br>
+       <div class="col-md-6" align="center" style="border-radius: 5px; padding-bottom:45px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
+       <h1>Informatii Parteneri</h1></br></br>
+             <p style="text-align:left;">Sugestia.ro este o platforma care incearca sa aduca proprietarii de afaceri sau institutiile publice din Cluj-Napoca mai aproape de nevoile clientilor sau a cetatenilor, prin colectarea feedback-ului acestora sub forma de sugestii si reclamatii.</br></br>
 
-Ave�0�4i posibilitatea sa trimiteti o sugestie sau o reclamatie pentru orice institutie sau business din orasul nostru, iar noi vom incerca sa ajungem la ei in numele dumneavoastra. Acestia pot sa raspunda reclamatiei prin intermediul nostru si sa va propuna o metoda de reconciliere. Dumneavoastra aveti optiunea de a face publica sugestia/reclamatia sau de a o face in mod privat. In momentul in care ati primit un raspuns, o sa fiti notificat pe e-mail, iar statusul reclamatiei dumneavoastra se ve modifica.</br></br>
+Institutiile publice trebuie sa fie aproape de cetateni, iar optimizarea relatiei dintre acestia este esentiala pentru o comunitate mai buna. In multe cazuri, situatia de monopol si comunicarea dificila descurajeaza oferirea de feedback, platforma noastra fiind solutia la aceasta problema.</br></br>
 
-Daca cel vizat ignora doleantele dumneavoastra, reclamatia va fi publicata pe site, iar cel vizat va fi inclus in topul ignorantilor.</br></br> 
-</p>
+Pentru ca un business sa reziste, realitatea zilelor noastre ne-a aratat faptul ca modul in care tratam nevoile clientilor este cel mai important aspect. De cele mai multe ori, experienta unui client cu business-ul nostru este mai importanta decat serviciul sau produsul in sine. </br></br>
+
+Noi ne asiguram ca renumele afacerii tale este protejat, avand posibilitatea sa alegi care sunt     sugestiile  sau reclamatiile care vrei sa fie tratate in mod public si cele care vrei sa fie private. Astfel, in momentul in care primesti o reclamatie sau o sugestie vei fi notificat pe e-mail, iar noi iti vom pune la dispozitie posibilitatea de a trata rapid si usor fiecare parere sau nemultumire In cazul in care ai constatat ca reclamatia este indreptatita, iti sugeram sa utilizezi metode palpabile de a indrepta lucurile: oferirea unui discount de 15%, un produs cadou, un vouche de cumparaturi, card de membru, etc.</br></br>
+
+Utilizarea acestui serviciu este gratuita, dar daca ti se pare ca aducem plus valoare afacerii tale, te rugam sa ne sprijini initiativa prin efectuarea unei donatii. 
+</p></br></br>
+<a href="/partnerRegister"><button type="button" class="btn btn-lg btn-success" style="padding: 10px 30px 10px 30px; "> INSCRIE-TE CA PARTENER </button></a>
 </div>
+
 
        
 

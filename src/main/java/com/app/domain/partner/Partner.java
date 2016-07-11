@@ -89,10 +89,7 @@ public class Partner {
 
 	@Override
 	public String toString() {
-		return "Partner [partnerLastName=" + partnerLastName + ", partnerFirstName=" + partnerFirstName
-				+ ", partnerCompanyOrInstitutionName=" + partnerCompanyOrInstitutionName + ", partnerAddress="
-				+ partnerAddress + ", partnerCategory=" + partnerCategory + ", partnerEmail=" + partnerEmail
-				+ ", partnerPhone=" + partnerPhone + ", partnerPassword=" + partnerPassword + "]";
+		return "Welcome Partner : " + partnerEmail;
 	}
 
 	@Override

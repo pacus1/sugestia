@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class ComplaintController {
 
-	@RequestMapping("/complaint")
+	@RequestMapping("/")
 	public ModelAndView partnerInformation() {
 		return new ModelAndView("/complaint");
 	}

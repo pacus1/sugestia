@@ -2,6 +2,7 @@ package com.app.controller.user;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,20 @@ public class RegisterController {
 	UserMemoryDao userMemoryDao;
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public ModelAndView register() {
+	public ModelAndView register(HttpServletRequest httpServletRequest) {
+
+		ModelAndView modelAndView = new ModelAndView();
+		if (httpServletRequest.getSession().getAttribute("currentUser") != null
+				|| httpServletRequest.getSession().getAttribute("currentPartner") != null) {
+
+			modelAndView = new ModelAndView("/logged/loggedIndex");
+
+			modelAndView.addObject("currentUser", httpServletRequest.getAttribute("currentUser"));
+			modelAndView.addObject("currentPartner", httpServletRequest.getAttribute("currentPartner"));
+
+			return modelAndView;
+		}
+
 		return new ModelAndView("/register", "user", new User());
 
 	}

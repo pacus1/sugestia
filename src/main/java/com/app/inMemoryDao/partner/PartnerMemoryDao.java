@@ -46,4 +46,25 @@ public class PartnerMemoryDao {
 		return false;
 	}
 
+	public Partner getCurrentPartner(String email, String password) {
+
+		for (int x = 0; x < partners.size(); x++) {
+			if (email.equals(partners.get(x).getPartnerEmail())
+					&& password.equals(partners.get(x).getPartnerPassword())) {
+
+				Partner partner = new Partner();
+				partner.setPartnerLastName(partners.get(x).getPartnerLastName());
+				partner.setPartnerFirstName(partners.get(x).getPartnerFirstName());
+				partner.setPartnerAddress(partners.get(x).getPartnerAddress());
+				partner.setPartnerCategory(partners.get(x).getPartnerCategory());
+				partner.setPartnerCompanyOrInstitutionName(partners.get(x).getPartnerCompanyOrInstitutionName());
+				partner.setPartnerPhone(partners.get(x).getPartnerPhone());
+				partner.setPartnerEmail(partners.get(x).getPartnerEmail());
+				partner.setPartnerPassword(partners.get(x).getPartnerPassword());
+				return partner;
+
+			}
+		}
+		return null;
+	}
 }

@@ -63,7 +63,14 @@
             <li><a href="/partnerInformation">Parteneri</a></li>
             <li><a href="/aboutUs">Despre Noi</a></li>
             <li><a href="/contact">Contact</a></li>
-<li><div class=btn-group style="padding-top:8px;"> <button type=button class="btn btn-success dropdown-toggle" data-toggle=dropdown aria-haspopup=true aria-expanded=false style="color:white;">AUTENTIFICARE <span class=caret></span></button> <ul class=dropdown-menu> <li><a href="/login">Intra in cont</a></li> <li><a href="/register">Inregistreaza un cont nou</a></li> <li><a href="/partnerRegister">Inregistrare partener</a></li></ul> </div> </li>
+            
+              [#if currentUser ??]
+            	<p>${currentUser}</p>
+             [/#if]
+             [#if currentPartner ??]
+            	<p>${currentPartner}</p>
+             [/#if]
+            
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -121,15 +128,71 @@
             </a>
           </div>
        </div>
-       <div class="col-md-6" align="center" style="border-radius: 5px; padding-bottom:270px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
-       <h1>Cum adaug o sugestie/reclamatie noua?</h1></br></br>
-             <p style="text-align:left;">Sugestia.ro este o platforma prin care poti educa institutiile publice si proprietarii de business-uri din Cluj-Napoca. Noi ne asiguram ca nevoile si nemultumirile tale vor fi auzite, iar acest lucru va fi pentru tine o experienta rapida �0�2i usoara. </br></br>
+       <div class="col-md-6" align="center" style="border-radius: 5px; padding-bottom:123px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
+       <h1>Contact</h1></br>
+      <p>Daca ai o intrebare, sugestie sau o problema utilizand serviciile noastre, te rugam sa ne trimiti un mesaj folosind formularul de mai jos iar unul din operatorii nostri o sa va raspunda cat mai curand.</p>
+</br></br>
+             <form id="contact-form" method="post" action="contactform.php" role="form">
 
-Ave�0�4i posibilitatea sa trimiteti o sugestie sau o reclamatie pentru orice institutie sau business din orasul nostru, iar noi vom incerca sa ajungem la ei in numele dumneavoastra. Acestia pot sa raspunda reclamatiei prin intermediul nostru si sa va propuna o metoda de reconciliere. Dumneavoastra aveti optiunea de a face publica sugestia/reclamatia sau de a o face in mod privat. In momentul in care ati primit un raspuns, o sa fiti notificat pe e-mail, iar statusul reclamatiei dumneavoastra se ve modifica.</br></br>
+    <div class="messages"></div>
 
-Daca cel vizat ignora doleantele dumneavoastra, reclamatia va fi publicata pe site, iar cel vizat va fi inclus in topul ignorantilor.</br></br> 
-</p>
+    <div class="controls" style="text-align:left;">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="form_name">Prenume:</label>
+                    <input id="form_name" type="text" name="name" class="form-control" placeholder="(Camp Optional)">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="form_lastname">Nume:</label>
+                    <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="(Camp Optional)">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="form_email">Email: *</label>
+                    <input id="form_email" type="email" name="email" class="form-control" placeholder="(Camp Obligatoriu)" required="required" data-error="Va rugam introduceti o adresa de email valida">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="form_phone">Telefon:</label>
+                    <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="(Camp Optional)">
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="form_message">Mesaj: *</label>
+                    <textarea id="form_message" name="message" class="form-control" placeholder="Mesajul Dvs" rows="6" required="required" data-error="Va rugam sa ne lasati un mesaj."></textarea>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <input type="submit" class="btn btn-success btn-send" value="Trimite Mesajul">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+</br>
+                <p class="text-muted"><strong>*</strong> Campurile marcate cu steluta sunt obligatorii.</p>
+            </div>
+        </div>
+    </div>
+
+</form>
 </div>
+
 
        
 
@@ -184,7 +247,7 @@ Daca cel vizat ignora doleantele dumneavoastra, reclamatia va fi publicata pe si
 			<p class="footer-company-name"> - SUGESTIA.RO &copy; Copyright 2016 - </p>
 
 		</footer>
-
+		
  <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

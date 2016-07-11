@@ -2,6 +2,7 @@ package com.app.controller.partner;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,18 @@ public class PartnerRegisterController {
 	PartnerMemoryDao partnerMemoryDao;
 
 	@RequestMapping(value = "/partnerRegister", method = RequestMethod.GET)
-	public ModelAndView register() {
+	public ModelAndView register(HttpServletRequest httpServletRequest) {
+		ModelAndView modelAndView = new ModelAndView();
+		if (httpServletRequest.getSession().getAttribute("currentUser") != null
+				|| httpServletRequest.getSession().getAttribute("currentPartner") != null) {
+
+			modelAndView = new ModelAndView("/logged/loggedIndex");
+
+			modelAndView.addObject("currentUser", httpServletRequest.getAttribute("currentUser"));
+			modelAndView.addObject("currentPartner", httpServletRequest.getAttribute("currentPartner"));
+
+			return modelAndView;
+		}
 		return new ModelAndView("/partnerRegister", "partner", new Partner());
 
 	}
@@ -32,15 +44,6 @@ public class PartnerRegisterController {
 	@RequestMapping(value = "/partnerRegister/submit", method = RequestMethod.POST)
 	public ModelAndView registerPartner(@Valid @ModelAttribute("partner") Partner partner,
 			BindingResult bindingResult) {
-
-		System.out.println(partner.getPartnerLastName());
-		System.out.println(partner.getPartnerFirstName());
-		System.out.println(partner.getPartnerCompanyOrInstitutionName());
-		System.out.println(partner.getPartnerEmail());
-		System.out.println(partner.getPartnerPhone());
-		System.out.println(partner.getPartnerCategory());
-		System.out.println(partner.getPartnerEmail());
-		System.out.println(partner.getPartnerPassword());
 
 		ArrayList<String> defaultMessage = new ArrayList<>();
 
