@@ -119,6 +119,7 @@
           </div>
        </div>
        <div class="col-md-6" align="center" style="border-radius: 5px; padding-bottom:30px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
+
        <h2>Adauga o sugestie noua</h2></br>
 </br>
              <div style="padding-left:50px; padding-right:50px;">
@@ -129,7 +130,7 @@
 			    	<h3 class="panel-title" align="center">Va rugam sa introduceti urmatoarele informatii:</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8" role="form">
+			    	<form accept-charset="UTF-8" role="form" action="/suggestion/submit" method="POST">
                     <fieldset>
                                         <div class="form-group" style="padding-top:12px;" align="center">
                                         <label for="selectcategorie">Alege categoria din care face parte compania/institutia caruia vreti sa-i trimiteti sugestia:</label>
@@ -192,13 +193,13 @@
                                             </select>
 			    		</div>
 			    	  	<div class="form-group">
-			    		    <input class="form-control" placeholder="Numele Companiei / Institutiei" name="nume" type="text">
+			    		    <input class="form-control" placeholder="Numele Companiei / Institutiei" name="partnerAsignneeName" type="text">
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Titlul Sugestiei *" name="titlu" type="text" required>
+			    		    <input class="form-control" placeholder="Titlul Sugestiei *" name="complaintTitle" type="text" required>
 			    		</div>
                                         <div class="form-group">
-			    		    <textarea class="form-control" placeholder="Descriere *" name="descriere" type="textarea" rows="4" required></textarea>
+			    		    <textarea class="form-control" placeholder="Descriere *" name="complaintBody" type="textarea" rows="4" required></textarea>
 			    		</div>
                                         <p>Adauga poze: (optional)</p>
 			    		<input type="file" name="pic1" accept="image/*" style="padding-top:10px; padding-bottom:10px;">
@@ -207,7 +208,19 @@
 			    		<input class="btn btn-lg btn-primary" style="color:#FFFFFF; width:100%;" type="submit" value="Adauga">
 			    	</fieldset>
 			      	</form>
+				
+					      	<!--REGISTER FORM-->
+			      	[#if message??]
+			      	${message}
+			      	[/#if]
 
+			      	[#if errors ??]
+			      		[#list errors as error]
+			      		<p>${error}</p>
+			      		[/#list]
+			      	[/#if]
+				
+				
 			    </div>
 			</div>
 		</div>

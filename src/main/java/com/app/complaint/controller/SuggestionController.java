@@ -1,4 +1,6 @@
-package com.app.user.controller;
+package com.app.complaint.controller;
+
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -9,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -41,7 +44,7 @@ public class SuggestionController {
 //		return modelAndView;
 //	}
 //
-	@RequestMapping("save")
+	@RequestMapping("/suggestion/submit")
 	public ModelAndView save(
 			@Valid @ModelAttribute("suggestion") Complaint complaint, 
 			BindingResult bindingResult) {
@@ -55,7 +58,7 @@ public class SuggestionController {
 				modelAndView.setView(new RedirectView(""));
 			} catch (ValidationException ex) {
 				for (String msg : ex.getCauses()) {
-					bindingResult.addError(new ObjectError("employee", msg));
+					bindingResult.addError(new ObjectError("complaint", msg));
 				}
 				hasErros = true;
 			}
@@ -65,13 +68,25 @@ public class SuggestionController {
 
 		if (hasErros) {
 			modelAndView = new ModelAndView("/suggestion");
-			modelAndView.addObject("employee", complaint);
+			modelAndView.addObject("complaint", complaint);
 			modelAndView.addObject("errors", bindingResult.getAllErrors());
 		}
 
 		return modelAndView;
 	}
 
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/listall")
 	public ModelAndView list() throws Exception {
 		ModelAndView modelAndView = new ModelAndView("/listall");

@@ -45,15 +45,13 @@
 
 <div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading">Panel heading</div>
+  <div class="panel-heading">SUGESTII</div>
   <div class="panel-body">
   </div>
 
   Current user: [#if currentUser??]${currentUser.userName!''}[/#if]
   <table class="table">
 	<tr>
-		<th>Status Type</th>
-		<th>Complaint Type</th>
 		<th>Title</th>
 		<th>Body</th>
 		<th></th>
@@ -63,11 +61,8 @@
 	[#if complaint??]
 		[#list complaint as complaint] 
 			<tr>
-				<td>${complaint.statusType}</td>
-				<td>${complaint.type}</td>
 				<td>${complaint.complaintTitle}</td>
 				<td>${complaint.complaintBody}</td>
-				
 			</tr>
 		[/#list]
 	[/#if]
@@ -76,7 +71,5 @@
 
 </table>
 </div>
-
-
 
 [/#escape]

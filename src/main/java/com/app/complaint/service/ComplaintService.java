@@ -53,9 +53,8 @@ public class ComplaintService {
 //	}
 //
 	public void save(Complaint complaint) throws ValidationException {
-		LOGGER.debug("Saving: " + complaint);
+		//LOGGER.debug("Saving: " + complaint);
 		//validate(employee);
-
 		dao.update(complaint);
 	}
 //
@@ -120,13 +119,13 @@ public class ComplaintService {
 //		}
 //	}
 
-//	public ComplaintDAO getDao() {
-//		return dao;
-//	}
-//
-//	public void setDao(ComplaintDAO dao) {
-//		this.dao = dao;
-//	}
+	public ComplaintDAO getDao() {
+		return dao;
+	}
+
+	public void setDao(ComplaintDAO dao) {
+		this.dao = dao;
+	}
 	
 	
 }
