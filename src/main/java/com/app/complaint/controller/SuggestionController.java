@@ -55,7 +55,7 @@ public class SuggestionController {
 				complaintService.save(complaint);
 
 				modelAndView = new ModelAndView();
-				modelAndView.setView(new RedirectView(""));
+				modelAndView.setView(new RedirectView("/listall"));
 			} catch (ValidationException ex) {
 				for (String msg : ex.getCauses()) {
 					bindingResult.addError(new ObjectError("complaint", msg));
@@ -71,7 +71,8 @@ public class SuggestionController {
 			modelAndView.addObject("complaint", complaint);
 			modelAndView.addObject("errors", bindingResult.getAllErrors());
 		}
-
+		System.out.println("Title este: " + complaint.getComplaintTitle());
+		System.out.println("Bodyul este: " + complaint.getComplaintBody());
 		return modelAndView;
 	}
 
@@ -90,7 +91,7 @@ public class SuggestionController {
 	@RequestMapping("/listall")
 	public ModelAndView list() throws Exception {
 		ModelAndView modelAndView = new ModelAndView("/listall");
-		modelAndView.addObject("complaint", complaintService.listAll());
+		modelAndView.addObject("complaints", complaintService.listAll());
 //		modelAndView.addObject("currentUser", securityService.getCurrentUser());
 		return modelAndView;
 	}

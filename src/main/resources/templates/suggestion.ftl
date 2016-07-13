@@ -193,13 +193,14 @@
                                             </select>
 			    		</div>
 			    	  	<div class="form-group">
-			    		    <input class="form-control" placeholder="Numele Companiei / Institutiei" name="partnerAsignneeName" type="text">
+			    		    <input class="form-control" placeholder="Numele Companiei / Institutiei" name="partnerAsignneeName" type="text"/>
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Titlul Sugestiei *" name="complaintTitle" type="text" required>
+			    		  
+			    		    <input class="form-control" placeholder="Titlul Sugestiei *" name="complaintTitle" type="text" required >
 			    		</div>
                                         <div class="form-group">
-			    		    <textarea class="form-control" placeholder="Descriere *" name="complaintBody" type="textarea" rows="4" required></textarea>
+			    		    <input class="form-control" placeholder="Descriere *" name="complaintBody" type="text" rows="4"  required >
 			    		</div>
                                         <p>Adauga poze: (optional)</p>
 			    		<input type="file" name="pic1" accept="image/*" style="padding-top:10px; padding-bottom:10px;">

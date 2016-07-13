@@ -53,7 +53,7 @@ public class ComplaintService {
 //	}
 //
 	public void save(Complaint complaint) throws ValidationException {
-		//LOGGER.debug("Saving: " + complaint);
+		LOGGER.debug("Saving: " + complaint);
 		//validate(employee);
 		dao.update(complaint);
 	}

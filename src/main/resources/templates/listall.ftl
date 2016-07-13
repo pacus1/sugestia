@@ -1,7 +1,7 @@
 [#ftl]
-<!DOCTYPE html>
 
-<!DOCTYPE html>
+[#import "/spring.ftl" as spring /]
+
 <html lang="en">
   <head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
     
@@ -41,6 +41,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+
 [#escape x as x?html]
 
 <div class="panel panel-default">
@@ -49,7 +50,7 @@
   <div class="panel-body">
   </div>
 
-  Current user: [#if currentUser??]${currentUser.userName!''}[/#if]
+ 
   <table class="table">
 	<tr>
 		<th>Title</th>
@@ -58,11 +59,12 @@
 		
 	</tr>
 	<!-- begin iteration -->
-	[#if complaint??]
-		[#list complaint as complaint] 
+	[#if complaints??]
+		[#list complaints as complaint] 
 			<tr>
 				<td>${complaint.complaintTitle}</td>
 				<td>${complaint.complaintBody}</td>
+				
 			</tr>
 		[/#list]
 	[/#if]

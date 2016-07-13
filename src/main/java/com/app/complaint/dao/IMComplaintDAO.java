@@ -26,7 +26,7 @@ public class IMComplaintDAO extends IMBaseDAO<Complaint>
 		Collection<Complaint> all = new LinkedList<Complaint>(getAll());
 		for (Iterator<Complaint> it = all.iterator(); it.hasNext();) {
 			Complaint emp = it.next();
-			String ss = emp.getComplainTitle() + " " + emp.getComplainBody();
+			String ss = emp.getComplaintTitle() + " " + emp.getComplaintBody();
 			if (!ss.toLowerCase().contains(query.toLowerCase())) {
 				it.remove();
 			}

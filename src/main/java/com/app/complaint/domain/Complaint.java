@@ -18,52 +18,52 @@ public class Complaint extends AbstractModel{
 		private Long complaintId1;
 	
 		
-		public long getComplainId() {
+		public long getComplaintId() {
 			return complaintId;
 		}
-		public void setComplainId(long complainId) {
+		public void setComplaintId(long complainId) {
 			this.complaintId = complainId;
 		}
 		public ComplaintStatusType getComplaintStatusType() {
 			return complaintStatusType;
 		}
-		public void setComplainStatusType(ComplaintStatusType complaintStatusType) {
+		public void setComplaintStatusType(ComplaintStatusType complaintStatusType) {
 			this.complaintStatusType = complaintStatusType;
 		}
-		public ComplaintType getComplainType() {
+		public ComplaintType getComplaintType() {
 			return complaintType;
 		}
-		public void setComplainType(ComplaintType complainType) {
+		public void setComplaintType(ComplaintType complainType) {
 			this.complaintType = complainType;
 		}
-		public Date getComplainTimeStamp() {
+		public Date getComplaintTimeStamp() {
 			return complaintTimeStamp;
 		}
-		public void setComplainTimeStamp(Date complainTimeStamp) {
+		public void setComplaintTimeStamp(Date complainTimeStamp) {
 			this.complaintTimeStamp = complainTimeStamp;
 		}
-		public String getComplainTitle() {
+		public String getComplaintTitle() {
 			return complaintTitle;
 		}
-		public void setComplainTitle(String complainTitle) {
+		public void setComplaintTitle(String complainTitle) {
 			this.complaintTitle = complainTitle;
 		}
-		public String getComplainBody() {
+		public String getComplaintBody() {
 			return complaintBody;
 		}
-		public void setComplainBody(String complainBody) {
+		public void setComplaintBody(String complainBody) {
 			this.complaintBody = complainBody;
 		}
-		public Object getComplainPicture() {
+		public Object getComplaintPicture() {
 			return complaintPicture;
 		}
-		public void setComplainPicture(Object complainPicture) {
+		public void setComplaintPicture(Object complainPicture) {
 			this.complaintPicture = complainPicture;
 		}
-		public String getComplainPartnerAsigneeName() {
+		public String getComplaintPartnerAsigneeName() {
 			return complaintPartnerAsigneeName;
 		}
-		public void setComplainPartnerAsigneeName(String complainPartnerAsigneeName) {
+		public void setComplaintPartnerAsigneeName(String complainPartnerAsigneeName) {
 			this.complaintPartnerAsigneeName = complainPartnerAsigneeName;
 		}
 	
