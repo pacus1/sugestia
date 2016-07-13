@@ -143,7 +143,7 @@
 			    		</div>
 			    		<div class="checkbox">
 			    	    	<label>
-			    	    		<input name="remember" type="checkbox" value="Remember Me"> Tine-ma minte
+			    	    		<input name="rememberMe" type="checkbox"  > Tine-ma minte
 			    	    	</label>
 			    	    </div>
 			    		<input class="btn btn-lg btn-success btn-block btnlogin" style="color:#FFFFFF;" type="submit" value="Login">

@@ -2,6 +2,7 @@ package com.app.controller.user;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.app.domain.user.User;
-import com.app.inMemoryDao.user.UserMemoryDao;
+import com.app.inMemoryDao.InMemoryDao;
 
 @Controller
 @RequestMapping("/")
@@ -22,12 +23,46 @@ public class RegisterController {
 
 	// Return true if email not exist, false if email exist aleardy.
 	@Autowired
-	UserMemoryDao userMemoryDao;
+	InMemoryDao inMemoryDao;
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register(HttpServletRequest httpServletRequest) {
+		ModelAndView modelAndView = null;
 
-		ModelAndView modelAndView = new ModelAndView();
+		if ((httpServletRequest.getCookies() != null && httpServletRequest.getCookies().length > 1)
+				&& (httpServletRequest.getSession().getAttribute("currentUser") == null
+						|| httpServletRequest.getSession().getAttribute("currentPartner") == null)) {
+			Cookie cookie[] = httpServletRequest.getCookies();
+
+			Cookie cook;
+			String currentUserEmail = "", currentUserPassword = "";
+			if (cookie != null) {
+				for (int x = 0; x < cookie.length; x++) {
+					cook = cookie[x];
+					if (cook.getName().equalsIgnoreCase("cookieCurrentUser"))
+						currentUserEmail = cook.getValue();
+					if (cook.getName().equalsIgnoreCase("cookieCurrentUserPassword"))
+						currentUserPassword = cook.getValue();
+				}
+
+				modelAndView = new ModelAndView("/logged/loggedIndex");
+
+				if (inMemoryDao.checkUserLogin(currentUserEmail, currentUserPassword))
+
+					httpServletRequest.getSession().setAttribute("currentUser",
+							inMemoryDao.getCurrentUser(currentUserEmail, currentUserPassword));
+
+				if (inMemoryDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
+					httpServletRequest.getSession().setAttribute("currentPartner",
+							inMemoryDao.getCurrentPartner(currentUserEmail, currentUserPassword));
+
+				}
+
+				return modelAndView;
+			}
+
+		}
+
 		if (httpServletRequest.getSession().getAttribute("currentUser") != null
 				|| httpServletRequest.getSession().getAttribute("currentPartner") != null) {
 
@@ -39,8 +74,7 @@ public class RegisterController {
 			return modelAndView;
 		}
 
-		return new ModelAndView("/register", "user", new User());
-
+		return new ModelAndView("/register");
 	}
 
 	@RequestMapping(value = "/register/submit", method = RequestMethod.POST)
@@ -57,7 +91,7 @@ public class RegisterController {
 
 		if (!bindingResult.hasErrors()) {
 
-			if (userMemoryDao.checkUserEmail(user)) {
+			if (inMemoryDao.checkUserEmail(user)) {
 
 				modelAndView = new ModelAndView("/login");
 				modelAndView.addObject("message", "Succesful registered now please login!");

@@ -70,6 +70,11 @@
              [#if currentPartner ??]
             	<p>${currentPartner}</p>
              [/#if]
+             <form  action="/logout" method="POST"  role="form">
+           
+           <input class="btn btn-lg btn-success btn-block btnlogin" style="color:#FFFFFF;" type="submit" value="Logout">
+           
+           </form>
 
           </ul>
         </div><!--/.nav-collapse -->
