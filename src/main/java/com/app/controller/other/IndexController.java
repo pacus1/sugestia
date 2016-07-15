@@ -22,6 +22,8 @@ public class IndexController {
 	public ModelAndView index(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 		ModelAndView modelAndView = null;
 
+
+
 		if (httpServletRequest.getCookies() != null && httpServletRequest.getCookies().length > 1
 				&& (httpServletRequest.getSession().getAttribute("currentUser") == null
 						&& httpServletRequest.getSession().getAttribute("currentPartner") == null)) {

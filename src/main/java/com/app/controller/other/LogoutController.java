@@ -15,11 +15,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class LogoutController {
 
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	public ModelAndView logout(HttpSession httpSession, HttpServletRequest httpServletRequest,
-			HttpServletResponse httpServletResponse) {
+	public ModelAndView logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 
-		httpSession.removeAttribute("currentUser");
-		httpSession.removeAttribute("currentPartner");
+		System.out.println(httpServletRequest.getSession().getAttribute("currentUser"));
+		System.out.println(httpServletRequest.getSession().getAttribute("currentPartner"));
+
+		httpServletRequest.getSession().removeAttribute("currentUser");
+		httpServletRequest.getSession().removeAttribute("currentPartner");
+
+		
+		System.out.println(httpServletRequest.getSession().getAttribute("currentUser"));
+		System.out.println(httpServletRequest.getSession().getAttribute("currentPartner"));
 
 		Cookie cookie[] = httpServletRequest.getCookies();
 

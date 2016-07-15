@@ -122,15 +122,17 @@ public class LoginController {
 				response.addCookie(emailCookie);
 				response.addCookie(passwordCookie);
 
-				request.getSession().setAttribute("currentUser", databaseDao.getCurrentUser(email, password));
+				request.getSession().setAttribute("currentPartner", databaseDao.getCurrentPartner(email, password));
 
 				modelAndView = new ModelAndView("/logged/loggedIndex");
 
 			}
 
-			modelAndView = new ModelAndView("/logged/loggedIndex");
+			if (request.getParameter("rememberMe") == null) {
+				modelAndView = new ModelAndView("/logged/loggedIndex");
 
-			request.getSession().setAttribute("currentPartner", databaseDao.getCurrentPartner(email, password));
+				request.getSession().setAttribute("currentPartner", databaseDao.getCurrentPartner(email, password));
+			}
 
 		}
 

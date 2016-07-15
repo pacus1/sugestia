@@ -2,6 +2,7 @@ package com.app.filter.service;
 
 import org.springframework.stereotype.Component;
 
+import com.app.domain.partner.Partner;
 import com.app.domain.user.User;
 
 @Component
@@ -16,6 +17,18 @@ public class SecurityService {
 
 	public User getCurrentUser() {
 		return this.currentUser != null ? this.currentUser.get() : null;
+
+	}
+
+	private ThreadLocal<Partner> currentPartner;
+
+	public void setCurrentPartner(Partner partner) {
+		this.currentPartner = new ThreadLocal<>();
+		this.currentPartner.set(partner);
+	}
+
+	public Partner getCurrentPartner() {
+		return this.currentUser != null ? this.getCurrentPartner() : null;
 
 	}
 
