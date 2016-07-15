@@ -8,22 +8,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.app.inMemoryDao.InMemoryDao;
+import com.app.databaseDao.DatabaseDao;
 
 @Controller
 @RequestMapping("/")
 public class SuggestionController {
 
 	@Autowired
-	InMemoryDao inMemoryDao;
+	DatabaseDao databaseDao;
 
 	@RequestMapping("/suggestion")
 	public ModelAndView partnerInformation(HttpServletRequest httpServletRequest) {
 		ModelAndView modelAndView = null;
 
-		if ((httpServletRequest.getCookies() != null && httpServletRequest.getCookies().length > 1)
+		if (httpServletRequest.getCookies() != null && httpServletRequest.getCookies().length > 1
 				&& (httpServletRequest.getSession().getAttribute("currentUser") == null
-						|| httpServletRequest.getSession().getAttribute("currentPartner") == null)) {
+						&& httpServletRequest.getSession().getAttribute("currentPartner") == null)) {
 			Cookie cookie[] = httpServletRequest.getCookies();
 
 			Cookie cook;
@@ -39,14 +39,14 @@ public class SuggestionController {
 
 				modelAndView = new ModelAndView("/logged/loggedSuggestion");
 
-				if (inMemoryDao.checkUserLogin(currentUserEmail, currentUserPassword))
+				if (databaseDao.checkUserLogin(currentUserEmail, currentUserPassword))
 
 					httpServletRequest.getSession().setAttribute("currentUser",
-							inMemoryDao.getCurrentUser(currentUserEmail, currentUserPassword));
+							databaseDao.getCurrentUser(currentUserEmail, currentUserPassword));
 
-				if (inMemoryDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
+				if (databaseDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
 					httpServletRequest.getSession().setAttribute("currentPartner",
-							inMemoryDao.getCurrentPartner(currentUserEmail, currentUserPassword));
+							databaseDao.getCurrentPartner(currentUserEmail, currentUserPassword));
 
 				}
 

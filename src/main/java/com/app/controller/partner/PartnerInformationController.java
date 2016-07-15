@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.app.databaseDao.DatabaseDao;
 import com.app.inMemoryDao.InMemoryDao;
 
 @Controller
@@ -15,15 +16,15 @@ import com.app.inMemoryDao.InMemoryDao;
 public class PartnerInformationController {
 
 	@Autowired
-	InMemoryDao inMemoryDao;
+	DatabaseDao databaseDao;
 
 	@RequestMapping("/partnerInformation")
 	public ModelAndView partnerInformation(HttpServletRequest httpServletRequest) {
 		ModelAndView modelAndView = null;
 
-		if ((httpServletRequest.getCookies() != null && httpServletRequest.getCookies().length > 1)
+		if (httpServletRequest.getCookies() != null && httpServletRequest.getCookies().length > 1
 				&& (httpServletRequest.getSession().getAttribute("currentUser") == null
-						|| httpServletRequest.getSession().getAttribute("currentPartner") == null)) {
+						&& httpServletRequest.getSession().getAttribute("currentPartner") == null)) {
 			Cookie cookie[] = httpServletRequest.getCookies();
 
 			Cookie cook;
@@ -39,14 +40,14 @@ public class PartnerInformationController {
 
 				modelAndView = new ModelAndView("/logged/loggedPartnerInformation");
 
-				if (inMemoryDao.checkUserLogin(currentUserEmail, currentUserPassword))
+				if (databaseDao.checkUserLogin(currentUserEmail, currentUserPassword))
 
 					httpServletRequest.getSession().setAttribute("currentUser",
-							inMemoryDao.getCurrentUser(currentUserEmail, currentUserPassword));
+							databaseDao.getCurrentUser(currentUserEmail, currentUserPassword));
 
-				if (inMemoryDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
+				if (databaseDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
 					httpServletRequest.getSession().setAttribute("currentPartner",
-							inMemoryDao.getCurrentPartner(currentUserEmail, currentUserPassword));
+							databaseDao.getCurrentPartner(currentUserEmail, currentUserPassword));
 
 				}
 

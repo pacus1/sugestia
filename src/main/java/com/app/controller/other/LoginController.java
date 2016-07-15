@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.app.inMemoryDao.InMemoryDao;
+import com.app.databaseDao.DatabaseDao;
 
 @Controller
 @RequestMapping("/")
@@ -19,15 +19,15 @@ public class LoginController {
 
 	// true if email and password exists
 	@Autowired
-	InMemoryDao inMemoryDao;
+	DatabaseDao databaseDao;
 
 	@RequestMapping("/login")
 	public ModelAndView login(HttpServletRequest httpServletRequest) {
 		ModelAndView modelAndView = null;
 
-		if ((httpServletRequest.getCookies() != null && httpServletRequest.getCookies().length > 1)
+		if (httpServletRequest.getCookies() != null && httpServletRequest.getCookies().length > 1
 				&& (httpServletRequest.getSession().getAttribute("currentUser") == null
-						|| httpServletRequest.getSession().getAttribute("currentPartner") == null)) {
+						&& httpServletRequest.getSession().getAttribute("currentPartner") == null)) {
 			Cookie cookie[] = httpServletRequest.getCookies();
 
 			Cookie cook;
@@ -43,14 +43,14 @@ public class LoginController {
 
 				modelAndView = new ModelAndView("/logged/loggedIndex");
 
-				if (inMemoryDao.checkUserLogin(currentUserEmail, currentUserPassword))
+				if (databaseDao.checkUserLogin(currentUserEmail, currentUserPassword))
 
 					httpServletRequest.getSession().setAttribute("currentUser",
-							inMemoryDao.getCurrentUser(currentUserEmail, currentUserPassword));
+							databaseDao.getCurrentUser(currentUserEmail, currentUserPassword));
 
-				if (inMemoryDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
+				if (databaseDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
 					httpServletRequest.getSession().setAttribute("currentPartner",
-							inMemoryDao.getCurrentPartner(currentUserEmail, currentUserPassword));
+							databaseDao.getCurrentPartner(currentUserEmail, currentUserPassword));
 
 				}
 
@@ -78,7 +78,7 @@ public class LoginController {
 			HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = null;
 
-		if (inMemoryDao.checkUserLogin(email, password)) {
+		if (databaseDao.checkUserLogin(email, password)) {
 
 			if (request.getParameter("rememberMe") != null) {
 
@@ -94,7 +94,7 @@ public class LoginController {
 				response.addCookie(emailCookie);
 				response.addCookie(passwordCookie);
 
-				request.getSession().setAttribute("currentUser", inMemoryDao.getCurrentUser(email, password));
+				request.getSession().setAttribute("currentUser", databaseDao.getCurrentUser(email, password));
 
 				modelAndView = new ModelAndView("/logged/loggedIndex");
 
@@ -103,14 +103,34 @@ public class LoginController {
 
 				modelAndView = new ModelAndView("/logged/loggedIndex");
 
-				request.getSession().setAttribute("currentUser", inMemoryDao.getCurrentUser(email, password));
+				request.getSession().setAttribute("currentUser", databaseDao.getCurrentUser(email, password));
 			}
 
-		} else if (inMemoryDao.checkPartnerLogin(email, password)) {
+		} else if (databaseDao.checkPartnerLogin(email, password)) {
+
+			if (request.getParameter("rememberMe") != null) {
+
+				Cookie emailCookie = new Cookie("cookieCurrentUser", email);
+				Cookie passwordCookie = new Cookie("cookieCurrentUserPassword", password);
+
+				emailCookie.setMaxAge(3600);
+				emailCookie.setPath("/");
+
+				passwordCookie.setMaxAge(3600);
+				passwordCookie.setPath("/");
+
+				response.addCookie(emailCookie);
+				response.addCookie(passwordCookie);
+
+				request.getSession().setAttribute("currentUser", databaseDao.getCurrentUser(email, password));
+
+				modelAndView = new ModelAndView("/logged/loggedIndex");
+
+			}
 
 			modelAndView = new ModelAndView("/logged/loggedIndex");
 
-			request.getSession().setAttribute("currentPartner", inMemoryDao.getCurrentPartner(email, password));
+			request.getSession().setAttribute("currentPartner", databaseDao.getCurrentPartner(email, password));
 
 		}
 

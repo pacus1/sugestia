@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.app.databaseDao.DatabaseDao;
 import com.app.domain.user.User;
-import com.app.inMemoryDao.InMemoryDao;
 
 @Controller
 @RequestMapping("/")
@@ -23,15 +23,15 @@ public class RegisterController {
 
 	// Return true if email not exist, false if email exist aleardy.
 	@Autowired
-	InMemoryDao inMemoryDao;
+	DatabaseDao databaseDao;
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register(HttpServletRequest httpServletRequest) {
 		ModelAndView modelAndView = null;
 
-		if ((httpServletRequest.getCookies() != null && httpServletRequest.getCookies().length > 1)
+		if (httpServletRequest.getCookies() != null && httpServletRequest.getCookies().length > 1
 				&& (httpServletRequest.getSession().getAttribute("currentUser") == null
-						|| httpServletRequest.getSession().getAttribute("currentPartner") == null)) {
+						&& httpServletRequest.getSession().getAttribute("currentPartner") == null)) {
 			Cookie cookie[] = httpServletRequest.getCookies();
 
 			Cookie cook;
@@ -47,14 +47,14 @@ public class RegisterController {
 
 				modelAndView = new ModelAndView("/logged/loggedIndex");
 
-				if (inMemoryDao.checkUserLogin(currentUserEmail, currentUserPassword))
+				if (databaseDao.checkUserLogin(currentUserEmail, currentUserPassword))
 
 					httpServletRequest.getSession().setAttribute("currentUser",
-							inMemoryDao.getCurrentUser(currentUserEmail, currentUserPassword));
+							databaseDao.getCurrentUser(currentUserEmail, currentUserPassword));
 
-				if (inMemoryDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
+				if (databaseDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
 					httpServletRequest.getSession().setAttribute("currentPartner",
-							inMemoryDao.getCurrentPartner(currentUserEmail, currentUserPassword));
+							databaseDao.getCurrentPartner(currentUserEmail, currentUserPassword));
 
 				}
 
@@ -91,7 +91,7 @@ public class RegisterController {
 
 		if (!bindingResult.hasErrors()) {
 
-			if (inMemoryDao.checkUserEmail(user)) {
+			if (databaseDao.checkUserEmail(user)) {
 
 				modelAndView = new ModelAndView("/login");
 				modelAndView.addObject("message", "Succesful registered now please login!");

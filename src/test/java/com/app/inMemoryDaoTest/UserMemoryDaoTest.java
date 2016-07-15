@@ -1,4 +1,4 @@
-package com.app.inMemoryDao;
+package com.app.inMemoryDaoTest;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.app.domain.partner.Partner;
 import com.app.domain.user.User;
+import com.app.inMemoryDao.InMemoryDao;
 
 public class UserMemoryDaoTest {
 
