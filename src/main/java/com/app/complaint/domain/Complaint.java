@@ -1,4 +1,5 @@
 package com.app.complaint.domain;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.app.user.domain.User;
@@ -10,14 +11,21 @@ public class Complaint extends AbstractModel{
 		private long complaintId;
 		private ComplaintStatusType complaintStatusType;
 		private ComplaintType complaintType;
-		private Date complaintTimeStamp;
+		private LocalDateTime complaintTimeStamp;
 		private String complaintTitle;
 		private String complaintBody;
-		private Object complaintPicture;
+		private String complaintPicture;
 		private String complaintPartnerAsigneeName;
-		private Long complaintId1;
+		private String complaintPartnerType;
+	
 	
 		
+		public String getComplaintPartnerType() {
+			return complaintPartnerType;
+		}
+		public void setComplaintPartnerType(String complaintPartnerType) {
+			this.complaintPartnerType = complaintPartnerType;
+		}
 		public long getComplaintId() {
 			return complaintId;
 		}
@@ -36,11 +44,11 @@ public class Complaint extends AbstractModel{
 		public void setComplaintType(ComplaintType complainType) {
 			this.complaintType = complainType;
 		}
-		public Date getComplaintTimeStamp() {
+		public LocalDateTime getComplaintTimeStamp() {
 			return complaintTimeStamp;
 		}
-		public void setComplaintTimeStamp(Date complainTimeStamp) {
-			this.complaintTimeStamp = complainTimeStamp;
+		public void setComplaintTimeStamp(LocalDateTime localDateTime) {
+			this.complaintTimeStamp = localDateTime;
 		}
 		public String getComplaintTitle() {
 			return complaintTitle;
@@ -57,7 +65,7 @@ public class Complaint extends AbstractModel{
 		public Object getComplaintPicture() {
 			return complaintPicture;
 		}
-		public void setComplaintPicture(Object complainPicture) {
+		public void setComplaintPicture(String complainPicture) {
 			this.complaintPicture = complainPicture;
 		}
 		public String getComplaintPartnerAsigneeName() {

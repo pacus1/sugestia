@@ -53,17 +53,37 @@
  
   <table class="table">
 	<tr>
-		<th>Title</th>
-		<th>Body</th>
 		<th></th>
-		
+		<th>Status</th>
+		<th>Tipul institutiei</th>
+		<th>Numele institutiei</th>
+		<th>Titlul sugestiei</th>
+		<th>Continut</th>
+		<th>Time stamp</th>
+		<th>Poze</th>
+		<th>Poze</th>
+		<th></th>
 	</tr>
+
 	<!-- begin iteration -->
 	[#if complaints??]
 		[#list complaints as complaint] 
 			<tr>
+				<td>${complaint.complaintType}</td>
+				<td>${complaint.complaintStatusType} <br>  
+						<form> 
+						<input type="radio" name="complaintStatusType" value="PENDING" checked> PENDING<br>
+ 						<input type="radio" name="complaintStatusType" value="APPROVED"> APPROVED<br>
+ 						<input type="radio" name="complaintStatusType" value="REJECT"> REJECT<br>
+ 						<input type="radio" name="complaintStatusType" value="SOLVED"> SOLVED</td>
+ 						</form>
+				<td>${complaint.complaintPartnerType}</td>
+				<td>${complaint.complaintPartnerAsigneeName}</td>
 				<td>${complaint.complaintTitle}</td>
 				<td>${complaint.complaintBody}</td>
+				<td>${complaint.complaintTimeStamp}</td>
+				<td><img src = file:///C:\Users\Petronia\Desktop\${complaint.complaintPicture} /></td>
+				<td>${complaint.complaintPicture}</td>
 				
 			</tr>
 		[/#list]
@@ -73,5 +93,6 @@
 
 </table>
 </div>
+<div> <a href="/save">SAVE</a></div>
 
 [/#escape]

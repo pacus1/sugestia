@@ -46,11 +46,11 @@ public class ComplaintService {
 //		return false;
 //	}
 //
-//	public Complaint get(Long id) {
-//		LOGGER.debug("Getting employee for id: " + id);
-//		return dao.findById(id);
-//
-//	}
+	public Complaint get(Long id) {
+		LOGGER.debug("Getting employee for id: " + id);
+		return dao.findById(id);
+
+	}
 //
 	public void save(Complaint complaint) throws ValidationException {
 		LOGGER.debug("Saving: " + complaint);

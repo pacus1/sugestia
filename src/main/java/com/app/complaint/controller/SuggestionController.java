@@ -1,8 +1,13 @@
 package com.app.complaint.controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.app.complaint.domain.Complaint;
+import com.app.complaint.domain.ComplaintStatusType;
+import com.app.complaint.domain.ComplaintType;
 import com.app.complaint.service.ComplaintService;
 import com.app.complaint.service.SecurityService;
 import com.app.complaint.service.ValidationException;
@@ -30,6 +37,7 @@ public class SuggestionController {
 	@Autowired
 	private ComplaintService complaintService;
 
+
 	@RequestMapping("suggestion")
 	public ModelAndView renderAddSuggestion() {
 		ModelAndView modelAndView = new ModelAndView("/suggestion");
@@ -37,23 +45,21 @@ public class SuggestionController {
 		return modelAndView;
 	}
 
-//	@RequestMapping("edit")
-//	public ModelAndView renderEdit(long id) {
-//		ModelAndView modelAndView = new ModelAndView("employee/add");
-//		modelAndView.addObject("employee", employeeService.get(id));
-//		return modelAndView;
-//	}
-//
+
 	@RequestMapping("/suggestion/submit")
-	public ModelAndView save(
+	public ModelAndView submit(
 			@Valid @ModelAttribute("suggestion") Complaint complaint, 
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = null;
 		boolean hasErros = false;
 		if (!bindingResult.hasErrors()) {
 			try {
+				ComplaintType complaintType= ComplaintType.SUGGESTION;
+				complaint.setComplaintType(complaintType);
+				ComplaintStatusType complaintStatusType= ComplaintStatusType.PENDING;
+				complaint.setComplaintStatusType(complaintStatusType);
+				complaint.setComplaintTimeStamp(LocalDateTime.now());
 				complaintService.save(complaint);
-
 				modelAndView = new ModelAndView();
 				modelAndView.setView(new RedirectView("/listall"));
 			} catch (ValidationException ex) {
@@ -71,28 +77,32 @@ public class SuggestionController {
 			modelAndView.addObject("complaint", complaint);
 			modelAndView.addObject("errors", bindingResult.getAllErrors());
 		}
-		System.out.println("Title este: " + complaint.getComplaintTitle());
-		System.out.println("Bodyul este: " + complaint.getComplaintBody());
+
 		return modelAndView;
 	}
 
-	
-	
-	
-	
-	
 
-	
-	
-	
-	
-	
+
 	
 	@RequestMapping("/listall")
-	public ModelAndView list() throws Exception {
+	public ModelAndView list(Complaint complaint) throws Exception {
 		ModelAndView modelAndView = new ModelAndView("/listall");
 		modelAndView.addObject("complaints", complaintService.listAll());
-//		modelAndView.addObject("currentUser", securityService.getCurrentUser());
+		//modelAndView.addObject("currentUser", securityService.getCurrentUser());
 		return modelAndView;
 	}
+	
+	
+	@RequestMapping("/save")
+	public ModelAndView save(Complaint complaint) throws Exception {
+		ModelAndView modelAndView = new ModelAndView("/listall");
+		modelAndView.addObject("complaints", complaintService.listAll());
+		//modelAndView.addObject("currentUser", securityService.getCurrentUser());
+		return modelAndView;
+	}
+	
+
+
+	
+	
 }
