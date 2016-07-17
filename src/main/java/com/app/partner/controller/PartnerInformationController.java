@@ -1,4 +1,4 @@
-package com.app.controller.partner;
+package com.app.partner.controller;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.app.databaseDao.DatabaseDao;
 import com.app.inMemoryDao.InMemoryDao;
+import com.app.user.dao.DatabaseDao;
 
 @Controller
 @RequestMapping("/")

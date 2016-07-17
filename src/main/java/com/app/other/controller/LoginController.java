@@ -1,4 +1,4 @@
-package com.app.controller.other;
+package com.app.other.controller;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.app.databaseDao.DatabaseDao;
+import com.app.user.dao.DatabaseDao;
 
 @Controller
 @RequestMapping("/")

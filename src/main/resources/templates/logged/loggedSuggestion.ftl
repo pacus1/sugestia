@@ -208,18 +208,23 @@
                                             </select>
 			    		</div>
 			    	  	<div class="form-group">
-			    		    <input class="form-control" placeholder="Numele Companiei / Institutiei" name="nume" type="text">
+			    		    <input class="form-control" placeholder="Numele Companiei / Institutiei" name="complaintPartnerAsigneeName" type="text"/>
 			    		</div>
-                                        <div class="form-group">
-			    		    <input class="form-control" placeholder="Titlul Sugestiei *" name="titlu" type="text" required>
+                        <div class="form-group">
+			    		     <input class="form-control" placeholder="Titlul Sugestiei *" name="complaintTitle" type="text" required >
 			    		</div>
-                                        <div class="form-group">
-			    		    <textarea class="form-control" placeholder="Descriere *" name="descriere" type="textarea" rows="4" required></textarea>
+                        <div class="form-group">
+			    		    <textarea class="form-control" placeholder="Descriere *" name="complaintBody" type="text" rows="4"  required >
+			    		    </textarea>
 			    		</div>
-                                        <p>Adauga poze: (optional)</p>
+			    		<div class="form-group" name="complaintType"></div>
+                        
+                        <p>Adauga poze: (optional)</p>
+                                        
 			    		<input type="file" name="pic1" accept="image/*" style="padding-top:10px; padding-bottom:10px;">
 			    		<input type="file" name="pic2" accept="image/*" style="padding-top:10px; padding-bottom:10px;">
-                                        <input type="file" name="pic3" accept="image/*" style="padding-top:10px; padding-bottom:25px;">
+                        <input type="file" name="pic3" accept="image/*" style="padding-top:10px; padding-bottom:25px;">
+                                        
 			    		<input class="btn btn-lg btn-primary" style="color:#FFFFFF; width:100%;" type="submit" value="Adauga">
 			    	</fieldset>
 			      	</form>

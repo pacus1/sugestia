@@ -1,4 +1,4 @@
-package com.app.controller.user;
+package com.app.user.controller;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.app.databaseDao.DatabaseDao;
+import com.app.user.dao.DatabaseDao;
 import com.app.user.domain.User;
 
 @Controller

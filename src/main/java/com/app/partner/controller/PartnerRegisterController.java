@@ -1,4 +1,4 @@
-package com.app.controller.partner;
+package com.app.partner.controller;
 
 import java.util.ArrayList;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.app.databaseDao.DatabaseDao;
 import com.app.partner.domain.Partner;
+import com.app.user.dao.DatabaseDao;
 
 @Controller
 @RequestMapping("/")

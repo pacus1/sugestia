@@ -1,4 +1,4 @@
-package com.app.controller.other;
+package com.app.other.controller;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
