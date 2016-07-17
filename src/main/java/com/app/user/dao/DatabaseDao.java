@@ -14,8 +14,11 @@ import com.app.user.domain.User;
 @Service
 public class DatabaseDao {
 
+	//connection to local dbs
 	private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/sugestiaDB?user=postgres&password=admin";
-
+	
+	//connection to Heroku dbs
+	//private static final String DATABASE_URL = "jdbc:postgresql://ec2-54-228-219-2.eu-west-1.compute.amazonaws.com:5432/davlnk5ukati5r?sslmode=require&user=pxtvzlortfjhdh&password=QY9jN5mm1dMBMJqVGZ9RavILOe";
 
 	Connection connection = null;
 	PreparedStatement preparedStatement = null;
