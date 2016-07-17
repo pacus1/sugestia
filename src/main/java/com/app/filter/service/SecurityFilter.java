@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.app.domain.partner.Partner;
-import com.app.domain.user.User;
+import com.app.partner.domain.Partner;
+import com.app.user.domain.User;
 
 @Component
 public class SecurityFilter implements Filter {

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.app.databaseDao.DatabaseDao;
-import com.app.domain.partner.Partner;
+import com.app.partner.domain.Partner;
 
 @Controller
 @RequestMapping("/")

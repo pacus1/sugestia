@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.app.databaseDao.DatabaseDao;
-import com.app.domain.partner.Partner;
-import com.app.domain.user.User;
+import com.app.partner.domain.Partner;
+import com.app.user.domain.User;
 
 public class DatabaseDaoTest {
 

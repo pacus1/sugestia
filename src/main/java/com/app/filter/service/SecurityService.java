@@ -2,8 +2,8 @@ package com.app.filter.service;
 
 import org.springframework.stereotype.Component;
 
-import com.app.domain.partner.Partner;
-import com.app.domain.user.User;
+import com.app.partner.domain.Partner;
+import com.app.user.domain.User;
 
 @Component
 public class SecurityService {

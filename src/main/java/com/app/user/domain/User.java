@@ -1,4 +1,4 @@
-package com.app.domain.user;
+package com.app.user.domain;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
