@@ -145,7 +145,7 @@
 			    	<h3 class="panel-title" align="center">Va rugam sa introduceti urmatoarele informatii:</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8" role="form">
+			    	<form accept-charset="UTF-8" role="form" action="/suggestion/submit" method="POST">
                     <fieldset>
                                         <div class="form-group" style="padding-top:12px;" align="center">
                                         <label for="selectcategorie">Alege categoria din care face parte compania/institutia caruia vreti sa-i trimiteti sugestia:</label>

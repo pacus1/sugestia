@@ -14,7 +14,8 @@ import com.app.user.domain.User;
 @Service
 public class DatabaseDao {
 
-	private static final String DATABASE_URL = "jdbc:postgresql://ec2-54-228-219-2.eu-west-1.compute.amazonaws.com:5432/davlnk5ukati5r?sslmode=require&user=pxtvzlortfjhdh&password=QY9jN5mm1dMBMJqVGZ9RavILOe";
+	private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/sugestiaDB?user=postgres&password=admin";
+
 
 	Connection connection = null;
 	PreparedStatement preparedStatement = null;
@@ -103,7 +104,7 @@ public class DatabaseDao {
 			e.printStackTrace();
 		}
 
-		String addPartnerQuery = String.format("INSERT INTO partners VALUES('%s','%s','%s','%s','%s','%s','%s','%s')",
+		String addPartnerQuery = String.format("INSERT INTO partners VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s')",1,
 				partner.getPartnerLastName(), partner.getPartnerFirstName(),
 				partner.getPartnerCompanyOrInstitutionName(), partner.getPartnerAddress(), partner.getPartnerCategory(),
 				partner.getPartnerEmail(), partner.getPartnerPhone(), partner.getPartnerPassword());
