@@ -63,7 +63,20 @@
             <li><a href="/partnerInformation">Parteneri</a></li>
             <li><a href="/aboutUs">Despre Noi</a></li>
             <li><a href="/contact">Contact</a></li>
-<li><div class=btn-group style="padding-top:8px;"> <button type=button class="btn btn-success dropdown-toggle" data-toggle=dropdown aria-haspopup=true aria-expanded=false style="color:white;">AUTENTIFICARE <span class=caret></span></button> <ul class=dropdown-menu> <li><a href="/login">Intra in cont</a></li> <li><a href="/register">Inregistreaza un cont nou</a></li> <li><a href="/partnerRegister">Inregistrare partener</a></li></ul> </div> </li>
+            
+            [#if currentUser ??]
+            	<p>${currentUser}</p>
+             [/#if]
+             [#if currentPartner ??]
+            	<p>${currentPartner}</p>
+             [/#if]
+             
+             <form  action="/logout" method="POST"  role="form">
+           
+           <input class="btn btn-lg btn-success btn-block btnlogin" style="color:#FFFFFF;" type="submit" value="Logout">
+           
+           </form>
+             
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -121,13 +134,12 @@
             </a>
           </div>
        </div>
-       <div class="col-md-6" align="center" style="border-radius: 5px; padding-bottom:270px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
-       <h1>Cum adaug o sugestie/reclamatie noua?</h1></br></br>
-             <p style="text-align:left;">Sugestia.ro este o platforma prin care poti educa institutiile publice si proprietarii de business-uri din Cluj-Napoca. Noi ne asiguram ca nevoile si nemultumirile tale vor fi auzite, iar acest lucru va fi pentru tine o experienta rapida �0�2i usoara. </br></br>
-
-Ave�0�4i posibilitatea sa trimiteti o sugestie sau o reclamatie pentru orice institutie sau business din orasul nostru, iar noi vom incerca sa ajungem la ei in numele dumneavoastra. Acestia pot sa raspunda reclamatiei prin intermediul nostru si sa va propuna o metoda de reconciliere. Dumneavoastra aveti optiunea de a face publica sugestia/reclamatia sau de a o face in mod privat. In momentul in care ati primit un raspuns, o sa fiti notificat pe e-mail, iar statusul reclamatiei dumneavoastra se ve modifica.</br></br>
-
-Daca cel vizat ignora doleantele dumneavoastra, reclamatia va fi publicata pe site, iar cel vizat va fi inclus in topul ignorantilor.</br></br> 
+       <div class="col-md-6" align="center" style="border-radius: 5px; padding-bottom:170px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
+       <h1>Despre Noi</h1></br></br>
+             <p style="text-align:left;">Povestea noastra a inceput intr-o zi torida de iunie, circuland intr-un autobuz fara aer conditionat al Companiei de Transport Cluj-Napoca. Aerul irespirabil, hainele lipite de corp si bucatile de hartie care se transformau in cele mai nonconformiste forme de evantai, pareau sa nu deranjeze pe nimeni. Exista o oarecare impacare ciudata cu situatia. desi disconfortul era unul evident.</br></br>
+Procesul de a ne face nemultumirea cunoscuta este unul dificil, implica timp si resurse, poate alte nemultumiri. Din acest motiv, uneori renuntam prea usor la punctul nostru de vedere, la a ne spune off-ul, la a incerca sa schimbam modul in care lucrurile functioneaza in orasul nostru.</br></br>
+Astfel, ne-am strans o mana de oameni de pe bancile scolii (informale), pentru a schimba ceva. </br></br>
+Principalul obiectiv al nostru este acela de a oferi o modalitate usoara pentru orice cetatean sau turist din Cluj sa ofere feedback linstitutiilor publice si societatilor private cu care interactioneaza. Feedback-ul poate fi de doua tipuri: sugestii si reclamatii. Vom tine evidenta reclamatiilor pentru fiecare utilizator care foloseste aplicatia noastra, pentru a ne asigura ca acesta va primi raspuns. Pe de alta parte, oferim institutilor publice si societatilor private un mod usor de a gestiona feedback-ul primit de la cei care folosesc serviciile sau produsele oferite si o modalitate de se a afla in permanenta aproape de nevoile acestora. 
 </p>
 </div>
 
@@ -185,7 +197,7 @@ Daca cel vizat ignora doleantele dumneavoastra, reclamatia va fi publicata pe si
 
 		</footer>
 
- <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

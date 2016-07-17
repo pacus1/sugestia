@@ -1,5 +1,5 @@
 [#ftl]
-<!DOCTYPE html>
+[#import "/spring.ftl" as spring /]
 <html lang="en">
   <head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
     
@@ -12,21 +12,24 @@
 
     <title>SUGESTIA.RO</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/custom.css" rel="stylesheet/less">
-    <link rel="stylesheet" href="css/footer-basic-centered.css">
-    <link href="less/navbar.less" rel="stylesheet/less">
-    <link href="less/navs.less" rel="stylesheet/less">
-    <link href="less/dropdowns.less" rel="stylesheet/less">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/theme.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+     <!-- Bootstrap core CSS -->
+<link href="[@spring.url '/css/custom.css' /]" rel="stylesheet/less" media="screen" /> 
+<link href="[@spring.url '/css/login.css' /]" rel="stylesheet/less" media="screen" /> 
+<link href="[@spring.url '/css/footer-basic-centered.css' /]" rel="stylesheet" media="screen" />    
+<link href="[@spring.url '/less/navbar.less' /]" rel="stylesheet/less" media="screen" />  
+<link href="[@spring.url '/less/navs.less' /]" rel="stylesheet/less" media="screen" />
+<link href="[@spring.url '/less/dropdowns.less' /]" rel="stylesheet/less" media="screen" />
+<link href="[@spring.url '/css/bootstrap.css' /]" rel="stylesheet"/>
+<link href="[@spring.url '/css/theme.css' /]" rel="stylesheet" media="screen" />
+<link href="[@spring.url '/css/bootstrap.min.css' /]" rel="stylesheet" media="screen" />
+
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="[@spring.url '/css/ie10-viewport-bug-workaround.css' /]" rel="stylesheet" media="screen" /> 
 
     <!-- Custom styles for this template -->
-    <link href="css/starter-template.css" rel="stylesheet">
+    <link href="[@spring.url '/css/starter-template.css' /]" rel="stylesheet"/> 
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -38,6 +41,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+[#escape x as x?html]
 
   <body style="background-color:#E9EBEE;">
 
@@ -54,7 +58,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav" style="float:right; font-weight:300;">
-            <li><a href="./">Acasa</a></li>
+            <li><a href="/">Acasa</a></li>
             <li><a href="/sugestii-reclamatii">Vezi Sugestii si Reclamatii</a></li>
             <li><a href="/partnerInformation">Parteneri</a></li>
             <li><a href="/aboutUs">Despre Noi</a></li>
@@ -236,15 +240,19 @@
 			<p class="footer-company-name"> - SUGESTIA.RO &copy; Copyright 2016 - </p>
 
 		</footer>
-
-    <!-- Bootstrap core JavaScript
+		
+ <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="js/bootstrap.min.js"></script>
+ 	<script src="[@spring.url '/js/bootstrap.min.js' /] "></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script src="js/contact.js"></script>
+    <script src="[@spring.url '/js/contact.js' /] "></script>
+    <script> $('.message a').click(function(){
+   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+}); </script>
   </body>
 </html>
+[/#escape]

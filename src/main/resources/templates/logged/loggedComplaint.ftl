@@ -63,7 +63,20 @@
             <li><a href="/partnerInformation">Parteneri</a></li>
             <li><a href="/aboutUs">Despre Noi</a></li>
             <li><a href="/contact">Contact</a></li>
-<li><div class=btn-group style="padding-top:8px;"> <button type=button class="btn btn-success dropdown-toggle" data-toggle=dropdown aria-haspopup=true aria-expanded=false style="color:white;">AUTENTIFICARE <span class=caret></span></button> <ul class=dropdown-menu> <li><a href="/login">Intra in cont</a></li> <li><a href="/register">Inregistreaza un cont nou</a></li> <li><a href="/partnerRegister">Inregistrare partener</a></li></ul> </div> </li>
+            
+              [#if currentUser ??]
+            	<p>${currentUser}</p>
+             [/#if]
+             [#if currentPartner ??]
+            	<p>${currentPartner}</p>
+             [/#if]
+             
+             <form  action="/logout" method="POST"  role="form">
+           
+           <input class="btn btn-lg btn-success btn-block btnlogin" style="color:#FFFFFF;" type="submit" value="Logout">
+           
+           </form>
+           
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -121,15 +134,104 @@
             </a>
           </div>
        </div>
-       <div class="col-md-6" align="center" style="border-radius: 5px; padding-bottom:270px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
-       <h1>Cum adaug o sugestie/reclamatie noua?</h1></br></br>
-             <p style="text-align:left;">Sugestia.ro este o platforma prin care poti educa institutiile publice si proprietarii de business-uri din Cluj-Napoca. Noi ne asiguram ca nevoile si nemultumirile tale vor fi auzite, iar acest lucru va fi pentru tine o experienta rapida �0�2i usoara. </br></br>
+       <div class="col-md-6" align="center" style="border-radius: 5px; padding-bottom:30px; background-color:#FFFFFF; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"></br>
+       <h2>Adauga o reclamatie noua</h2></br>
+</br>
+             <div style="padding-left:50px; padding-right:50px;">
+    <div class="row">
+		<div>
+    		<div class="panel panel-default" style="text-align:left;">
+			  	<div class="panel-heading">
+			    	<h3 class="panel-title" align="center">Va rugam sa introduceti urmatoarele informatii:</h3>
+			 	</div>
+			  	<div class="panel-body">
+			    	<form accept-charset="UTF-8" role="form">
+                    <fieldset>
+                                        <div class="form-group" style="padding-top:12px;" align="center">
+                                        <label for="selectcategorie">Alege categoria din care face parte compania/institutia caruia vreti sa-i trimiteti reclamatia:</label>
+			    		    <select name="categorie" id="selectcategorie" required style="font-size:25px;">
+                                               <optgroup label="Institutii Publice">
+                                                  <option value="volvo">Primaria</option>
+                                                  <option value="saab">Consiliul Local</option>
+                                                  <option value="saab">Politie</option>
+                                               </optgroup>
+                                               <optgroup label="Servicii Publice">
+                                                  <option value="volvo">Cluj Bike</option>
+                                                  <option value="saab">Parcuri</option>
+                                                  <option value="saab">ADP</option>
+                                                  <option value="saab">RATUC</option>
+                                               </optgroup>
+                                               <optgroup label="Servicii Private">
+                                                  <option value="volvo">Telefonie</option>
+                                                  <option value="saab">Internet</option>
+                                                  <option value="saab">Gunoi/Reciclare</option>
+                                                  <option value="saab">Taxi</option>
+                                                  <option value="saab">Curierat</option>
+                                               </optgroup>
+                                               <optgroup label="Utilitati">
+                                                  <option value="volvo">Apa</option>
+                                                  <option value="saab">Gaze</option>
+                                                  <option value="saab">Electricitate</option>
+                                               </optgroup>
+                                               <optgroup label="Localuri">
+                                                  <option value="volvo">Cafenele</option>
+                                                  <option value="saab">Restaurante</option>
+                                                  <option value="saab">Baruri</option>
+                                               </optgroup>
+                                               <optgroup label="Cazare">
+                                                  <option value="volvo">Hotele</option>
+                                                  <option value="saab">Pensiuni</option>
+                                               </optgroup>
+                                               <optgroup label="Evenimente">
+                                                  <option value="volvo">Festivaluri</option>
+                                                  <option value="saab">Targuri</option>
+                                                  <option value="saab">Concerte</option>
+                                               </optgroup>
+                                               <optgroup label="Cultura">
+                                                  <option value="volvo">Teatru</option>
+                                                  <option value="saab">Opera</option>
+                                                  <option value="saab">Film</option>
+                                               </optgroup>
+                                               <optgroup label="Evenimente">
+                                                  <option value="volvo">Mall-uri</option>
+                                                  <option value="saab">Centre Comerciale</option>
+                                                  <option value="saab">Second-Hand</option>
+                                                  <option value="volvo">Outlet-uri</option>
+                                                  <option value="saab">Electronice</option>
+                                                  <option value="saab">Farmacii</option>
+                                               </optgroup>
+                                               <optgroup label="Sanatate">
+                                                  <option value="volvo">Clinici</option>
+                                                  <option value="saab">Spitale</option>
+                                                  <option value="saab">Cabinete individuale</option>
+                                               </optgroup>
+                                            </select>
+			    		</div>
+			    	  	<div class="form-group">
+			    		    <input class="form-control" placeholder="Numele Companiei / Institutiei" name="nume" type="text">
+			    		</div>
+                                        <div class="form-group">
+			    		    <input class="form-control" placeholder="Titlul Sugestiei *" name="titlu" type="text" required>
+			    		</div>
+                                        <div class="form-group">
+			    		    <textarea class="form-control" placeholder="Descriere *" name="descriere" type="textarea" rows="4" required></textarea>
+			    		</div>
+                                        <p>Adauga poze: (optional)</p>
+			    		<input type="file" name="pic1" accept="image/*" style="padding-top:10px; padding-bottom:10px;">
+			    		<input type="file" name="pic2" accept="image/*" style="padding-top:10px; padding-bottom:10px;">
+                                        <input type="file" name="pic3" accept="image/*" style="padding-top:10px; padding-bottom:25px;">
+			    		<input class="btn btn-lg btn-primary" style="color:#FFFFFF; width:100%;" type="submit" value="Adauga">
+			    	</fieldset>
+			      	</form>
 
-Ave�0�4i posibilitatea sa trimiteti o sugestie sau o reclamatie pentru orice institutie sau business din orasul nostru, iar noi vom incerca sa ajungem la ei in numele dumneavoastra. Acestia pot sa raspunda reclamatiei prin intermediul nostru si sa va propuna o metoda de reconciliere. Dumneavoastra aveti optiunea de a face publica sugestia/reclamatia sau de a o face in mod privat. In momentul in care ati primit un raspuns, o sa fiti notificat pe e-mail, iar statusul reclamatiei dumneavoastra se ve modifica.</br></br>
-
-Daca cel vizat ignora doleantele dumneavoastra, reclamatia va fi publicata pe site, iar cel vizat va fi inclus in topul ignorantilor.</br></br> 
-</p>
+			    </div>
+			</div>
+		</div>
+	</div>
 </div>
+
+</div>
+
 
        
 
