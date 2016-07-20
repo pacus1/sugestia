@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.app.user.dao.DatabaseDao;
+import com.app.user.dao.UserDao;
 
 @Controller
 @RequestMapping("/")
@@ -19,7 +19,7 @@ public class LoginController {
 
 	// true if email and password exists
 	@Autowired
-	DatabaseDao databaseDao;
+	UserDao databaseDao;
 
 	@RequestMapping("/login")
 	public ModelAndView login(HttpServletRequest httpServletRequest) {

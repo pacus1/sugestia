@@ -8,15 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.app.inMemoryDao.InMemoryDao;
-import com.app.user.dao.DatabaseDao;
+import com.app.user.dao.UserDao;
+import com.app.user.dao.InMemoryDao;
 
 @Controller
 @RequestMapping("/")
 public class PartnerInformationController {
 
 	@Autowired
-	DatabaseDao databaseDao;
+	UserDao databaseDao;
 
 	@RequestMapping("/partnerInformation")
 	public ModelAndView partnerInformation(HttpServletRequest httpServletRequest) {

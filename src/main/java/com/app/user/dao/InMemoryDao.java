@@ -1,4 +1,4 @@
-package com.app.inMemoryDao;
+package com.app.user.dao;
 
 import java.util.ArrayList;
 

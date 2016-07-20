@@ -20,15 +20,17 @@ import com.app.complaint.domain.ComplaintStatusType;
 import com.app.complaint.domain.ComplaintType;
 import com.app.complaint.service.ComplaintService;
 import com.app.complaint.service.ValidationException;
-import com.app.user.dao.DatabaseDao;
+import com.app.partner.domain.Partner;
+import com.app.user.dao.UserDao;
+import com.app.user.domain.User;
 
 @Controller
 @RequestMapping("/")
 public class SuggestionController {
 
 	@Autowired
-	DatabaseDao databaseDao;
-	private ComplaintService complaintService;
+	UserDao userDao;
+	ComplaintService complaintService;
 
 	@RequestMapping("/suggestion")
 	public ModelAndView partnerInformation(HttpServletRequest httpServletRequest) {
@@ -52,14 +54,14 @@ public class SuggestionController {
 
 				modelAndView = new ModelAndView("/logged/loggedSuggestion");
 
-				if (databaseDao.checkUserLogin(currentUserEmail, currentUserPassword))
+				if (userDao.checkUserLogin(currentUserEmail, currentUserPassword))
 
 					httpServletRequest.getSession().setAttribute("currentUser",
-							databaseDao.getCurrentUser(currentUserEmail, currentUserPassword));
+							userDao.getCurrentUser(currentUserEmail, currentUserPassword));
 
-				if (databaseDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
+				if (userDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
 					httpServletRequest.getSession().setAttribute("currentPartner",
-							databaseDao.getCurrentPartner(currentUserEmail, currentUserPassword));
+							userDao.getCurrentPartner(currentUserEmail, currentUserPassword));
 
 				}
 				
@@ -89,7 +91,7 @@ public class SuggestionController {
 // from this line down, added code from Ovi's SuggestionController class 
 	@RequestMapping("/suggestion/submit")
 	public ModelAndView submit(
-			@Valid @ModelAttribute("suggestion") Complaint complaint, 
+			@Valid @ModelAttribute("suggestion") Complaint complaint, User user, //Partner partner,
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = null;
 		boolean hasErros = false;
@@ -100,7 +102,7 @@ public class SuggestionController {
 				ComplaintStatusType complaintStatusType= ComplaintStatusType.PENDING;
 				complaint.setComplaintStatusType(complaintStatusType);
 				complaint.setComplaintTimeStamp(LocalDateTime.now());
-				complaintService.save(complaint);
+				complaintService.save(complaint,user);
 				modelAndView = new ModelAndView();
 				modelAndView.setView(new RedirectView("/listall"));
 			} catch (ValidationException ex) {

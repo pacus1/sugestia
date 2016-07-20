@@ -15,7 +15,7 @@ import com.app.complaint.domain.Complaint;
 
 @Component
 public class IMComplaintDAO extends IMBaseDAO<Complaint> 
-	implements ComplaintDAO {
+	implements ComplaintDAO_old {
 
 	@Override
 	public Collection<Complaint> searchByName(String query) {

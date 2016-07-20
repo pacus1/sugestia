@@ -7,8 +7,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import com.app.partner.domain.Partner;
+import com.app.user.dao.InMemoryDao;
 import com.app.user.domain.User;
-import com.app.inMemoryDao.InMemoryDao;
 
 public class UserMemoryDaoTest {
 

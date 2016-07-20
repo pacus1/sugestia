@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.app.partner.domain.Partner;
-import com.app.user.dao.DatabaseDao;
+import com.app.user.dao.UserDao;
 import com.app.user.domain.User;
 
 public class DatabaseDaoTest {
@@ -13,7 +13,7 @@ public class DatabaseDaoTest {
 	@Test
 	public void testRegister() {
 
-		DatabaseDao databaseDao = new DatabaseDao();
+		UserDao databaseDao = new UserDao();
 
 		User user = new User();
 		user.setUserLastName("T");
@@ -59,7 +59,7 @@ public class DatabaseDaoTest {
 	@Test
 	public void testLogin() {
 
-		DatabaseDao databaseDao = new DatabaseDao();
+		UserDao databaseDao = new UserDao();
 
 		assertTrue(databaseDao.checkUserLogin("alex.timis95@gmail.com", "aaaa"));
 
@@ -72,7 +72,7 @@ public class DatabaseDaoTest {
 
 	@Test
 	public void returnCurrentUser() {
-		DatabaseDao databaseDao = new DatabaseDao();
+		UserDao databaseDao = new UserDao();
 		System.out.println(databaseDao.getCurrentUser("alex.timis95@gmail.com", "aaaa"));
 		System.out.println(databaseDao.getCurrentPartner("asd", "asd"));
 

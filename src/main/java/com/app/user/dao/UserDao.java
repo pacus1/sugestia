@@ -7,41 +7,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.stereotype.Service;
+import org.apache.commons.lang.StringEscapeUtils;
 
 import com.app.partner.domain.Partner;
 import com.app.user.domain.User;
+import com.app.other.dao.ConnectDBS;
 
 @Service
-public class DatabaseDao {
+public class UserDao {
 
-	//connection to local dbs
-	private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/sugestiaDB?user=postgres&password=admin";
-	
-	//connection to Heroku dbs
-	//private static final String DATABASE_URL = "jdbc:postgresql://ec2-54-228-219-2.eu-west-1.compute.amazonaws.com:5432/davlnk5ukati5r?sslmode=require&user=pxtvzlortfjhdh&password=QY9jN5mm1dMBMJqVGZ9RavILOe";
-
-	Connection connection = null;
 	PreparedStatement preparedStatement = null;
 	ResultSet resultSet = null;
-
-	private Connection connectDatabase() {
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		try {
-			connection = DriverManager.getConnection(DATABASE_URL);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		System.out.println("Connection succesful");
-		return connection;
-	}
-
+	Connection connection = null;
+	
 	public boolean checkUserEmail(User user) {
-		connectDatabase();
+		connection = ConnectDBS.connectDatabase();
 
 		String userEmailCheck = "SELECT useremail,partneremail FROM users,partners";
 		try {
@@ -66,23 +46,35 @@ public class DatabaseDao {
 			e.printStackTrace();
 		}
 
-		String addUserQuery = String.format("INSERT INTO users VALUES('%s','%s','%s','%s','%s','%s','%s')",
-				user.getUserLastName(), user.getUserFirstName(), user.getUserEmail(), user.getUserMobilePhone(),
-				user.getUserHomeTown(), user.getUserPassword(), user.getUserRole());
-
+//		initial approach - changed due to conflicts with autoincremented fields 		
+//		String addUserQuery = String.format("INSERT INTO users VALUES('%s','%s','%s','%s','%s','%s','%s')",
+//				user.getUserLastName(), user.getUserFirstName(), user.getUserEmail(), user.getUserMobilePhone(),
+//				user.getUserHomeTown(), user.getUserPassword(), user.getUserRole());
+		
 		try {
-			preparedStatement = connection.prepareStatement(addUserQuery);
+						
+			preparedStatement = connection.prepareStatement("INSERT INTO users (userlastname,userfirstname,useremail,usermobilephone,userhometown,"
+					+ "userpassword,userrole) " + "VALUES(?,?,?,?,?,?,?)");			
+			
+			preparedStatement.setString(1, user.getUserLastName());
+			preparedStatement.setString(2, user.getUserFirstName());
+			preparedStatement.setString(3, user.getUserEmail());
+			preparedStatement.setString(4, user.getUserMobilePhone());
+			preparedStatement.setString(5, user.getUserHomeTown());
+			preparedStatement.setString(6, user.getUserPassword());
+			preparedStatement.setString(7, user.getUserRole());
+			
 			preparedStatement.executeQuery();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 		return true;
-
 	}
 
 	public boolean checkPartnerEmail(Partner partner) {
-		connectDatabase();
+		connection = ConnectDBS.connectDatabase();
 
 		String partnerEmailCheck = "SELECT useremail,partneremail FROM users,partners";
 		try {
@@ -125,7 +117,7 @@ public class DatabaseDao {
 
 	// if login return true
 	public boolean checkUserLogin(String email, String password) {
-		connectDatabase();
+		connection = ConnectDBS.connectDatabase();
 
 		String userLoginCheck = "SELECT useremail,userpassword FROM users";
 		try {
@@ -155,7 +147,7 @@ public class DatabaseDao {
 
 	// if login return true
 	public boolean checkPartnerLogin(String email, String password) {
-		connectDatabase();
+		connection = ConnectDBS.connectDatabase();
 
 		String partnerLoginCheck = "SELECT partneremail,partnerpassword FROM partners";
 		try {
@@ -184,7 +176,7 @@ public class DatabaseDao {
 	}
 
 	public User getCurrentUser(String email, String password) {
-		connectDatabase();
+		connection = ConnectDBS.connectDatabase();
 
 		String userLoginCheck = "SELECT * FROM users";
 		try {
@@ -218,7 +210,7 @@ public class DatabaseDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				connectDatabase().close();
+				connection.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -227,7 +219,7 @@ public class DatabaseDao {
 	}
 
 	public Partner getCurrentPartner(String email, String password) {
-		connectDatabase();
+		connection = ConnectDBS.connectDatabase();
 
 		String userLoginCheck = "SELECT * FROM partners";
 		try {
@@ -262,7 +254,7 @@ public class DatabaseDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				connectDatabase().close();
+				connection.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

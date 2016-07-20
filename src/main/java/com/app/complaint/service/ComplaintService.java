@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import com.app.complaint.dao.ComplaintDAO;
-import com.app.complaint.dao.IMComplaintDAO;
+import com.app.complaint.dao.*;
 import com.app.complaint.domain.Complaint;
+import com.app.user.domain.User;
 
 
 @Service
@@ -24,7 +24,7 @@ public class ComplaintService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ComplaintService.class);
 
 	@Autowired
-	private ComplaintDAO dao;
+	private ComplaintDao dao;
 
 	public Collection<Complaint> listAll() {
 		return dao.getAll();
@@ -52,10 +52,10 @@ public class ComplaintService {
 
 	}
 //
-	public void save(Complaint complaint) throws ValidationException {
+	public void save(Complaint complaint, User user) throws ValidationException {
 		LOGGER.debug("Saving: " + complaint);
 		//validate(employee);
-		dao.update(complaint);
+		dao.update(complaint,user);
 	}
 //
 //	private void validate(Complaint employee) throws ValidationException {
@@ -119,13 +119,6 @@ public class ComplaintService {
 //		}
 //	}
 
-	public ComplaintDAO getDao() {
-		return dao;
-	}
 
-	public void setDao(ComplaintDAO dao) {
-		this.dao = dao;
-	}
-	
 	
 }

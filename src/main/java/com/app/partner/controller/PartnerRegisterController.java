@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.app.partner.domain.Partner;
-import com.app.user.dao.DatabaseDao;
+import com.app.user.dao.UserDao;
 
 @Controller
 @RequestMapping("/")
@@ -23,7 +23,7 @@ public class PartnerRegisterController {
 
 	// Return true if email not exist, false if email exist aleardy.
 	@Autowired
-	DatabaseDao databaseDao;
+	UserDao databaseDao;
 
 	@RequestMapping(value = "/partnerRegister", method = RequestMethod.GET)
 	public ModelAndView register(HttpServletRequest httpServletRequest) {

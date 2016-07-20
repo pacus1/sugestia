@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.app.user.dao.DatabaseDao;
+import com.app.user.dao.UserDao;
 import com.app.user.domain.User;
 
 @Controller
@@ -23,7 +23,7 @@ public class RegisterController {
 
 	// Return true if email not exist, false if email exist aleardy.
 	@Autowired
-	DatabaseDao databaseDao;
+	UserDao userDao;
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView register(HttpServletRequest httpServletRequest) {
@@ -47,14 +47,14 @@ public class RegisterController {
 
 				modelAndView = new ModelAndView("/logged/loggedIndex");
 
-				if (databaseDao.checkUserLogin(currentUserEmail, currentUserPassword))
+				if (userDao.checkUserLogin(currentUserEmail, currentUserPassword))
 
 					httpServletRequest.getSession().setAttribute("currentUser",
-							databaseDao.getCurrentUser(currentUserEmail, currentUserPassword));
+							userDao.getCurrentUser(currentUserEmail, currentUserPassword));
 
-				if (databaseDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
+				if (userDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
 					httpServletRequest.getSession().setAttribute("currentPartner",
-							databaseDao.getCurrentPartner(currentUserEmail, currentUserPassword));
+							userDao.getCurrentPartner(currentUserEmail, currentUserPassword));
 
 				}
 
@@ -91,7 +91,7 @@ public class RegisterController {
 
 		if (!bindingResult.hasErrors()) {
 
-			if (databaseDao.checkUserEmail(user)) {
+			if (userDao.checkUserEmail(user)) {
 
 				modelAndView = new ModelAndView("/login");
 				modelAndView.addObject("message", "Succesful registered now please login!");
