@@ -55,9 +55,9 @@
 	<tr>
 		<th></th>
 		<th>Status</th>
-		<th>Tipul institutiei</th>
-		<th>Numele institutiei</th>
-		<th>Titlul sugestiei</th>
+		<th>Numele Companiei</th>
+		<th>Titlu Sugestie</th>
+		<th>Continut</th>
 		<th>Continut</th>
 		<th>Time stamp</th>
 		<th>Poze</th>
@@ -67,7 +67,9 @@
 
 	<!-- begin iteration -->
 	[#if complaints??]
+	
 		[#list complaints as complaint] 
+		
 			<tr>
 				<td>${complaint.complaintType}</td>
 				<td>${complaint.complaintStatusType} <br>  
@@ -77,16 +79,16 @@
  						<input type="radio" name="complaintStatusType" value="REJECT"> REJECT<br>
  						<input type="radio" name="complaintStatusType" value="SOLVED"> SOLVED</td>
  						</form>
-				<td>${complaint.complaintPartnerType}</td>
-				<td>${complaint.complaintPartnerAsigneeName}</td>
-				<td>${complaint.complaintTitle}</td>
-				<td>${complaint.complaintBody}</td>
-				<td>${complaint.complaintTimeStamp}</td>
-				<td><img src = file:///C:\Users\Petronia\Desktop\${complaint.complaintPicture} /></td>
-				<td>${complaint.complaintPicture}</td>
+				[#if complaint.complaintPartnerType??]<td>${complaint.complaintPartnerType}</td>[/#if]
+				[#if complaint.complaintPartnerAsigneeName??]<td>${complaint.complaintPartnerAsigneeName}</td>[/#if]
+				[#if complaint.complaintTitle??]<td>${complaint.complaintTitle}</td>[/#if]
+				[#if complaint.complaintBody??]<td>${complaint.complaintBody}</td>[/#if]
+			[#if complaint.complaintTimeStamp??]<td>${complaint.complaintTimeStamp}</td>[/#if]
+		
 				
 			</tr>
 		[/#list]
+		
 	[/#if]
 	
 	<!-- end iteration -->
