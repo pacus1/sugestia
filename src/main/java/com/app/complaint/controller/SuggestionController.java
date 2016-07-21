@@ -20,6 +20,7 @@ import com.app.complaint.domain.ComplaintStatusType;
 import com.app.complaint.domain.ComplaintType;
 import com.app.complaint.service.ComplaintService;
 import com.app.complaint.service.ValidationException;
+import com.app.other.domain.TransferObject;
 import com.app.partner.domain.Partner;
 import com.app.user.dao.UserDao;
 import com.app.user.domain.User;
@@ -65,7 +66,7 @@ public class SuggestionController {
 
 				}
 				
-				modelAndView.addObject("suggestion", new Complaint());	//added code from Ovi's SugestionController class			
+				modelAndView.addObject("suggestion", new TransferObject());	//added code from Ovi's SugestionController class			
 				return modelAndView;
 			}
 
@@ -91,7 +92,7 @@ public class SuggestionController {
 // from this line down, added code from Ovi's SuggestionController class 
 	@RequestMapping("/suggestion/submit")
 	public ModelAndView submit(
-			@Valid @ModelAttribute("suggestion") Complaint complaint, User user, //Partner partner,
+			@Valid @ModelAttribute("suggestion") TransferObject transferObject, //User user, //Partner partner,
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = null;
 		boolean hasErros = false;

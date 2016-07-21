@@ -5,6 +5,10 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.app.complaint.domain.Complaint;
+import com.app.complaint.domain.ComplaintHistory;
+import com.app.partner.domain.Partner;
+
 public class User {
 
 	@Size(min = 4, max = 10, message = "Last name minim 4 characters and maximum 10 characters.")
@@ -26,6 +30,10 @@ public class User {
 	private String userPassword;
 
 	private String userRole;
+	private Partner partner;
+	private Complaint complaint;
+	private ComplaintHistory complaintHistory; 
+	
 
 	public String getUserLastName() {
 		return userLastName;

@@ -2,6 +2,7 @@ package com.app.complaint.domain;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import com.app.partner.domain.Partner;
 import com.app.user.domain.User;
 import com.app.user.domain.UserRole;
 
@@ -17,8 +18,10 @@ public class Complaint extends AbstractModel{
 		private String complaintPicture;
 		private String complaintPartnerAsigneeName;
 		private String complaintPartnerType;
-	
-	
+		private User user;
+		private Partner partner;
+		private ComplaintHistory complaintHistory;
+		
 		
 		public String getComplaintPartnerType() {
 			return complaintPartnerType;
