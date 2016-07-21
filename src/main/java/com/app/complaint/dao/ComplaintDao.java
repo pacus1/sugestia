@@ -14,6 +14,7 @@ import com.app.partner.domain.Partner;
 import com.app.user.domain.User;
 import com.app.complaint.domain.Complaint;
 import com.app.other.dao.ConnectDBS;
+import com.app.other.domain.TransferObject;
 
 @Service
 public class ComplaintDao {
@@ -22,21 +23,23 @@ public class ComplaintDao {
 	ResultSet resultSet = null;
 	Connection connection = null;
 	
-	public boolean update(Complaint complaint, User user) {
-		connection = ConnectDBS.connectDatabase();
+	//public boolean update(Complaint complaint, User user) {
+	public boolean update(TransferObject transferObject) {
+	
+	connection = ConnectDBS.connectDatabase();
 
 			try {
 				
 				preparedStatement = connection.prepareStatement("INSERT INTO complaint (senderEmailAddress,statusType,type,timestamp,complaintTitle,"
 						+ "complaintBody,partner_id) " + "VALUES(?,?,?,?,?,?,?)");			
 				
-				preparedStatement.setString(1, user.getUserEmail());
-//				preparedStatement.setString(2, complaint.getComplaintStatusType());
-//				preparedStatement.setString(3, complaint.getComplaintType());
-//				preparedStatement.setString(4, Date());
-				preparedStatement.setString(5, user.getUserHomeTown());
-				preparedStatement.setString(6, user.getUserPassword());
-				preparedStatement.setString(7, user.getUserRole());
+//				preparedStatement.setString(1, user.getUserEmail());
+////				preparedStatement.setString(2, complaint.getComplaintStatusType());
+////				preparedStatement.setString(3, complaint.getComplaintType());
+////				preparedStatement.setString(4, Date());
+//				preparedStatement.setString(5, user.getUserHomeTown());
+//				preparedStatement.setString(6, user.getUserPassword());
+//				preparedStatement.setString(7, user.getUserRole());
 				
 				preparedStatement.executeQuery();
 				

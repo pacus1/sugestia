@@ -16,6 +16,7 @@ import org.springframework.util.StringUtils;
 
 import com.app.complaint.dao.*;
 import com.app.complaint.domain.Complaint;
+import com.app.other.domain.TransferObject;
 import com.app.user.domain.User;
 
 
@@ -52,10 +53,13 @@ public class ComplaintService {
 
 	}
 //
-	public void save(Complaint complaint, User user) throws ValidationException {
-		LOGGER.debug("Saving: " + complaint);
+	//public void save(Complaint complaint) throws ValidationException {
+	public void save(TransferObject transferObject) throws ValidationException {
+	
+	LOGGER.debug("Saving: " + transferObject.getComplaint());
 		//validate(employee);
-		dao.update(complaint,user);
+		//dao.update(complaint);
+		dao.update(transferObject);
 	}
 //
 //	private void validate(Complaint employee) throws ValidationException {

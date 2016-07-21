@@ -84,26 +84,34 @@ public class SuggestionController {
 			return modelAndView;
 		} else if (httpServletRequest.getSession().getAttribute("currentUser") != null) {
 			modelAndView = new ModelAndView("/logged/loggedSuggestion");
+//			modelAndView = new ModelAndView();
+//			modelAndView.setView(new RedirectView("/logged/loggedSuggestion"));
 			return modelAndView;
 		}
 		return new ModelAndView("/suggestion");
 	}
 	
 // from this line down, added code from Ovi's SuggestionController class 
-	@RequestMapping("/suggestion/submit")
+	@RequestMapping("/logged/loggedSuggestion/submit")
 	public ModelAndView submit(
-			@Valid @ModelAttribute("suggestion") TransferObject transferObject, //User user, //Partner partner,
+			@Valid @ModelAttribute("loggedSuggestion") TransferObject transferObject, //User user, //Partner partner,
 			BindingResult bindingResult) {
 		ModelAndView modelAndView = null;
 		boolean hasErros = false;
 		if (!bindingResult.hasErrors()) {
 			try {
-				ComplaintType complaintType= ComplaintType.SUGGESTION;
-				complaint.setComplaintType(complaintType);
-				ComplaintStatusType complaintStatusType= ComplaintStatusType.PENDING;
-				complaint.setComplaintStatusType(complaintStatusType);
-				complaint.setComplaintTimeStamp(LocalDateTime.now());
-				complaintService.save(complaint,user);
+				//ComplaintType complaintType= ComplaintType.SUGGESTION;
+				//complaint.setComplaintType(complaintType);
+				transferObject.setComplaintType(ComplaintType.SUGGESTION);
+				//ComplaintStatusType complaintStatusType= ComplaintStatusType.PENDING;
+				//complaint.setComplaintStatusType(complaintStatusType);
+				transferObject.setComplaintStatusType(ComplaintStatusType.PENDING);
+				//complaint.setComplaintTimeStamp(LocalDateTime.now());
+				transferObject.getComplaint().setComplaintTimeStamp(LocalDateTime.now());
+				
+				//complaintService.save(complaint);
+				complaintService.save(transferObject);
+				
 				modelAndView = new ModelAndView();
 				modelAndView.setView(new RedirectView("/listall"));
 			} catch (ValidationException ex) {
@@ -118,7 +126,8 @@ public class SuggestionController {
 
 		if (hasErros) {
 			modelAndView = new ModelAndView("/suggestion");
-			modelAndView.addObject("complaint", complaint);
+			//modelAndView.addObject("complaint", complaint);
+			modelAndView.addObject("complaint", transferObject);//add Sergiu
 			modelAndView.addObject("errors", bindingResult.getAllErrors());
 		}
 
