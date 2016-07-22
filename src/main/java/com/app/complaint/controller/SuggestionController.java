@@ -1,6 +1,8 @@
 package com.app.complaint.controller;
 
 import java.time.LocalDateTime;
+import java.util.Random;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -10,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 import com.app.complaint.dao.SuggestionDao;
 import com.app.complaint.domain.Complaint;
 import com.app.complaint.domain.ComplaintStatusType;
@@ -99,10 +100,14 @@ public class SuggestionController {
 			ComplaintStatusType complaintStatusType = ComplaintStatusType.PENDING;
 			complaint.setComplaintStatusType(complaintStatusType);
 			complaint.setComplaintTimeStamp(LocalDateTime.now());
-// T changes
+			Random random = new Random();
+			int randomValue = random.nextInt(100000) + 1;
+			complaint.setComplaintId(Integer.toString(randomValue));
+			// T changes
 			suggestionDao.save(complaint);
-			modelAndView = new ModelAndView();
-			modelAndView.setView(new RedirectView("/listall"));
+			modelAndView = new ModelAndView("/logged/loggedSuggestion");
+			modelAndView.addObject("message", "Thank you for submitting your suggestion.");
+
 		} else {
 			hasErros = true;
 		}
@@ -113,13 +118,6 @@ public class SuggestionController {
 			modelAndView.addObject("errors", bindingResult.getAllErrors());
 		}
 
-		return modelAndView;
-	}
-
-	@RequestMapping("/listall")
-	public ModelAndView list(Complaint complaint) throws Exception {
-		ModelAndView modelAndView = new ModelAndView("/listall");
-		modelAndView.addObject("complaints", suggestionDao.listAll());
 		return modelAndView;
 	}
 }

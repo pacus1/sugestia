@@ -226,6 +226,9 @@
                         <input type="file" name="pic3" accept="image/*" style="padding-top:10px; padding-bottom:25px;">
                                         
 			    		<input class="btn btn-lg btn-primary" style="color:#FFFFFF; width:100%;" type="submit" value="Adauga">
+			    		[#if message??]
+			    		<p>${message}</p>
+			    		[/#if]
 			    	</fieldset>
 			      	</form>
 

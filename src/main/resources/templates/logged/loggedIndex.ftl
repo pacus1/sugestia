@@ -75,6 +75,8 @@
            
            </form>
            
+           <a href="/admin/listAllSuggestions" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-wrench"></span> Admin</a>
+           
              [#if message??]
              <p>${message}</p>
              [/#if]
