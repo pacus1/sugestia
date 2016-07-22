@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.app.user.dao.DatabaseDao;
+import com.app.user.domain.User;
 
 @Controller
 @RequestMapping("/")
@@ -59,6 +60,7 @@ public class AboutUsController {
 				|| httpServletRequest.getSession().getAttribute("currentPartner") != null) {
 
 			modelAndView = new ModelAndView("/logged/loggedAboutUs");
+			httpServletRequest.getAttribute("currentUser");
 
 			modelAndView.addObject("currentUser", httpServletRequest.getAttribute("currentUser"));
 			modelAndView.addObject("currentPartner", httpServletRequest.getAttribute("currentPartner"));

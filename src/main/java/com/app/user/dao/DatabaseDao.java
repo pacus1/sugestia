@@ -199,7 +199,7 @@ public class DatabaseDao {
 				String userEmailResultSet = resultSet.getString("useremail");
 				String partnerEmailResultSet = resultSet.getString("userpassword");
 
-				if (email.equals(userEmailResultSet) || password.equals(partnerEmailResultSet)) {
+				if (email.equals(userEmailResultSet) && password.equals(partnerEmailResultSet)) {
 
 					User user = new User();
 					user.setUserLastName(resultSet.getString("userlastname"));
