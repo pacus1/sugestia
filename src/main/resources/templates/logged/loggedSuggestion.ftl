@@ -250,6 +250,7 @@
                                                      <li>Completeaza toate datele din formularul de sugestie/reclamatie</li>
                                                      <li>Verific corectitudinea datelor introduse</li>
                                                      <li>Gata! Sugestia sau reclamatia dvs. ajunge la cel vizat</li>
+                                                     <li>Esti logat</li>
                                                  </ol>
                                     <a href="ajutor.html">Vezi mai multe informatii</a>
                          </div></div>

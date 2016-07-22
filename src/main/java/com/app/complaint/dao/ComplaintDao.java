@@ -23,23 +23,30 @@ public class ComplaintDao {
 	ResultSet resultSet = null;
 	Connection connection = null;
 	
-	//public boolean update(Complaint complaint, User user) {
-	public boolean update(TransferObject transferObject) {
+	//public boolean update(TransferObject transferObject) {
+	public boolean update(Complaint complaint) {
 	
 	connection = ConnectDBS.connectDatabase();
 
 			try {
 				
-				preparedStatement = connection.prepareStatement("INSERT INTO complaint (senderEmailAddress,statusType,type,timestamp,complaintTitle,"
-						+ "complaintBody,partner_id) " + "VALUES(?,?,?,?,?,?,?)");			
+//				preparedStatement = connection.prepareStatement("INSERT INTO Complaint (senderEmailAddress,statusType,type,timestamp,complaintTitle,"
+//						+ "complaintBody,partner_id) " + "VALUES(?,?,?,?,?,?,?)");			
+								
 				
-//				preparedStatement.setString(1, user.getUserEmail());
-////				preparedStatement.setString(2, complaint.getComplaintStatusType());
-////				preparedStatement.setString(3, complaint.getComplaintType());
-////				preparedStatement.setString(4, Date());
-//				preparedStatement.setString(5, user.getUserHomeTown());
-//				preparedStatement.setString(6, user.getUserPassword());
-//				preparedStatement.setString(7, user.getUserRole());
+				preparedStatement = connection.prepareStatement("INSERT INTO complaint (sender_email_address,status_type,type,timestamp,"
+						+ "complaint_title,complaint_body,partner_assign_name) VALUES(?,?,?,?,?,?,?)");
+				
+				preparedStatement.setString(1, complaint.getSenderEmailAddress());
+				preparedStatement.setString(2, complaint.getComplaintStatusType().toString());
+				preparedStatement.setString(3, complaint.getComplaintType().toString());
+				
+				//java.sql.Timestamp complainTime = complaint.getComplaintTimeStamp();
+				
+				preparedStatement.setTimestamp(4, complaint.getComplaintTimeStamp());
+				preparedStatement.setString(5, complaint.getComplaintTitle());
+				preparedStatement.setString(6, complaint.getComplaintBody());
+				preparedStatement.setString(7, complaint.getComplaintPartnerAsigneeName());
 				
 				preparedStatement.executeQuery();
 				

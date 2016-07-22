@@ -1,4 +1,5 @@
 package com.app.complaint.domain;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ public class Complaint extends AbstractModel{
 		private long complaintId;
 		private ComplaintStatusType complaintStatusType;
 		private ComplaintType complaintType;
-		private LocalDateTime complaintTimeStamp;
+		private java.sql.Timestamp complaintTimeStamp;
 		private String complaintTitle;
 		private String complaintBody;
 		private String complaintPicture;
@@ -21,8 +22,15 @@ public class Complaint extends AbstractModel{
 		private User user;
 		private Partner partner;
 		private ComplaintHistory complaintHistory;
+		private String senderEmailAddress;
 		
 		
+		public String getSenderEmailAddress() {
+			return senderEmailAddress;
+		}
+		public void setSenderEmailAddress(String senderEmailAddress) {
+			this.senderEmailAddress = senderEmailAddress;
+		}
 		public String getComplaintPartnerType() {
 			return complaintPartnerType;
 		}
@@ -47,10 +55,10 @@ public class Complaint extends AbstractModel{
 		public void setComplaintType(ComplaintType complainType) {
 			this.complaintType = complainType;
 		}
-		public LocalDateTime getComplaintTimeStamp() {
+		public java.sql.Timestamp getComplaintTimeStamp() {
 			return complaintTimeStamp;
 		}
-		public void setComplaintTimeStamp(LocalDateTime localDateTime) {
+		public void setComplaintTimeStamp(java.sql.Timestamp localDateTime) {
 			this.complaintTimeStamp = localDateTime;
 		}
 		public String getComplaintTitle() {

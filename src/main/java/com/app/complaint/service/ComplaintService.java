@@ -8,6 +8,9 @@ import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.util.StringUtils;
 import com.app.complaint.dao.*;
 import com.app.complaint.domain.Complaint;
 import com.app.other.domain.TransferObject;
+import com.app.other.service.SendMail;
 import com.app.user.domain.User;
 
 
@@ -53,13 +57,21 @@ public class ComplaintService {
 
 	}
 //
-	//public void save(Complaint complaint) throws ValidationException {
-	public void save(TransferObject transferObject) throws ValidationException {
+	public void saveComplaint(Complaint complaint) throws ValidationException, AddressException, MessagingException {
+	//public void save(TransferObject transferObject) throws ValidationException {
 	
-	LOGGER.debug("Saving: " + transferObject.getComplaint());
+	LOGGER.debug("Saving: " + complaint);
 		//validate(employee);
 		//dao.update(complaint);
-		dao.update(transferObject);
+		
+		dao.update(complaint);
+		
+		String emailComplaintSender = complaint.getSenderEmailAddress();
+		String emailTitle = "Suggestion sent confirmation email";
+		String emailBody = "Sugestia.ro confirms that your sugestion \"" + complaint.getComplaintTitle() + "\" has been saved to our databases and directed to requested partner \"" + complaint.getComplaintPartnerAsigneeName() + "\"";
+		
+		SendMail.SiteMailSend(emailComplaintSender, "", emailTitle, emailBody);
+		
 	}
 //
 //	private void validate(Complaint employee) throws ValidationException {
