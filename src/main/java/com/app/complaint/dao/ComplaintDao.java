@@ -24,7 +24,7 @@ public class ComplaintDao {
 	Connection connection = null;
 	
 	//public boolean update(TransferObject transferObject) {
-	public boolean update(Complaint complaint) {
+	public boolean update(Complaint complaint)   {
 	
 	connection = ConnectDBS.connectDatabase();
 

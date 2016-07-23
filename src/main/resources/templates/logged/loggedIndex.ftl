@@ -71,11 +71,11 @@
            
            <form  action="/logout" method="POST"  role="form">
            
-           <input class="btn btn-lg btn-success btn-block btnlogin" style="color:#FFFFFF;" type="submit" value="Logout">
+           <input class="btn btn-xs btn-success btn-block btnlogin" style="color:#FFFFFF;" type="submit" value="Logout">
            
            </form>
            
-           <a href="/admin/listAllSuggestions" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-wrench"></span> Admin</a>
+            <a href="/admin/listAllSuggestions" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-wrench"></span> Admin</a>
            
              [#if message??]
              <p>${message}</p>
@@ -84,6 +84,9 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+
+		
+
 
     <div class="container">
 

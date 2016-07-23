@@ -58,7 +58,7 @@ public class ComplaintService {
 
 	}
 //
-	public void saveComplaint(Complaint complaint) throws ValidationException, AddressException, MessagingException {
+	public void saveComplaint(Complaint complaint) throws AddressException, MessagingException {
 	//public void save(TransferObject transferObject) throws ValidationException {
 	
 	LOGGER.debug("Saving: " + complaint);
