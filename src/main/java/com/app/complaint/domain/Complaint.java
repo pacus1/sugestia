@@ -1,12 +1,13 @@
 package com.app.complaint.domain;
+
 import java.sql.Timestamp;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.app.partner.domain.Partner;
 import com.app.user.domain.User;
 import com.app.user.domain.UserRole;
-
 
 public class Complaint extends AbstractModel{
 
@@ -130,41 +131,40 @@ public class Complaint extends AbstractModel{
 			} else if (!complaintStatusType.equals(other.complaintStatusType))
 				return false;
 			
-			if (complaintType == null) {
-				if (other.complaintType != null)
-					return false;
-			} else if (!complaintType.equals(other.complaintType))
+		if (complaintType == null) {
+			if (other.complaintType != null)
 				return false;
-			
-			if (complaintTimeStamp == null) {
-				if (other.complaintTimeStamp != null)
-					return false;
-			} else if (!complaintTimeStamp.equals(other.complaintTimeStamp))
+		} else if (!complaintType.equals(other.complaintType))
+			return false;
+
+		if (complaintTimeStamp == null) {
+			if (other.complaintTimeStamp != null)
 				return false;
-			
-			if (complaintTitle == null) {
-				if (other.complaintTitle != null)
-					return false;
-			} else if (!complaintTitle.equals(other.complaintTitle))
+		} else if (!complaintTimeStamp.equals(other.complaintTimeStamp))
+			return false;
+
+		if (complaintTitle == null) {
+			if (other.complaintTitle != null)
 				return false;
-			
-			if (complaintBody == null) {
-				if (other.complaintBody != null)
-					return false;
-			} else if (!complaintBody.equals(other.complaintBody))
+		} else if (!complaintTitle.equals(other.complaintTitle))
+			return false;
+
+		if (complaintBody == null) {
+			if (other.complaintBody != null)
 				return false;
-		
-			if (complaintPicture == null) {
-				if (other.complaintPicture!= null)
-					return false;
-			} else if (!complaintPicture.equals(other.complaintPicture))
+		} else if (!complaintBody.equals(other.complaintBody))
+			return false;
+
+		if (complaintPicture == null) {
+			if (other.complaintPicture != null)
 				return false;
-			
-			
-			if (complaintPartnerAsigneeName != other.complaintPartnerAsigneeName)
-				return false;
-			return true;
-		}
-		
-		
+		} else if (!complaintPicture.equals(other.complaintPicture))
+			return false;
+
+		if (complaintPartnerAsigneeName != other.complaintPartnerAsigneeName)
+			return false;
+		return true;
+	}
+
+}
 }

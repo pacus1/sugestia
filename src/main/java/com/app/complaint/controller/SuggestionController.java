@@ -1,43 +1,56 @@
 package com.app.complaint.controller;
 
 import java.time.LocalDateTime;
+import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+<<<<<<< HEAD
 
 import org.postgresql.core.Utils;
+=======
+>>>>>>> master
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
-
+import com.app.complaint.dao.SuggestionDao;
 import com.app.complaint.domain.Complaint;
 import com.app.complaint.domain.ComplaintStatusType;
 import com.app.complaint.domain.ComplaintType;
+<<<<<<< HEAD
 import com.app.complaint.service.ComplaintService;
 import com.app.complaint.service.ValidationException;
 import com.app.other.domain.TransferObject;
 import com.app.partner.domain.Partner;
 import com.app.user.dao.UserDao;
 import com.app.user.domain.User;
+=======
+import com.app.user.dao.DatabaseDao;
+>>>>>>> master
 
 @Controller
 @RequestMapping("/")
 public class SuggestionController {
 
 	@Autowired
+<<<<<<< HEAD
 	UserDao userDao;
 	
 	@Autowired
 	ComplaintService complaintService;
+=======
+	private DatabaseDao databaseDao;
+
+	@Autowired
+	private SuggestionDao suggestionDao;
+>>>>>>> master
 
 	@RequestMapping("/suggestion")
 	public ModelAndView partnerInformation(HttpServletRequest httpServletRequest) {
@@ -71,8 +84,18 @@ public class SuggestionController {
 							userDao.getCurrentPartner(currentUserEmail, currentUserPassword));
 
 				}
+<<<<<<< HEAD
 				
 				modelAndView.addObject("suggestion", new TransferObject());	//added code from Ovi's SugestionController class			
+=======
+
+				modelAndView.addObject("suggestion", new Complaint()); // added
+																		// code
+																		// from
+																		// Ovi's
+																		// SugestionController
+																		// class
+>>>>>>> master
 				return modelAndView;
 			}
 
@@ -96,6 +119,7 @@ public class SuggestionController {
 		}
 		return new ModelAndView("/suggestion");
 	}
+<<<<<<< HEAD
 	
 // from this line down, added code from Ovi's SuggestionController class 
 	@RequestMapping("/suggestion/submit")
@@ -149,6 +173,28 @@ public class SuggestionController {
 				}
 				hasErros = true;
 			}
+=======
+
+	// from this line down, added code from Ovi's SuggestionController class
+	@RequestMapping("/logged/loggedSuggestion/submit")
+	public ModelAndView submit(@Valid @ModelAttribute("suggestion") Complaint complaint, BindingResult bindingResult) {
+		ModelAndView modelAndView = null;
+		boolean hasErros = false;
+		if (!bindingResult.hasErrors()) {
+			ComplaintType complaintType = ComplaintType.SUGGESTION;
+			complaint.setComplaintType(complaintType);
+			ComplaintStatusType complaintStatusType = ComplaintStatusType.PENDING;
+			complaint.setComplaintStatusType(complaintStatusType);
+			complaint.setComplaintTimeStamp(LocalDateTime.now());
+			Random random = new Random();
+			int randomValue = random.nextInt(100000) + 1;
+			complaint.setComplaintId(Integer.toString(randomValue));
+			// T changes
+			suggestionDao.save(complaint);
+			modelAndView = new ModelAndView("/logged/loggedSuggestion");
+			modelAndView.addObject("message", "Thank you for submitting your suggestion.");
+
+>>>>>>> master
 		} else {
 			hasErros = true;
 		}
@@ -162,24 +208,4 @@ public class SuggestionController {
 
 		return modelAndView;
 	}
-
-	
-	@RequestMapping("/listall")
-	public ModelAndView list(Complaint complaint) throws Exception {
-		ModelAndView modelAndView = new ModelAndView("/listall");
-		modelAndView.addObject("complaints", complaintService.listAll());
-		//modelAndView.addObject("currentUser", securityService.getCurrentUser());
-		return modelAndView;
-	}
-	
-	
-	@RequestMapping("/save")
-	public ModelAndView save(Complaint complaint) throws Exception {
-		ModelAndView modelAndView = new ModelAndView("/listall");
-		modelAndView.addObject("complaints", complaintService.listAll());
-		//modelAndView.addObject("currentUser", securityService.getCurrentUser());
-		return modelAndView;
-	}
-	
-
 }

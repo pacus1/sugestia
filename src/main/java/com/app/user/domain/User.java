@@ -26,7 +26,7 @@ public class User {
 	@Size(min = 4, max = 30, message = "Home town minimum 4 characters maximum 30")
 	private String userHomeTown;
 
-	@Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=.])[^\\s]{8,}$", message = "Password must be at least 8 characters, need to contain at least one number,at least one lowercase character uppercase character and one special characater(#,@,!)")
+	@Pattern(regexp = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%!.]).{8,20})", message = "Password must contain one digit (0-9),must contains one lowercase character, must contains one uppercase character,must contains one special character (@#$%!.), must have minimum 8 characters maximum 20 ")
 	private String userPassword;
 
 	private String userRole;

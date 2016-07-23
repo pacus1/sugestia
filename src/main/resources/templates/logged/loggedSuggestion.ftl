@@ -145,7 +145,7 @@
 			    	<h3 class="panel-title" align="center">Va rugam sa introduceti urmatoarele informatii:</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8" role="form" action="/suggestion/submit" method="POST">
+			    	<form accept-charset="UTF-8" role="form" action="/logged/loggedSuggestion/submit" method="POST">
                     <fieldset>
                                        <div class="form-group" style="padding-top:12px;" align="center">
                                         <label for="selectcategorie">Alege categoria din care face parte compania/institutia caruia vreti sa-i trimiteti sugestia:</label>
@@ -226,6 +226,9 @@
                         <input type="file" name="pic3" accept="image/*" style="padding-top:10px; padding-bottom:25px;">
                                         
 			    		<input class="btn btn-lg btn-primary" style="color:#FFFFFF; width:100%;" type="submit" value="Adauga">
+			    		[#if message??]
+			    		<p>${message}</p>
+			    		[/#if]
 			    	</fieldset>
 			      	</form>
 
