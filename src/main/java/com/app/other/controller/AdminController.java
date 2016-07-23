@@ -1,5 +1,7 @@
 package com.app.other.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.app.complaint.dao.SuggestionDao;
+import com.app.complaint.dao.SuggestionDao_old;
 import com.app.complaint.domain.Complaint;
+import com.app.complaint.domain.ComplaintStatusType;
+import com.app.other.service.AdminService;
 import com.app.user.domain.User;
 
 @Controller
@@ -18,6 +23,12 @@ public class AdminController {
 
 	@Autowired
 	private SuggestionDao suggestionDao;
+	
+	private ArrayList<Complaint> complaintsList = new ArrayList<>();
+	ComplaintStatusType complaintStatusType = null;
+	
+	@Autowired
+	private AdminService adminService = new AdminService();
 
 	@RequestMapping("/listAllSuggestions")
 	public ModelAndView list(HttpServletRequest httpServletRequest) {
@@ -27,11 +38,13 @@ public class AdminController {
 
 		if (user.getUserRole().equals("ADMIN")) {
 			modelAndView = new ModelAndView("/admin/listAllSuggestions");
-			modelAndView.addObject("complaints", suggestionDao.listAll());
+			
+			complaintsList = adminService.getAdminPendingList();
+			
+			modelAndView.addObject("complaints", complaintsList);
 			return modelAndView;
 		}
 		return new ModelAndView("/");
-
 	}
 
 	@RequestMapping(value = "/listAllSuggestions/submit", method = RequestMethod.POST)
@@ -39,15 +52,29 @@ public class AdminController {
 		ModelAndView modelAndView = null;
 		if (httpServletRequest.getParameter("complaintStatusType") != null
 				&& httpServletRequest.getParameter("complainId") != null) {
+		
+			int id = Integer.parseInt(httpServletRequest.getParameter("complainId").toString());	
+			String submitStatus = httpServletRequest.getParameter("complaintStatusType").toString();
+			
+			switch (submitStatus){
+			case "PENDING" : complaintStatusType = ComplaintStatusType.PENDING ;break;
+			case "APPROVED" : complaintStatusType = ComplaintStatusType.APPROVED ;break;
+			case "REJECT" : complaintStatusType = ComplaintStatusType.REJECT ;break;
+			case "SOLVED" : complaintStatusType = ComplaintStatusType.SOLVED ;break;
+			}
+			
+			modelAndView = new ModelAndView("/admin/listAllSuggestions");
+					
+			complaintsList = adminService.updateComplaintStatus(id, complaintStatusType);
+			
+			modelAndView.addObject("complaints", complaintsList);
+			return modelAndView;
+			
+//			System.out.println(httpServletRequest.getParameter("complainId"));
 
-			suggestionDao.changeSuggestionStatus(httpServletRequest.getParameter("complainId"),
-					httpServletRequest.getParameter("complaintStatusType"));
+//			System.out.println(httpServletRequest.getParameter("complaintStatusType"));
 
-			System.out.println(httpServletRequest.getParameter("complainId"));
-
-			System.out.println(httpServletRequest.getParameter("complaintStatusType"));
-
-			modelAndView = new ModelAndView(new RedirectView("/admin/listAllSuggestions"));
+//			modelAndView = new ModelAndView(new RedirectView("/admin/listAllSuggestions"));
 
 		}
 		return new ModelAndView(new RedirectView("/admin/listAllSuggestions"));

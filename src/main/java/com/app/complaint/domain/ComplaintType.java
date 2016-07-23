@@ -5,5 +5,4 @@ package com.app.complaint.domain;
 		SUGGESTION,
 		COMPLAINT
 	}
-
-
+	

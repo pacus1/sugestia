@@ -75,7 +75,7 @@
 				<td>${complaint.complaintType}</td>
 				<td>${complaint.complaintStatusType} <br>  
  				[#if complaint.complaintId??] <td>${complaint.complaintId}</td>[/#if]
-				[#if complaint.complaintPartnerType??]<td>${complaint.complaintPartnerType}</td>[/#if]
+				[#if complaint.complaintPartnerType??]<td>${complaint.partnerT}</td>[/#if]
 				[#if complaint.complaintPartnerAsigneeName??]<td>${complaint.complaintPartnerAsigneeName}</td>[/#if]
 				[#if complaint.complaintTitle??]<td>${complaint.complaintTitle}</td>[/#if]
 				[#if complaint.complaintBody??]<td>${complaint.complaintBody}</td>[/#if]

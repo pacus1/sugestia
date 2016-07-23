@@ -29,7 +29,7 @@ import com.app.complaint.domain.ComplaintType;
 import com.app.complaint.service.ComplaintService;
 import com.app.other.domain.TransferObject;
 
-import com.app.complaint.dao.SuggestionDao;
+import com.app.complaint.dao.SuggestionDao_old;
 
 import com.app.partner.domain.Partner;
 import com.app.user.dao.UserDao;
@@ -48,7 +48,7 @@ public class SuggestionController {
 	ComplaintService complaintService;
 
 	@Autowired
-	private SuggestionDao suggestionDao;
+	private SuggestionDao_old suggestionDao;
 	
 	@RequestMapping("/suggestion")
 	public ModelAndView partnerInformation(HttpServletRequest httpServletRequest) {
@@ -126,7 +126,6 @@ public class SuggestionController {
 		ModelAndView modelAndView = null;
 		boolean hasErros = false;
 		if (!bindingResult.hasErrors()) {
-			//try {
 				ComplaintType complaintType= ComplaintType.SUGGESTION;
 				complaint.setComplaintType(complaintType);
 				ComplaintStatusType complaintStatusType= ComplaintStatusType.PENDING;
@@ -136,49 +135,24 @@ public class SuggestionController {
 				java.sql.Timestamp timestamp = new java.sql.Timestamp(time);
 				
 				complaint.setComplaintTimeStamp(timestamp);
-				
-				//String userEmail = httpServletRequest.getParameter("currentUser"); 
-						
-						//request.getParameter(userEmail creat);
-				
+			
 				String userEmail =httpServletRequest.getSession().getAttribute("currentUser").toString();
-				//String userEmail =(String) httpServletRequest.getSession().getAttribute("currentUser");
+
 				userEmail = userEmail.replace("Welcome,", "");
 				complaint.setSenderEmailAddress(userEmail);
-				//complaintService.save(complaint);
-				
-				//TransferObject transferObject = new TransferObject();
-				//transferObject.setComplaint(complaint);
-				
-//				User tempUser = new User();
-//				
-//				
-//				userEmail = userEmail.replace("Welcome,", "");
-//				
-//				tempUser.setUserEmail(userEmail);
-//				transferObject.setUser(tempUser);
-				
-				//complaintService.save(complaint);
 				
 				complaintService.saveComplaint(complaint);
 				
 				modelAndView = new ModelAndView();
 				modelAndView.setView(new RedirectView("/listall"));
 				
-//			} catch (ValidationException ex) {
-//				for (String msg : ex.getCauses()) {
-//					bindingResult.addError(new ObjectError("complaint", msg));
-//				}
-//				hasErros=true;
-//			}
 		} else {
 			hasErros=true;
 		}
 		
 		if (hasErros) {
 			modelAndView = new ModelAndView("/suggestion");
-			//modelAndView.addObject("complaint", complaint);
-			modelAndView.addObject("complaint", complaint);//add Sergiu
+			modelAndView.addObject("complaint", complaint);
 			modelAndView.addObject("errors", bindingResult.getAllErrors());
 		}
 		
@@ -202,40 +176,4 @@ public class SuggestionController {
 		//modelAndView.addObject("currentUser", securityService.getCurrentUser());
 		return modelAndView;
 	}
-//	// from this line down, added code from Ovi's SuggestionController class
-//	@RequestMapping("/logged/loggedSuggestion/submit")
-//	public ModelAndView submit(@Valid @ModelAttribute("suggestion") Complaint complaint, BindingResult bindingResult) {
-//		ModelAndView modelAndView = null;
-//		boolean hasErros = false;
-//		if (!bindingResult.hasErrors()) {
-//			ComplaintType complaintType = ComplaintType.SUGGESTION;
-//			complaint.setComplaintType(complaintType);
-//			ComplaintStatusType complaintStatusType = ComplaintStatusType.PENDING;
-//			complaint.setComplaintStatusType(complaintStatusType);
-//			
-//			long time = System.currentTimeMillis();
-//			java.sql.Timestamp timestamp = new java.sql.Timestamp(time);
-//			complaint.setComplaintTimeStamp(timestamp);
-//			
-//			Random random = new Random();
-//			int randomValue = random.nextInt(100000) + 1;
-//			//complaint.setComplaintId(Integer.toString(randomValue));
-//			// T changes
-//			suggestionDao.save(complaint);
-//			modelAndView = new ModelAndView("/logged/loggedSuggestion");
-//			modelAndView.addObject("message", "Thank you for submitting your suggestion.");
-//
-//		} else {
-//			hasErros = true;
-//		}
-//
-//		if (hasErros) {
-//			modelAndView = new ModelAndView("/suggestion");
-//			//modelAndView.addObject("complaint", complaint);
-//			modelAndView.addObject("complaint", complaint);//add Sergiu
-//			modelAndView.addObject("errors", bindingResult.getAllErrors());
-//		}
-//
-//		return modelAndView;
-//	}
 }
