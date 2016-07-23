@@ -25,7 +25,7 @@ public class SuggestionDao {
 
 				Complaint complaint = new Complaint();
 				complaint.setComplaintBody(complaints.get(x).getComplaintBody());
-				complaint.setComplaintId(suggestionId);
+				//complaint.setComplaintId(suggestionId);
 				complaint.setComplaintPartnerAsigneeName(complaints.get(x).getComplaintPartnerAsigneeName());
 				complaint.setComplaintPartnerType(complaints.get(x).getComplaintPartnerType());
 				complaint.setComplaintTimeStamp(complaints.get(x).getComplaintTimeStamp());

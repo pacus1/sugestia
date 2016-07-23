@@ -8,50 +8,47 @@ import javax.mail.internet.AddressException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-<<<<<<< HEAD
+//import javax.validation.ValidationException;
+import com.app.complaint.service.ValidationException;
 
 import org.postgresql.core.Utils;
-=======
->>>>>>> master
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
+
 import com.app.complaint.dao.SuggestionDao;
 import com.app.complaint.domain.Complaint;
 import com.app.complaint.domain.ComplaintStatusType;
 import com.app.complaint.domain.ComplaintType;
-<<<<<<< HEAD
+
 import com.app.complaint.service.ComplaintService;
-import com.app.complaint.service.ValidationException;
+
 import com.app.other.domain.TransferObject;
 import com.app.partner.domain.Partner;
 import com.app.user.dao.UserDao;
 import com.app.user.domain.User;
-=======
-import com.app.user.dao.DatabaseDao;
->>>>>>> master
+
 
 @Controller
 @RequestMapping("/")
 public class SuggestionController {
 
 	@Autowired
-<<<<<<< HEAD
 	UserDao userDao;
 	
 	@Autowired
 	ComplaintService complaintService;
-=======
-	private DatabaseDao databaseDao;
 
 	@Autowired
 	private SuggestionDao suggestionDao;
->>>>>>> master
-
+	
 	@RequestMapping("/suggestion")
 	public ModelAndView partnerInformation(HttpServletRequest httpServletRequest) {
 		ModelAndView modelAndView = null;
@@ -84,10 +81,9 @@ public class SuggestionController {
 							userDao.getCurrentPartner(currentUserEmail, currentUserPassword));
 
 				}
-<<<<<<< HEAD
 				
-				modelAndView.addObject("suggestion", new TransferObject());	//added code from Ovi's SugestionController class			
-=======
+				//modelAndView.addObject("suggestion", new TransferObject());	//added code from Ovi's SugestionController class			
+
 
 				modelAndView.addObject("suggestion", new Complaint()); // added
 																		// code
@@ -95,7 +91,7 @@ public class SuggestionController {
 																		// Ovi's
 																		// SugestionController
 																		// class
->>>>>>> master
+
 				return modelAndView;
 			}
 
@@ -119,13 +115,13 @@ public class SuggestionController {
 		}
 		return new ModelAndView("/suggestion");
 	}
-<<<<<<< HEAD
+
 	
 // from this line down, added code from Ovi's SuggestionController class 
 	@RequestMapping("/suggestion/submit")
 	public ModelAndView submit(
 			@Valid @ModelAttribute("suggestion") Complaint complaint, HttpServletRequest httpServletRequest,//@RequestParam("email") String email,//User user, //Partner partner,
-			BindingResult bindingResult) throws AddressException, MessagingException {
+			BindingResult bindingResult) throws ValidationException, AddressException, MessagingException {
 		ModelAndView modelAndView = null;
 		boolean hasErros = false;
 		if (!bindingResult.hasErrors()) {
@@ -167,13 +163,20 @@ public class SuggestionController {
 				
 				modelAndView = new ModelAndView();
 				modelAndView.setView(new RedirectView("/listall"));
+				
 			} catch (ValidationException ex) {
-				for (String msg : ex.getCauses()) {
+				for (String msg : ex.getCauses()) 
+													{
+					//String	msg = ex.getCauses()
 					bindingResult.addError(new ObjectError("complaint", msg));
 				}
-				hasErros = true;
+				hasErros=true;
+			  }
+			} else {
+				hasErros=true;
 			}
-=======
+	}
+
 
 	// from this line down, added code from Ovi's SuggestionController class
 	@RequestMapping("/logged/loggedSuggestion/submit")
@@ -185,16 +188,19 @@ public class SuggestionController {
 			complaint.setComplaintType(complaintType);
 			ComplaintStatusType complaintStatusType = ComplaintStatusType.PENDING;
 			complaint.setComplaintStatusType(complaintStatusType);
-			complaint.setComplaintTimeStamp(LocalDateTime.now());
+			
+			long time = System.currentTimeMillis();
+			java.sql.Timestamp timestamp = new java.sql.Timestamp(time);
+			complaint.setComplaintTimeStamp(timestamp);
+			
 			Random random = new Random();
 			int randomValue = random.nextInt(100000) + 1;
-			complaint.setComplaintId(Integer.toString(randomValue));
+			//complaint.setComplaintId(Integer.toString(randomValue));
 			// T changes
 			suggestionDao.save(complaint);
 			modelAndView = new ModelAndView("/logged/loggedSuggestion");
 			modelAndView.addObject("message", "Thank you for submitting your suggestion.");
 
->>>>>>> master
 		} else {
 			hasErros = true;
 		}
