@@ -57,9 +57,8 @@ public class ComplaintService {
 		return dao.findById(id);
 
 	}
-//
+
 	public void saveComplaint(Complaint complaint) throws AddressException, MessagingException {
-	//public void save(TransferObject transferObject) throws ValidationException {
 	
 	LOGGER.debug("Saving: " + complaint);
 		//validate(employee);
@@ -74,67 +73,6 @@ public class ComplaintService {
 		SendMail.SiteMailSend(emailComplaintSender, "", emailTitle, emailBody);
 		
 	}
-//
-//	private void validate(Complaint employee) throws ValidationException {
-//		Date currentDate = new Date();
-//		List<String> errors = new LinkedList<String>();
-//		if (StringUtils.isEmpty(employee.getFirstName())) {
-//			errors.add("First Name is Empty");
-//		}
-//
-//		if (StringUtils.isEmpty(employee.getLastName())) {
-//			errors.add("Last Name is Empty");
-//		}
-//
-//		if (employee.getGender() == null) {
-//			errors.add("Gender is Empty");
-//		}
-//
-//		if (StringUtils.isEmpty(employee.getJobTitle())) {
-//			errors.add("JobTitle is Empty");
-//		}
-//
-//		if (employee.getBirthDate() == null) {
-//			errors.add("BirthDate is Empty");
-//		} else {
-//			if (currentDate.before(employee.getBirthDate())) {
-//				errors.add("Birthdate in future");
-//			}
-//			
-//			Calendar c = GregorianCalendar.getInstance();
-//			c.setTime(new Date());
-//			c.set(Calendar.YEAR, c.get(Calendar.YEAR) - 18);
-//			if (employee.getBirthDate().after(c.getTime())) {
-//				errors.add("Too young to get employeed");
-//			}
-//			
-//			c.set(Calendar.YEAR, 1901);
-//			if (employee.getBirthDate().before(c.getTime())) {
-//				errors.add("Too old to get employeed");
-//			}
-//			
-//		}
-//
-//		if (employee.getEmploymentDate() == null) {
-//			errors.add("EmploymentDate is Empty");
-//		} else {
-//			if (currentDate.before(employee.getEmploymentDate())) {
-//				errors.add("EmploymentDate in future");
-//			}
-//		}
-//		
-//		if (employee.getBirthDate() != null && employee.getEmploymentDate() != null) {
-//			if (employee.getEmploymentDate().before(employee.getBirthDate())) {
-//				errors.add("EmploymentDate before BirthDate");
-//			}
-//		}
-//		
-//		
-//
-//		if (!errors.isEmpty()) {
-//			throw new ValidationException(errors.toArray(new String[] {}));
-//		}
-//	}
 
 
 	

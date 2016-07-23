@@ -27,7 +27,6 @@ import com.app.complaint.domain.Complaint;
 import com.app.complaint.domain.ComplaintStatusType;
 import com.app.complaint.domain.ComplaintType;
 import com.app.complaint.service.ComplaintService;
-import com.app.complaint.service.ValidationException;
 import com.app.other.domain.TransferObject;
 
 import com.app.complaint.dao.SuggestionDao;
