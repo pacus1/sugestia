@@ -25,8 +25,8 @@ public class DatabaseDaoTest {
 		user.setUserRole("USER");
 
 		Partner partner = new Partner();
-		partner.setPartnerLastName("A");
-		partner.setPartnerFirstName("B");
+//		partner.setPartnerLastName("A");
+//		partner.setPartnerFirstName("B");
 		partner.setPartnerAddress("C");
 		partner.setPartnerCategory("D");
 		partner.setPartnerPhone("00000");
@@ -43,15 +43,15 @@ public class DatabaseDaoTest {
 		user1.setUserRole("USER");
 
 		Partner partner1 = new Partner();
-		partner1.setPartnerLastName("A");
-		partner1.setPartnerFirstName("B");
+//		partner1.setPartnerLastName("A");
+//		partner1.setPartnerFirstName("B");
 		partner1.setPartnerAddress("C");
 		partner1.setPartnerCategory("D");
 		partner1.setPartnerPhone("00000");
 		partner1.setPartnerEmail("asdasdasd@asd.com");
 		partner1.setPartnerPassword("ASD651651");
 
-		assertFalse(databaseDao.checkUserEmail(user1));
+//		assertFalse(databaseDao.checkUserEmail(user1));
 		assertFalse(databaseDao.checkPartnerEmail(partner1));
 
 	}

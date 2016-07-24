@@ -139,86 +139,90 @@
 			    	<form action="/partnerRegister/submit" method="POST" accept-charset="UTF-8" role="form">
                     <fieldset>
 			    	  	<div class="form-group" style="padding-top:20px;">
-			    		    <input class="form-control" placeholder="Nume Reprezentant" name="partner.partnerLastName" type="text">
+			    		    <input class="form-control" placeholder="Nume Reprezentant" name="user.userLastName" type="text">
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Prenume Reprezentant" name="partner.partnerFirstName" type="text">
+			    		    <input class="form-control" placeholder="Prenume Reprezentant" name="user.userFirstName" type="text">
+			    		</div>
+			    						<div class="form-group">
+			    		    <input class="form-control" placeholder="E-mail *" name="user.userEmail" type="email" required>
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Nume Companie/Institutie *" name="partner.partnerCompanyOrInstitutionName" type="text" required>
+			    		    <input class="form-control" placeholder="Nume Companie/Institutie *" name="partner.partnerCompanyName" type="text" required>
 			    		</div>
                                         <div class="form-group">
 			    		    <input class="form-control" placeholder="Adresa *" name="partner.partnerAddress" type="text" required>
 			    		</div>
+			    		      		    <div class="form-group">
+			    		    <input class="form-control" placeholder="Email Companie/Institutie *" name="partner.partnerEmail" type="text" required>
+			    		</div>
+			    		
                                         <div class="form-group">
                                         <label for="selectcategorie">Alege categoria din care face parte compania/institutia ta:</label>
-			    		    <select name="partner.partnerCategory" id="selectcategorie" required>
+			    		    <select name="partnerClassification.partnerType" id="selectcategorie" required>
                                                <optgroup label="Institutii Publice">
-                                                  <option  value="cityHall">Primaria</option> 
-                                                  <option  value="council">Consiliul Local</option>
-                                                  <option  value="police">Politie</option>
+                                                  <option  value="Primaria">Primaria</option> 
+                                                  <option  value="Consiliul local">Consiliul Local</option>
+                                                  <option  value="Politia">Politie</option>
                                                </optgroup>
                                                <optgroup label="Servicii Publice">
-                                                  <option   value="clujBike">Cluj Bike</option>
-                                                  <option  value="parks">Parcuri</option>
+                                                  <option   value="Cluj Bike">Cluj Bike</option>
+                                                  <option  value="Parcuri">Parcuri</option>
                                                   <option   value="ADP">ADP</option>
                                                   <option name="partnerCategory"    value="RATUC">RATUC</option>
                                                </optgroup>
                                                <optgroup label="Servicii Private">
-                                                  <option   value="telephony">Telefonie</option>
-                                                  <option   value="internet">Internet</option>
-                                                  <option   value="garbage">Gunoi/Reciclare</option>
-                                                  <option  value="taxi">Taxi</option>
-                                                  <option   value="courier">Curierat</option>
+                                                  <option   value="Telefonie">Telefonie</option>
+                                                  <option   value="Internet">Internet</option>
+                                                  <option   value="Gunoaie/Reciclare">Gunoi/Reciclare</option>
+                                                  <option  value="Taxi">Taxi</option>
+                                                  <option   value="Curierat">Curierat</option>
                                                </optgroup>
                                                <optgroup label="Utilitati">
-                                                  <option  value="water">Apa</option>
-                                                  <option   value="gases">Gaze</option>
-                                                  <option "  value="electricity">Electricitate</option>
+                                                  <option  value="Apa">Apa</option>
+                                                  <option   value="Gaze">Gaze</option>
+                                                  <option "  value="Electricitate">Electricitate</option>
                                                </optgroup>
                                                <optgroup label="Localuri">
-                                                  <option   value="coffeShops">Cafenele</option>
-                                                  <option   value="restaurants">Restaurante</option>
-                                                  <option "  value="bars">Baruri</option>
+                                                  <option   value="Cafenele">Cafenele</option>
+                                                  <option   value="Restaurante">Restaurante</option>
+                                                  <option "  value="Baruri">Baruri</option>
                                                </optgroup>
                                                <optgroup label="Cazare">
-                                                  <option value="hotels">Hotele</option>
-                                                  <option    value="pensions">Pensiuni</option>
+                                                  <option value="Hoteluri">Hoteluri</option>
+                                                  <option    value="Pensiuni">Pensiuni</option>
                                                </optgroup>
                                                <optgroup label="Evenimente">
-                                                  <option  value="festivals">Festivaluri</option>
-                                                  <option   value="market">Targuri</option>
-                                                  <option   value="concerts">Concerte</option>
+                                                  <option  value="Festivaluri">Festivaluri</option>
+                                                  <option   value="Targuri">Targuri</option>
+                                                  <option   value="Concerte">Concerte</option>
                                                </optgroup>
                                                <optgroup label="Cultura">
-                                                  <option  value="theater">Teatru</option>
-                                                  <option  value="opera">Opera</option>
-                                                  <option   value="movie">Film</option>
+                                                  <option  value="Teatru">Teatru</option>
+                                                  <option  value="Opera">Opera</option>
+                                                  <option   value="Film">Film</option>
                                                </optgroup>
                                                <optgroup label="Evenimente">
-                                                  <option  value="malls">Mall-uri</option>
-                                                  <option  value="emporium">Centre Comerciale</option>
-                                                  <option   value="secondHand">Second-Hand</option>
-                                                  <option  value="outlet">Outlet-uri</option>
-                                                  <option   value="electronics">Electronice</option>
-                                                  <option   value="pharmacy">Farmacii</option>
+                                                  <option  value="Mall-uri">Mall-uri</option>
+                                                  <option  value="Centre comerciale second-hand">Centre comerciale second-hand</option>
+                                              <!--<option   value="Second-Hand">Second-Hand</option> -->
+                                                  <option  value="Outlet-uri">Outlet-uri</option>
+                                                  <option   value="Electronice">Electronice</option>
+                                                  <option   value="Farmacii">Farmacii</option>
                                                </optgroup>
                                                <optgroup label="Sanatate">
-                                                  <option  value="clinics">Clinici</option>
-                                                  <option   value="hospitals">Spitale</option>
-                                                  <option   value="individualOffices">Cabinete individuale</option>
+                                                  <option  value="Clinici">Clinici</option>
+                                                  <option   value="Spitale">Spitale</option>
+                                                  <option   value="Cabinete individuale">Cabinete individuale</option>
                                                </optgroup>
                                             </select>
-			    		</div>
+			    		</div>                                       
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="E-mail *" name="partner.partnerEmail" type="email" required>
-			    		</div>
-                                        <div class="form-group">
-			    		    <input class="form-control" placeholder="Telefon" name="partner.partnerPhone" type="text" >
+			    		    <input class="form-control" placeholder="Telefon" name="partner.partnerPhoneNumber" type="text" >
 			    		</div>
                                       
 			    		<div class="form-group">
-			    			<input class="form-control" placeholder="Parola *" name="partner.partnerPassword" type="password" value="" required>
+			    			<input class="form-control" placeholder="Parola *" name="user.userPassword" type="password" value="" required>
 			    		</div>
 			    		
 			    		<input class="btn btn-lg btn-primary" style="color:#FFFFFF; width:100%;" type="submit" value="Inregistreaza Contul">

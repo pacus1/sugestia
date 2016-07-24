@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.app.other.domain.TransferObject;
 import com.app.partner.domain.Partner;
+import com.app.partner.service.PartnerService;
 import com.app.user.dao.UserDao;
 
 @Controller
@@ -25,6 +26,9 @@ public class PartnerRegisterController {
 	// Return true if email not exist, false if email exist aleardy.
 	@Autowired
 	UserDao userDao;
+	
+	@Autowired
+	PartnerService partnerService;
 
 	@RequestMapping(value = "/partnerRegister", method = RequestMethod.GET)
 	public ModelAndView register(HttpServletRequest httpServletRequest) {
@@ -87,26 +91,26 @@ public class PartnerRegisterController {
 		for (int x = 0; x < bindingResult.getAllErrors().size(); x++) {
 			defaultMessage.add(bindingResult.getAllErrors().get(x).getDefaultMessage());
 		}
-
+		
+		
+		transferObject.getUser().setUserRole("PARTNER");
 		ModelAndView modelAndView = null;
 		boolean hasErros = false;
 
 		if (!bindingResult.hasErrors()) {
-
-//			if (userDao.checkPartnerEmail(partner)) {
+			// this is used for testing purposes as the Partner Registration Form does not meet all requirements 
+			
+			
+			if (partnerService.addPartner(transferObject)!=-1) {
 				
-				
-			
-			
-			
 				modelAndView = new ModelAndView("/login");
 				modelAndView.addObject("message", "Succesful registered now please login!");
 
-//			} else {
-//				modelAndView = new ModelAndView("/partnerRegister");
-//				modelAndView.addObject("message", "Mail already exist");
-//
-//			}
+			} else {
+				modelAndView = new ModelAndView("/partnerRegister");
+				modelAndView.addObject("message", "Mail already exist or inconsistent data"); //the thing with inconsistent data must be changed
+
+			}
 
 		} else {
 			hasErros = true;

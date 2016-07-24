@@ -24,10 +24,11 @@ public class UserDao {
 	ResultSet resultSet = null;
 	Connection connection = null;
 	
-	public boolean checkUserEmail(User user) {
+	public int checkUserEmail(User user) {
 		connection = ConnectDBS.connectDatabase();
+		int newAddedUserId = 0;
 
-		String userEmailCheck = "SELECT useremail,partneremail FROM users,partners";
+		String userEmailCheck = "SELECT useremail FROM users";
 		try {
 			preparedStatement = connection.prepareStatement(userEmailCheck);
 			resultSet = preparedStatement.executeQuery();
@@ -38,43 +39,59 @@ public class UserDao {
 			while (resultSet.next()) {
 
 				String userEmailResultSet = resultSet.getString("useremail");
-				String partnerEmailResultSet = resultSet.getString("partneremail");
+//				String partnerEmailResultSet = resultSet.getString("partneremail");
 
-				if (user.getUserEmail().equals(userEmailResultSet)
-						|| user.getUserEmail().equals(partnerEmailResultSet)) {
-					return false;
-				}
+				if (user.getUserEmail().equals(userEmailResultSet))
+//						|| user.getUserEmail().equals(partnerEmailResultSet)) {
+					return -1;
+//				}
 
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-//		initial approach - changed due to conflicts with autoincremented fields 		
-//		String addUserQuery = String.format("INSERT INTO users VALUES('%s','%s','%s','%s','%s','%s','%s')",
-//				user.getUserLastName(), user.getUserFirstName(), user.getUserEmail(), user.getUserMobilePhone(),
-//				user.getUserHomeTown(), user.getUserPassword(), user.getUserRole());
 		
 		try {
 						
 			preparedStatement = connection.prepareStatement("INSERT INTO users (userlastname,userfirstname,useremail,usermobilephone,userhometown,"
-					+ "userpassword,userrole) " + "VALUES(?,?,?,?,?,?,?)");			
+					+ "userpassword,userrole) " + "VALUES(?,?,?,?,?,?,?)", newAddedUserId);			
 			
 			preparedStatement.setString(1, user.getUserLastName());
 			preparedStatement.setString(2, user.getUserFirstName());
 			preparedStatement.setString(3, user.getUserEmail());
-			preparedStatement.setString(4, user.getUserMobilePhone());
-			preparedStatement.setString(5, user.getUserHomeTown());
+			
+//			if (user.getUserMobilePhone()==null){
+//				preparedStatement.setString(4, "");
+//			}else{
+				preparedStatement.setString(4, user.getUserMobilePhone());
+//			}
+			
+//			if (user.getUserMobilePhone()==null){
+//				preparedStatement.setString(5, "");
+//			}else{
+				preparedStatement.setString(5, user.getUserHomeTown());
+//			}
+			
 			preparedStatement.setString(6, user.getUserPassword());
 			preparedStatement.setString(7, user.getUserRole());
 			
-			preparedStatement.executeQuery();
+			preparedStatement.execute();
+			resultSet = preparedStatement.getGeneratedKeys();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return true;
+		try {
+			resultSet.next();
+			newAddedUserId = resultSet.getInt("id");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return newAddedUserId;
 	}
 
 	public boolean checkPartnerEmail(Partner partner) {
@@ -104,7 +121,7 @@ public class UserDao {
 		}
 
 		String addPartnerQuery = String.format("INSERT INTO partners VALUES('%s','%s','%s','%s','%s','%s','%s','%s','%s')",1,
-				partner.getPartnerLastName(), partner.getPartnerFirstName(),
+//				partner.getPartnerLastName(), partner.getPartnerFirstName(),
 				partner.getPartnerCompanyOrInstitutionName(), partner.getPartnerAddress(), partner.getPartnerCategory(),
 				partner.getPartnerEmail(), partner.getPartnerPhone(), partner.getPartnerPassword());
 
@@ -176,7 +193,6 @@ public class UserDao {
 		}
 
 		return false;
-
 	}
 
 	public User getCurrentUser(String email, String password) {
@@ -241,8 +257,8 @@ public class UserDao {
 				if (email.equals(userEmailResultSet) || password.equals(partnerEmailResultSet)) {
 
 					Partner partner = new Partner();
-					partner.setPartnerLastName(resultSet.getString("partnerlastname"));
-					partner.setPartnerFirstName(resultSet.getString("partnerfirstname"));
+//					partner.setPartnerLastName(resultSet.getString("partnerlastname"));
+//					partner.setPartnerFirstName(resultSet.getString("partnerfirstname"));
 					partner.setPartnerAddress(resultSet.getString("partneraddress"));
 					partner.setPartnerCategory(resultSet.getString("partnercategory"));
 					partner.setPartnerCompanyOrInstitutionName(resultSet.getString("partnercompanyorinstitutionname"));

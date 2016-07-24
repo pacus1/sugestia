@@ -41,7 +41,10 @@ public class ComplaintService {
 				
 		String emailComplaintSender = complaint.getSenderEmailAddress();
 		String emailTitle = "Suggestion sent confirmation email";
-		String emailBody = "Sugestia.ro confirms that sugestion with the title \"" + complaint.getComplaintTitle() +  "\" and id no. \"" + newAddedComplaintId +"\" has been saved to our databases and directed to requested partner \"" + complaint.getComplaintPartnerAsigneeName() + "\"";
+		String emailBody = "Sugestia.ro confirms that sugestion with the title \"" + complaint.getComplaintTitle() 
+			+  "\" and id no. \"" + newAddedComplaintId 
+			+"\" has been saved to our databases. \n After moderator's check it will be directed to requested partner \"" 
+			+ complaint.getComplaintPartnerAsigneeName() + "\". \n Check email for updated information about your suggestion.";
 		
 		SendMail.SiteMailSend(emailComplaintSender, "", emailTitle, emailBody);
 		

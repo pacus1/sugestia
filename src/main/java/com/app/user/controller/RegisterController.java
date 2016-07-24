@@ -90,8 +90,8 @@ public class RegisterController {
 		boolean hasErros = false;
 
 		if (!bindingResult.hasErrors()) {
-
-			if (userDao.checkUserEmail(user)) {
+			
+			if (userDao.checkUserEmail(user)!= -1) {
 
 				modelAndView = new ModelAndView("/login");
 				modelAndView.addObject("message", "Succesful registered now please login!");

@@ -135,7 +135,7 @@ public class SuggestionController {
 			
 				String userEmail =httpServletRequest.getSession().getAttribute("currentUser").toString();
 
-				userEmail = userEmail.replace("Welcome,", "");
+//				userEmail = userEmail.replace("Welcome,", "");
 				complaint.setSenderEmailAddress(userEmail);
 				
 				complaintService.saveComplaint(complaint);
