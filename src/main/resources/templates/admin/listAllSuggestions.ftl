@@ -59,7 +59,6 @@
 		<th>Numele Companiei</th>
 		<th>Titlu Sugestie</th>
 		<th>Continut</th>
-		<th>Continut</th>
 		<th>Time stamp</th>
 		<th>Poze</th>
 		<th>Poze</th>

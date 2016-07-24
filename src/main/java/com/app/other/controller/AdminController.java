@@ -62,11 +62,10 @@ public class AdminController {
 			case "REJECT" : complaintStatusType = ComplaintStatusType.REJECT ;break;
 			case "SOLVED" : complaintStatusType = ComplaintStatusType.SOLVED ;break;
 			}
-			
-			modelAndView = new ModelAndView("/admin/listAllSuggestions");
-					
+											
 			complaintsList = adminService.updateComplaintStatus(id, complaintStatusType);
 			
+			modelAndView = new ModelAndView(new RedirectView("/admin/listAllSuggestions"));
 			modelAndView.addObject("complaints", complaintsList);
 			return modelAndView;
 			

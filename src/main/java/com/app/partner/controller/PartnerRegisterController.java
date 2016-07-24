@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.app.other.domain.TransferObject;
 import com.app.partner.domain.Partner;
 import com.app.user.dao.UserDao;
 
@@ -23,7 +24,7 @@ public class PartnerRegisterController {
 
 	// Return true if email not exist, false if email exist aleardy.
 	@Autowired
-	UserDao databaseDao;
+	UserDao userDao;
 
 	@RequestMapping(value = "/partnerRegister", method = RequestMethod.GET)
 	public ModelAndView register(HttpServletRequest httpServletRequest) {
@@ -47,14 +48,14 @@ public class PartnerRegisterController {
 
 				modelAndView = new ModelAndView("/logged/loggedIndex");
 
-				if (databaseDao.checkUserLogin(currentUserEmail, currentUserPassword))
+				if (userDao.checkUserLogin(currentUserEmail, currentUserPassword))
 
 					httpServletRequest.getSession().setAttribute("currentUser",
-							databaseDao.getCurrentUser(currentUserEmail, currentUserPassword));
+							userDao.getCurrentUser(currentUserEmail, currentUserPassword));
 
-				if (databaseDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
+				if (userDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
 					httpServletRequest.getSession().setAttribute("currentPartner",
-							databaseDao.getCurrentPartner(currentUserEmail, currentUserPassword));
+							userDao.getCurrentPartner(currentUserEmail, currentUserPassword));
 
 				}
 
@@ -78,7 +79,7 @@ public class PartnerRegisterController {
 	}
 
 	@RequestMapping(value = "/partnerRegister/submit", method = RequestMethod.POST)
-	public ModelAndView registerPartner(@Valid @ModelAttribute("partner") Partner partner,
+	public ModelAndView registerPartner(@Valid @ModelAttribute("TransferObject") TransferObject transferObject,
 			BindingResult bindingResult) {
 
 		ArrayList<String> defaultMessage = new ArrayList<>();
@@ -92,16 +93,20 @@ public class PartnerRegisterController {
 
 		if (!bindingResult.hasErrors()) {
 
-			if (databaseDao.checkPartnerEmail(partner)) {
-
+//			if (userDao.checkPartnerEmail(partner)) {
+				
+				
+			
+			
+			
 				modelAndView = new ModelAndView("/login");
 				modelAndView.addObject("message", "Succesful registered now please login!");
 
-			} else {
-				modelAndView = new ModelAndView("/partnerRegister");
-				modelAndView.addObject("message", "Mail already exist");
-
-			}
+//			} else {
+//				modelAndView = new ModelAndView("/partnerRegister");
+//				modelAndView.addObject("message", "Mail already exist");
+//
+//			}
 
 		} else {
 			hasErros = true;

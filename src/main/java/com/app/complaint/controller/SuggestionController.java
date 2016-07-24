@@ -83,9 +83,6 @@ public class SuggestionController {
 
 				}
 				
-				//modelAndView.addObject("suggestion", new TransferObject());	//added code from Ovi's SugestionController class			
-
-
 				modelAndView.addObject("suggestion", new Complaint()); // added
 																		// code
 																		// from

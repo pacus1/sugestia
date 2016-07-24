@@ -33,14 +33,15 @@ public class ComplaintService {
 	private SuggestionDao dao;
 
 	public void saveComplaint(Complaint complaint) throws AddressException, MessagingException {
+		int newAddedComplaintId;
 		
 		LOGGER.debug("Saving: " + complaint);
 				
-		dao.addComplaint(complaint);
-		
+		newAddedComplaintId = dao.addComplaint(complaint);
+				
 		String emailComplaintSender = complaint.getSenderEmailAddress();
 		String emailTitle = "Suggestion sent confirmation email";
-		String emailBody = "Sugestia.ro confirms that your sugestion \"" + complaint.getComplaintTitle() + "\" has been saved to our databases and directed to requested partner \"" + complaint.getComplaintPartnerAsigneeName() + "\"";
+		String emailBody = "Sugestia.ro confirms that sugestion with the title \"" + complaint.getComplaintTitle() +  "\" and id no. \"" + newAddedComplaintId +"\" has been saved to our databases and directed to requested partner \"" + complaint.getComplaintPartnerAsigneeName() + "\"";
 		
 		SendMail.SiteMailSend(emailComplaintSender, "", emailTitle, emailBody);
 		

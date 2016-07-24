@@ -1,5 +1,6 @@
 package com.app.complaint.dao;
 
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -36,13 +37,14 @@ public class SuggestionDao {
 	private String type;
 	private java.sql.Timestamp timeStamp;
 	
-	public boolean addComplaint(Complaint complaint)   {
+	public int addComplaint(Complaint complaint)   {
 	
 	connection = ConnectDBS.connectDatabase();
+	int newAddedComplaintId = 0;
 
 			try {
 				preparedStatement = connection.prepareStatement("INSERT INTO complaint (sender_email_address,status_type,suggestion_type,timestamp,"
-						+ "complaint_title,complaint_body,partner_assign_name) VALUES(?,?,?,?,?,?,?)");
+						+ "complaint_title,complaint_body,partner_assign_name) VALUES(?,?,?,?,?,?,?)", newAddedComplaintId);
 				
 				preparedStatement.setString(1, complaint.getSenderEmailAddress());
 				preparedStatement.setString(2, complaint.getComplaintStatusType().toString());
@@ -57,13 +59,22 @@ public class SuggestionDao {
 				preparedStatement.setString(6, complaint.getComplaintBody());
 				preparedStatement.setString(7, complaint.getComplaintPartnerAsigneeName());
 				
-				preparedStatement.executeQuery();
+				preparedStatement.execute();
+				rs = preparedStatement.getGeneratedKeys();
+				
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			
-			return true;
+			try {
+				rs.next();
+				newAddedComplaintId = rs.getInt("complaint_id");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return newAddedComplaintId;
 		}
 
 	public Collection<Complaint> getAll() {
@@ -76,7 +87,8 @@ public class SuggestionDao {
 	
 	public ArrayList<Complaint> listAllComplaintsByStatus(ComplaintStatusType complaintStatusType)   {
 		
-		connection = ConnectDBS.connectDatabase();	
+		connection = ConnectDBS.connectDatabase();
+		complaintsList = new ArrayList<>();
 		
 				try {
 					preparedStatement = connection.prepareStatement("SELECT * from complaint WHERE status_type = ?");
@@ -89,45 +101,11 @@ public class SuggestionDao {
 					e.printStackTrace();
 				}
 
-	        	try{	
-	        		while (rs.next()) {              				        
-	        			complaint = new Complaint();
-		        		complaint.setComplaintId(rs.getInt("complaint_id"));
-		        		complaint.setSenderEmailAddress(rs.getString("sender_email_address"));
-		        		complaint.setComplaintTitle(rs.getString("complaint_title"));
-		        		complaint.setComplaintBody(rs.getString("complaint_body"));
-		        	
-		        		statusType = rs.getString("status_type");
-		        		switch (statusType){
-			        		case "PENDING" : complaint.setComplaintStatusType(complaintStatusType.PENDING);break;
-			        		case "APPROVED" : complaint.setComplaintStatusType(complaintStatusType.APPROVED);break;
-			        		case "REJECT" : complaint.setComplaintStatusType(complaintStatusType.REJECT);break;
-			        		case "SOLVED" : complaint.setComplaintStatusType(complaintStatusType.SOLVED);break;
-		        		}
-		        				        	
-		        		complaint.setComplaintPartnerAsigneeName(rs.getString("partner_assign_name"));
-		        		
-		        		type = rs.getString("suggestion_type").trim();
-		        		switch (type){
-			        		case "SUGGESTION" : complaint.setComplaintType(complaintType.SUGGESTION);break;
-			        		case "COMPLAINT" : complaint.setComplaintType(complaintType.COMPLAINT);break;
-		        		}		        	
-		        		
-		        		timeStamp = rs.getTimestamp("timestamp");
-		        		complaint.setComplaintTimeStamp(rs.getTimestamp("timestamp"));
-		        		
-		        		System.out.println(complaint.toString());
-		        		
-		        		complaintsList.add(complaint);
-	        		}
-	        	
-	        	} catch (SQLException e) {
-					e.printStackTrace();
-				}
+				complaintsList = addResultsetToArrayList(rs);
 				
-	        	for (int i = 0; i<complaintsList.size();i++){	        		
-	        		System.out.println(complaintsList.get(i).toString());	        		
-	        	}        		        	
+//	        	for (int i = 0; i<complaintsList.size();i++){	        		
+//	        		System.out.println(complaintsList.get(i).toString());	        		
+//	        	}        		        	
 				return complaintsList;
 			}	
 	
@@ -146,14 +124,175 @@ public class SuggestionDao {
 						
 					} catch (SQLException e) {
 						e.printStackTrace();
+						//return false;						
 					}
 	
+			// check update code to be added
 			return true;
 	}
 	
+	public Complaint getComplaintById(int id)   {
+		
+		connection = ConnectDBS.connectDatabase();	
+			
+		try {
+			preparedStatement = connection.prepareStatement("SELECT * from complaint WHERE complaint_id = ?");
+			preparedStatement.setInt(1, id);
 	
+			rs = preparedStatement.executeQuery();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+    	complaint = addResultsetToArrayList(rs).get(0);
+    	
+		return complaint;
+}
 	
+public ArrayList<Complaint> listAllComplaintsOrderByTimeStamp()   {
+		
+		connection = ConnectDBS.connectDatabase();
+		complaintsList = new ArrayList<>();
+		
+				try {
+					preparedStatement = connection.prepareStatement("SELECT * from complaint ORDER BY timestamp");
+					
+					rs = preparedStatement.executeQuery();
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+	        	
+	        	complaintsList = addResultsetToArrayList(rs);
+	        	
+				return complaintsList;
+			}	
+
+	public ArrayList<Complaint> listAllComplaintsByUserEmail(String userEmail)   {
 	
+	connection = ConnectDBS.connectDatabase();
+	complaintsList = new ArrayList<>();
+	
+		
+			try {
+				preparedStatement = connection.prepareStatement("SELECT * from complaint WHERE sender_email_address = ?");
+				
+				preparedStatement.setString(1, userEmail);
+				
+				rs = preparedStatement.executeQuery();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+        	complaintsList = addResultsetToArrayList(rs);	
+        		        	
+			return complaintsList;
+	}	
+
+	
+	//------------------------------------------------------------------------
+	//       the method below is under development
+	//------------------------------------------------------------------------
+	public ArrayList<Complaint> listAllComplaintsBySelection(String userEmail)   {
+	
+	connection = ConnectDBS.connectDatabase();
+	complaintsList = new ArrayList<>();
+		
+			try {
+				preparedStatement = connection.prepareStatement("SELECT * from complaint,partner WHERE sender_email_address = ?");
+				
+				preparedStatement.setString(1, userEmail);
+				
+				rs = preparedStatement.executeQuery();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
+        	try{	
+        		while (rs.next()) {              				        
+        			complaint = new Complaint();
+	        		complaint.setComplaintId(rs.getInt("complaint_id"));
+	        		complaint.setSenderEmailAddress(rs.getString("sender_email_address"));
+	        		complaint.setComplaintTitle(rs.getString("complaint_title"));
+	        		complaint.setComplaintBody(rs.getString("complaint_body"));
+	        	
+	        		statusType = rs.getString("status_type");
+	        		switch (statusType){
+		        		case "PENDING" : complaint.setComplaintStatusType(ComplaintStatusType.PENDING);break;
+		        		case "APPROVED" : complaint.setComplaintStatusType(ComplaintStatusType.APPROVED);break;
+		        		case "REJECT" : complaint.setComplaintStatusType(ComplaintStatusType.REJECT);break;
+		        		case "SOLVED" : complaint.setComplaintStatusType(ComplaintStatusType.SOLVED);break;
+	        		}
+	        				        	
+	        		complaint.setComplaintPartnerAsigneeName(rs.getString("partner_assign_name"));
+	        		
+	        		type = rs.getString("suggestion_type").trim();
+	        		switch (type){
+		        		case "SUGGESTION" : complaint.setComplaintType(ComplaintType.SUGGESTION);break;
+		        		case "COMPLAINT" : complaint.setComplaintType(ComplaintType.COMPLAINT);break;
+	        		}		        	
+	        		
+	        		timeStamp = rs.getTimestamp("timestamp");
+	        		complaint.setComplaintTimeStamp(rs.getTimestamp("timestamp"));
+	        		
+	        	//	System.out.println(complaint.toString());
+	        		
+	        		complaintsList.add(complaint);
+        		}
+        	
+        	} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+        		        	
+			return complaintsList;
+		}	
+	
+	public ArrayList<Complaint> addResultsetToArrayList(ResultSet resultSet){
+		ArrayList<Complaint> tempComplaintsList = new ArrayList<>();
+		
+		try{	
+    		while (resultSet.next()) {              				        
+    			complaint = new Complaint();
+        		complaint.setComplaintId(rs.getInt("complaint_id"));
+        		complaint.setSenderEmailAddress(rs.getString("sender_email_address"));
+        		complaint.setComplaintTitle(rs.getString("complaint_title"));
+        		complaint.setComplaintBody(rs.getString("complaint_body"));
+        	
+        		statusType = rs.getString("status_type");
+        		switch (statusType){
+	        		case "PENDING" : complaint.setComplaintStatusType(ComplaintStatusType.PENDING);break;
+	        		case "APPROVED" : complaint.setComplaintStatusType(ComplaintStatusType.APPROVED);break;
+	        		case "REJECT" : complaint.setComplaintStatusType(ComplaintStatusType.REJECT);break;
+	        		case "SOLVED" : complaint.setComplaintStatusType(ComplaintStatusType.SOLVED);break;
+        		}
+        				        	
+        		complaint.setComplaintPartnerAsigneeName(rs.getString("partner_assign_name"));
+        		
+        		type = rs.getString("suggestion_type").trim();
+        		switch (type){
+	        		case "SUGGESTION" : complaint.setComplaintType(ComplaintType.SUGGESTION);break;
+	        		case "COMPLAINT" : complaint.setComplaintType(ComplaintType.COMPLAINT);break;
+        		}		        	
+        		
+        		timeStamp = rs.getTimestamp("timestamp");
+        		complaint.setComplaintTimeStamp(rs.getTimestamp("timestamp"));
+        		
+        		System.out.println(complaint.toString());
+        		
+        		tempComplaintsList.add(complaint);
+    		}
+    	
+    	} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return tempComplaintsList;
+	}
+
 }
 
 

@@ -139,20 +139,20 @@
 			    	<form action="/partnerRegister/submit" method="POST" accept-charset="UTF-8" role="form">
                     <fieldset>
 			    	  	<div class="form-group" style="padding-top:20px;">
-			    		    <input class="form-control" placeholder="Nume Reprezentant" name="partnerLastName" type="text">
+			    		    <input class="form-control" placeholder="Nume Reprezentant" name="partner.partnerLastName" type="text">
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Prenume Reprezentant" name="partnerFirstName" type="text">
+			    		    <input class="form-control" placeholder="Prenume Reprezentant" name="partner.partnerFirstName" type="text">
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Nume Companie/Institutie *" name="partnerCompanyOrInstitutionName" type="text" required>
+			    		    <input class="form-control" placeholder="Nume Companie/Institutie *" name="partner.partnerCompanyOrInstitutionName" type="text" required>
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Adresa *" name="partnerAddress" type="text" required>
+			    		    <input class="form-control" placeholder="Adresa *" name="partner.partnerAddress" type="text" required>
 			    		</div>
                                         <div class="form-group">
                                         <label for="selectcategorie">Alege categoria din care face parte compania/institutia ta:</label>
-			    		    <select name="partnerCategory" id="selectcategorie" required>
+			    		    <select name="partner.partnerCategory" id="selectcategorie" required>
                                                <optgroup label="Institutii Publice">
                                                   <option  value="cityHall">Primaria</option> 
                                                   <option  value="council">Consiliul Local</option>
@@ -211,14 +211,14 @@
                                             </select>
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="E-mail *" name="partnerEmail" type="email" required>
+			    		    <input class="form-control" placeholder="E-mail *" name="partner.partnerEmail" type="email" required>
 			    		</div>
                                         <div class="form-group">
-			    		    <input class="form-control" placeholder="Telefon" name="partnerPhone" type="text" >
+			    		    <input class="form-control" placeholder="Telefon" name="partner.partnerPhone" type="text" >
 			    		</div>
                                       
 			    		<div class="form-group">
-			    			<input class="form-control" placeholder="Parola *" name="partnerPassword" type="password" value="" required>
+			    			<input class="form-control" placeholder="Parola *" name="partner.partnerPassword" type="password" value="" required>
 			    		</div>
 			    		
 			    		<input class="btn btn-lg btn-primary" style="color:#FFFFFF; width:100%;" type="submit" value="Inregistreaza Contul">
