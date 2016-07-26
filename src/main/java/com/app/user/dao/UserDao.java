@@ -97,7 +97,7 @@ public class UserDao {
 	public boolean checkPartnerEmail(Partner partner) {
 		connection = ConnectDBS.connectDatabase();
 
-		String partnerEmailCheck = "SELECT useremail,partneremail FROM users,partners";
+		String partnerEmailCheck = "SELECT useremail,partner_email FROM users,partners";
 		try {
 			preparedStatement = connection.prepareStatement(partnerEmailCheck);
 			resultSet = preparedStatement.executeQuery();
@@ -108,7 +108,7 @@ public class UserDao {
 			while (resultSet.next()) {
 
 				String userEmailResultSet = resultSet.getString("useremail");
-				String partnerEmailResultSet = resultSet.getString("partneremail");
+				String partnerEmailResultSet = resultSet.getString("partner_email");
 
 				if (partner.getPartnerEmail().equals(userEmailResultSet)
 						|| partner.getPartnerEmail().equals(partnerEmailResultSet)) {
@@ -167,30 +167,32 @@ public class UserDao {
 	}
 
 	// if login return true
+//	the method was commented as login data for Partners is stored in User 
 	public boolean checkPartnerLogin(String email, String password) {
-		connection = ConnectDBS.connectDatabase();
+		
+//		connection = ConnectDBS.connectDatabase();
 
-		String partnerLoginCheck = "SELECT partneremail,partnerpassword FROM partners";
-		try {
-			preparedStatement = connection.prepareStatement(partnerLoginCheck);
-			resultSet = preparedStatement.executeQuery();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			while (resultSet.next()) {
-
-				String userEmailResultSet = resultSet.getString("partneremail");
-				String partnerEmailResultSet = resultSet.getString("partnerpassword");
-
-				if (email.equals(userEmailResultSet) && password.equals(partnerEmailResultSet)) {
-					return true;
-				}
-
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		String partnerLoginCheck = "SELECT partneremail,partnerpassword FROM partners";
+//		try {
+//			preparedStatement = connection.prepareStatement(partnerLoginCheck);
+//			resultSet = preparedStatement.executeQuery();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		try {
+//			while (resultSet.next()) {
+//
+//				String userEmailResultSet = resultSet.getString("partneremail");
+//				String partnerEmailResultSet = resultSet.getString("partnerpassword");
+//
+//				if (email.equals(userEmailResultSet) && password.equals(partnerEmailResultSet)) {
+//					return true;
+//				}
+//
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 
 		return false;
 	}
@@ -211,7 +213,7 @@ public class UserDao {
 				String userEmailResultSet = resultSet.getString("useremail");
 				String partnerEmailResultSet = resultSet.getString("userpassword");
 
-				if (email.equals(userEmailResultSet) || password.equals(partnerEmailResultSet)) {
+				if (email.equals(userEmailResultSet) && password.equals(partnerEmailResultSet)) {
 
 					User user = new User();
 					user.setUserLastName(resultSet.getString("userlastname"));
@@ -238,47 +240,48 @@ public class UserDao {
 		return null;
 	}
 
+//	the method was commented as login data for Partners is stored in User; partner table does not contain partneremail and partnerpassword anymore
 	public Partner getCurrentPartner(String email, String password) {
-		connection = ConnectDBS.connectDatabase();
-
-		String userLoginCheck = "SELECT * FROM partners";
-		try {
-			preparedStatement = connection.prepareStatement(userLoginCheck);
-			resultSet = preparedStatement.executeQuery();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			while (resultSet.next()) {
-
-				String userEmailResultSet = resultSet.getString("partneremail");
-				String partnerEmailResultSet = resultSet.getString("partnerpassword");
-
-				if (email.equals(userEmailResultSet) || password.equals(partnerEmailResultSet)) {
-
-					Partner partner = new Partner();
-//					partner.setPartnerLastName(resultSet.getString("partnerlastname"));
-//					partner.setPartnerFirstName(resultSet.getString("partnerfirstname"));
-					partner.setPartnerAddress(resultSet.getString("partneraddress"));
-					partner.setPartnerCategory(resultSet.getString("partnercategory"));
-					partner.setPartnerCompanyOrInstitutionName(resultSet.getString("partnercompanyorinstitutionname"));
-					partner.setPartnerPhone(resultSet.getString("partnerphone"));
-					partner.setPartnerEmail(resultSet.getString("partneremail"));
-					partner.setPartnerPassword(resultSet.getString("partnerpassword"));
-					return partner;
-
-				}
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+//		connection = ConnectDBS.connectDatabase();
+//
+//		String userLoginCheck = "SELECT * FROM partners";
+//		try {
+//			preparedStatement = connection.prepareStatement(userLoginCheck);
+//			resultSet = preparedStatement.executeQuery();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		try {
+//			while (resultSet.next()) {
+//
+//				String userEmailResultSet = resultSet.getString("partneremail");
+//				String partnerEmailResultSet = resultSet.getString("partnerpassword");
+//
+//				if (email.equals(userEmailResultSet) || password.equals(partnerEmailResultSet)) {
+//
+//					Partner partner = new Partner();
+////					partner.setPartnerLastName(resultSet.getString("partnerlastname"));
+////					partner.setPartnerFirstName(resultSet.getString("partnerfirstname"));
+//					partner.setPartnerAddress(resultSet.getString("partneraddress"));
+//					partner.setPartnerCategory(resultSet.getString("partnercategory"));
+//					partner.setPartnerCompanyOrInstitutionName(resultSet.getString("partnercompanyorinstitutionname"));
+//					partner.setPartnerPhone(resultSet.getString("partnerphone"));
+//					partner.setPartnerEmail(resultSet.getString("partneremail"));
+//					partner.setPartnerPassword(resultSet.getString("partnerpassword"));
+//					return partner;
+//
+//				}
+//			}
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				connection.close();
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		return null;
 	}
 

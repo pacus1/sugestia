@@ -149,7 +149,7 @@
                     <fieldset>
                                        <div class="form-group" style="padding-top:12px;" align="center">
                                         <label for="selectcategorie">Alege categoria din care face parte compania/institutia caruia vreti sa-i trimiteti sugestia:</label>
-			    		    <select name="complaintPartnerType" id="selectcategorie" required style="font-size:16px;">
+			    		    <select name="partnerClassification.partnerType" id="selectcategorie" required style="font-size:16px;">
                                                <optgroup label="Institutii Publice">
                                                   <option value="Primaria">Primaria</option>
                                                   <option value="Consiliul Local">Consiliul Local</option>
@@ -208,13 +208,13 @@
                                             </select>
 			    		</div>
 			    	  	<div class="form-group">
-			    		    <input class="form-control" placeholder="Numele Companiei / Institutiei" name="complaintPartnerAsigneeName" type="text"/>
+			    		    <input class="form-control" placeholder="Numele Companiei / Institutiei" name="partner.partnerCompanyName" type="text"/>
 			    		</div>
                         <div class="form-group">
-			    		     <input class="form-control" placeholder="Titlul Sugestiei *" name="complaintTitle" type="text" required >
+			    		     <input class="form-control" placeholder="Titlul Sugestiei *" name="complaint.complaintTitle" type="text" required >
 			    		</div>
                         <div class="form-group">
-			    		    <textarea class="form-control" placeholder="Descriere *" name="complaintBody" type="text" rows="4"  required >
+			    		    <textarea class="form-control" placeholder="Descriere *" name="complaint.complaintBody" type="text" rows="4"  required >
 			    		    </textarea>
 			    		</div>
 			    		<div class="form-group" name="complaintType"></div>

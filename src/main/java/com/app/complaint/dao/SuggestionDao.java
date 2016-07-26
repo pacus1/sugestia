@@ -44,7 +44,7 @@ public class SuggestionDao {
 
 			try {
 				preparedStatement = connection.prepareStatement("INSERT INTO complaint (sender_email_address,status_type,suggestion_type,timestamp,"
-						+ "complaint_title,complaint_body,partner_assign_name) VALUES(?,?,?,?,?,?,?)", newAddedComplaintId);
+						+ "complaint_title,complaint_body,partner_assign_name,partner_id) VALUES(?,?,?,?,?,?,?,?)", newAddedComplaintId);
 				
 				preparedStatement.setString(1, complaint.getSenderEmailAddress());
 				preparedStatement.setString(2, complaint.getComplaintStatusType().toString());
@@ -58,6 +58,7 @@ public class SuggestionDao {
 				preparedStatement.setString(5, complaint.getComplaintTitle());
 				preparedStatement.setString(6, complaint.getComplaintBody());
 				preparedStatement.setString(7, complaint.getComplaintPartnerAsigneeName());
+				preparedStatement.setInt(8, complaint.getPartnerId());
 				
 				preparedStatement.execute();
 				rs = preparedStatement.getGeneratedKeys();
@@ -131,7 +132,7 @@ public class SuggestionDao {
 			return true;
 	}
 	
-	public Complaint getComplaintById(int id)   {
+public Complaint getComplaintById(int id)   {
 		
 		connection = ConnectDBS.connectDatabase();	
 			
@@ -251,6 +252,7 @@ public ArrayList<Complaint> listAllComplaintsOrderByTimeStamp()   {
 			return complaintsList;
 		}	
 	
+// this method adds a ResultSet to am ArrayList 	
 	public ArrayList<Complaint> addResultsetToArrayList(ResultSet resultSet){
 		ArrayList<Complaint> tempComplaintsList = new ArrayList<>();
 		

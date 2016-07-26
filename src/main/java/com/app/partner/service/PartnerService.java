@@ -34,10 +34,10 @@ public class PartnerService {
 		
 		if(newAddedUserId != -1){
 			
-			partnerClassificationId = partnerClassificationDao.checkPartnerClassificationId(transferObject);
+			partnerClassificationId = partnerClassificationDao.checkPartnerClassificationId(transferObject.getPartnerClassification());
 			transferObject.getPartner().setPartnerClassificationId(partnerClassificationId);
 			
-			newAddedPartnerId = partnerDao.addPartner(transferObject);
+			newAddedPartnerId = partnerDao.addPartner(transferObject.getPartner());
 		}
 		
 		return newAddedPartnerId;

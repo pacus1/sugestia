@@ -48,23 +48,23 @@ public class PartnerDao {
 				return true;
 			}	
 
-	public int addPartner(TransferObject transferObject){
+	public int addPartner(Partner partner){
 		
 		connection = ConnectDBS.connectDatabase();
-		int newAddedComplaintId = 0;
+		int newAddedPartnerId = 0;
 
 				try {
 					preparedStatement = connection.prepareStatement("INSERT INTO partners (user_id,partner_company_name,partner_address,partner_classification_id,"
-							+ "phone_number,partner_email,tax_ident_number) VALUES(?,?,?,?,?,?,?)", newAddedComplaintId);
+							+ "phone_number,partner_email,tax_ident_number) VALUES(?,?,?,?,?,?,?)", newAddedPartnerId);
 					
-					preparedStatement.setInt(1, transferObject.getPartner().getUser_id());
-					preparedStatement.setString(2, transferObject.getPartner().getPartnerCompanyName());
+					preparedStatement.setInt(1, partner.getUser_id());
+					preparedStatement.setString(2, partner.getPartnerCompanyName());
 					
-					preparedStatement.setString(3, transferObject.getPartner().getPartnerAddress());
+					preparedStatement.setString(3, partner.getPartnerAddress());
 					
-					preparedStatement.setInt(4, transferObject.getPartner().getPartnerClassificationId());
-					preparedStatement.setString(5, transferObject.getPartner().getPartnerPhoneNumber());
-					preparedStatement.setString(6, transferObject.getPartner().getPartnerEmail());
+					preparedStatement.setInt(4, partner.getPartnerClassificationId());
+					preparedStatement.setString(5, partner.getPartnerPhoneNumber());
+					preparedStatement.setString(6, partner.getPartnerEmail());
 					preparedStatement.setInt(7, 0);
 					
 					preparedStatement.execute();
@@ -77,16 +77,40 @@ public class PartnerDao {
 				
 				try {
 					rs.next();
-					newAddedComplaintId = rs.getInt("partner_id");
+					newAddedPartnerId = rs.getInt("partner_id");
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 				
-				return newAddedComplaintId;
+				return newAddedPartnerId;
 	}
 		
 		
+public int findPartnerByName(Partner partner){
 		
+		connection = ConnectDBS.connectDatabase();
+		int partnerId = 0;
+
+				try {
+					preparedStatement = connection.prepareStatement("SELECT * FROM partners WHERE partner_company_name=?");
+					
+					preparedStatement.setString(1, partner.getPartnerCompanyName());					
+					
+					rs = preparedStatement.executeQuery();
+					 
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+				try {
+					rs.next();
+					partnerId = rs.getInt("partner_id");
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+				return partnerId;
+	}	
 		
 }
 

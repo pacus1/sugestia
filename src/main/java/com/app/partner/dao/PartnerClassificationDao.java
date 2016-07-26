@@ -20,18 +20,18 @@ public class PartnerClassificationDao {
 	private ResultSet rs;
 	
 	
-		public int checkPartnerClassificationId(TransferObject transferObject){
+		public int checkPartnerClassificationId(PartnerClassification partnerClassification){
 			String partnerType;
 			int partnerClassifId = 0;
 			
-			partnerType = transferObject.getPartnerClassification().getPartnerType();
+//			partnerType = partnerClassification.getPartnerType();
 			
 			connection = ConnectDBS.connectDatabase();
 					
 			try {
 				preparedStatement = connection.prepareStatement("SELECT * from partner_classification WHERE partner_type= ?");
 				
-				preparedStatement.setString(1, transferObject.getPartnerClassification().getPartnerType());
+				preparedStatement.setString(1, partnerClassification.getPartnerType());
 				
 				rs = preparedStatement.executeQuery();
 				

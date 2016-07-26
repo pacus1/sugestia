@@ -12,6 +12,7 @@ import com.app.user.domain.UserRole;
 public class Complaint extends AbstractModel{
 
 		private long complaintId;
+		private int partnerId;
 		private ComplaintStatusType complaintStatusType;
 		private ComplaintType complaintType;
 		private java.sql.Timestamp complaintTimeStamp;
@@ -28,6 +29,12 @@ public class Complaint extends AbstractModel{
 		
 		public String getSenderEmailAddress() {
 			return senderEmailAddress;
+		}
+		public int getPartnerId() {
+			return partnerId;
+		}
+		public void setPartnerId(int partnerId) {
+			this.partnerId = partnerId;
 		}
 		public void setSenderEmailAddress(String senderEmailAddress) {
 			this.senderEmailAddress = senderEmailAddress;
@@ -88,6 +95,12 @@ public class Complaint extends AbstractModel{
 		}
 	
 		
+		public ComplaintHistory getComplaintHistory() {
+			return complaintHistory;
+		}
+		public void setComplaintHistory(ComplaintHistory complaintHistory) {
+			this.complaintHistory = complaintHistory;
+		}
 		@Override
 		public String toString() {
 			return "Complain Id: " + complaintId + 

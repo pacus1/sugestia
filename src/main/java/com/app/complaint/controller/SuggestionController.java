@@ -26,7 +26,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.app.complaint.domain.Complaint;
 import com.app.complaint.domain.ComplaintStatusType;
 import com.app.complaint.domain.ComplaintType;
-import com.app.complaint.service.ComplaintService;
+import com.app.complaint.service.SuggestionService;
 import com.app.other.domain.TransferObject;
 
 import com.app.complaint.dao.SuggestionDao_old;
@@ -45,7 +45,7 @@ public class SuggestionController {
 	UserDao userDao;
 	
 	@Autowired
-	ComplaintService complaintService;
+	SuggestionService complaintService;
 
 	@Autowired
 	private SuggestionDao_old suggestionDao;
@@ -118,27 +118,30 @@ public class SuggestionController {
 // from this line down, added code from Ovi's SuggestionController class 
 	@RequestMapping("/logged/loggedSuggestion/submit")
 	public ModelAndView submit(
-			@Valid @ModelAttribute("suggestion") Complaint complaint, HttpServletRequest httpServletRequest,
+			@Valid @ModelAttribute("suggestion") TransferObject transferObject, HttpServletRequest httpServletRequest,
 			BindingResult bindingResult) throws AddressException, MessagingException {
 		ModelAndView modelAndView = null;
 		boolean hasErros = false;
 		if (!bindingResult.hasErrors()) {
+				
 				ComplaintType complaintType= ComplaintType.SUGGESTION;
-				complaint.setComplaintType(complaintType);
+				transferObject.getComplaint().setComplaintType(complaintType);
 				ComplaintStatusType complaintStatusType= ComplaintStatusType.PENDING;
-				complaint.setComplaintStatusType(complaintStatusType);
+				transferObject.getComplaint().setComplaintStatusType(complaintStatusType);
 				
 				long time = System.currentTimeMillis();
 				java.sql.Timestamp timestamp = new java.sql.Timestamp(time);
 				
-				complaint.setComplaintTimeStamp(timestamp);
+				transferObject.getComplaint().setComplaintTimeStamp(timestamp);
 			
 				String userEmail =httpServletRequest.getSession().getAttribute("currentUser").toString();
-
-//				userEmail = userEmail.replace("Welcome,", "");
-				complaint.setSenderEmailAddress(userEmail);
+				transferObject.getComplaint().setSenderEmailAddress(userEmail);
 				
-				complaintService.saveComplaint(complaint);
+//				for testing and temporary reason only
+				transferObject.getComplaint().setComplaintPartnerAsigneeName(transferObject.getPartner().getPartnerCompanyName());
+				
+				
+				complaintService.saveComplaint(transferObject);
 				
 				modelAndView = new ModelAndView();
 				modelAndView.setView(new RedirectView("/listall"));
@@ -149,7 +152,7 @@ public class SuggestionController {
 		
 		if (hasErros) {
 			modelAndView = new ModelAndView("/suggestion");
-			modelAndView.addObject("complaint", complaint);
+			modelAndView.addObject("complaint", transferObject.getComplaint());
 			modelAndView.addObject("errors", bindingResult.getAllErrors());
 		}
 		
