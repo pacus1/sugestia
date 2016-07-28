@@ -18,6 +18,7 @@ import com.app.other.domain.TransferObject;
 import com.app.partner.domain.Partner;
 import com.app.partner.service.PartnerService;
 import com.app.user.dao.UserDao;
+import com.app.user.domain.User;
 
 @Controller
 @RequestMapping("/")
@@ -67,14 +68,17 @@ public class PartnerRegisterController {
 			}
 
 		}
+		
+		User currentUser = new User();
+		currentUser = (User) httpServletRequest.getSession().getAttribute("currentUser");
 
 		if (httpServletRequest.getSession().getAttribute("currentUser") != null
-				|| httpServletRequest.getSession().getAttribute("currentPartner") != null) {
+				&& currentUser.getUserRole().contentEquals("PARTNER")) {
 
 			modelAndView = new ModelAndView("/logged/loggedIndex");
 
 			modelAndView.addObject("currentUser", httpServletRequest.getAttribute("currentUser"));
-			modelAndView.addObject("currentPartner", httpServletRequest.getAttribute("currentPartner"));
+//			modelAndView.addObject("currentPartner", httpServletRequest.getAttribute("currentPartner"));
 
 			return modelAndView;
 		}
@@ -100,8 +104,10 @@ public class PartnerRegisterController {
 		if (!bindingResult.hasErrors()) {
 			// this is used for testing purposes as the Partner Registration Form does not meet all requirements 
 			
+			int checkPartnerFound = 0;
+			checkPartnerFound = (int) partnerService.addPartner(transferObject);
 			
-			if (partnerService.addPartner(transferObject)!=-1) {
+			if (checkPartnerFound!=-1) {
 				
 				modelAndView = new ModelAndView("/login");
 				modelAndView.addObject("message", "Succesful registered now please login!");

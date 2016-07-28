@@ -18,14 +18,14 @@ public class LogoutController {
 	public ModelAndView logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 
 		System.out.println(httpServletRequest.getSession().getAttribute("currentUser"));
-		System.out.println(httpServletRequest.getSession().getAttribute("currentPartner"));
+//		System.out.println(httpServletRequest.getSession().getAttribute("currentPartner"));
 
 		httpServletRequest.getSession().removeAttribute("currentUser");
-		httpServletRequest.getSession().removeAttribute("currentPartner");
+//		httpServletRequest.getSession().removeAttribute("currentPartner");
 
 		
 		System.out.println(httpServletRequest.getSession().getAttribute("currentUser"));
-		System.out.println(httpServletRequest.getSession().getAttribute("currentPartner"));
+//		System.out.println(httpServletRequest.getSession().getAttribute("currentPartner"));
 
 		Cookie cookie[] = httpServletRequest.getCookies();
 

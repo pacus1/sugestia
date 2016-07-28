@@ -94,21 +94,40 @@ public class SuggestionController {
 
 		}
 
-		if (httpServletRequest.getSession().getAttribute("currentUser") == null
-				&& httpServletRequest.getSession().getAttribute("currentPartner") != null) {
-			modelAndView = new ModelAndView("/logged/loggedIndex");
-			modelAndView.addObject("message", "Sorry you can't add suggestions!");
-			return modelAndView;
-
-		} else if (httpServletRequest.getSession().getAttribute("currentUser") == null) {
+		User currentUser = new User();
+		currentUser = (User) httpServletRequest.getSession().getAttribute("currentUser");
+		
+		if (httpServletRequest.getSession().getAttribute("currentUser") == null){
 			modelAndView = new ModelAndView("/login");
 			modelAndView.addObject("message", "Please login first!");
 			return modelAndView;
-		} else if (httpServletRequest.getSession().getAttribute("currentUser") != null) {
-			modelAndView = new ModelAndView("/logged/loggedSuggestion");
-			return modelAndView;
+		}else{
+			if(currentUser.getUserRole().contentEquals("USER")){
+				modelAndView = new ModelAndView("/logged/loggedSuggestion");
+				return modelAndView;
+			}else{
+				modelAndView = new ModelAndView("/logged/loggedIndex");
+				modelAndView.addObject("message", "Sorry you can't add suggestions!");
+				return modelAndView;
+			}			
 		}
-		return new ModelAndView("/suggestion");
+			
+		
+//		if (httpServletRequest.getSession().getAttribute("currentUser") == null
+//				&& currentUser.getUserRole() != "USER") {
+//			modelAndView = new ModelAndView("/logged/loggedIndex");
+//			modelAndView.addObject("message", "Sorry you can't add suggestions!");
+//			return modelAndView;
+//
+//		} else if (httpServletRequest.getSession().getAttribute("currentUser") == null) {
+//			modelAndView = new ModelAndView("/login");
+//			modelAndView.addObject("message", "Please login first!");
+//			return modelAndView;
+//		} else if (httpServletRequest.getSession().getAttribute("currentUser") != null) {
+//			modelAndView = new ModelAndView("/logged/loggedSuggestion");
+//			return modelAndView;
+//		}
+//		return new ModelAndView("/suggestion");
 	}
 
 	@RequestMapping("/logged/loggedSuggestion/submit")

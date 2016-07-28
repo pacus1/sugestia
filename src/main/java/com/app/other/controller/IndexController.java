@@ -69,9 +69,13 @@ public class IndexController {
 
 		}
 
-		if (httpServletRequest.getSession().getAttribute("currentUser") != null
-				|| httpServletRequest.getSession().getAttribute("currentPartner") != null) {
+		User currentUser = new User();
+		currentUser = (User) httpServletRequest.getSession().getAttribute("currentUser");
+		
+//		if (httpServletRequest.getSession().getAttribute("currentUser") != null
+//				|| httpServletRequest.getSession().getAttribute("currentPartner") != null) {
 
+		if (httpServletRequest.getSession().getAttribute("currentUser") != null){
 			modelAndView = new ModelAndView("/logged/loggedIndex");
 
 //			modelAndView.addObject("currentUser", httpServletRequest.getAttribute("currentUser"));
@@ -80,9 +84,6 @@ public class IndexController {
 			complaintsList = suggestionService.listComplaintsForIndexPage();
 			modelAndView.addObject("complaints", complaintsList);
 
-			
-			
-			
 			return modelAndView;
 		}
 			

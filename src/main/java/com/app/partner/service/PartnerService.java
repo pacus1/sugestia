@@ -20,7 +20,7 @@ public class PartnerService {
 	public int addPartner (TransferObject transferObject){
 		int newAddedUserId;
 		int partnerClassificationId;	
-		int newAddedPartnerId = 0;
+		int newAddedPartnerId = -1;
 		
 		this.user = new User();
 		this.userDao = new UserDao();
@@ -30,14 +30,15 @@ public class PartnerService {
 		user = transferObject.getUser();
 				
 		newAddedUserId = userDao.checkUserEmail(user);
-		transferObject.getPartner().setUser_id(newAddedUserId);
+		
 		
 		if(newAddedUserId != -1){
-			
+			transferObject.getPartner().setUser_id(newAddedUserId);
 			partnerClassificationId = partnerClassificationDao.checkPartnerClassificationId(transferObject.getPartnerClassification());
 			transferObject.getPartner().setPartnerClassificationId(partnerClassificationId);
 			
 			newAddedPartnerId = partnerDao.addPartner(transferObject.getPartner());
+			
 		}
 		
 		return newAddedPartnerId;

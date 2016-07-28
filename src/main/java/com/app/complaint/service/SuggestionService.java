@@ -55,7 +55,6 @@ public class SuggestionService {
 //		complaint = transferObject.getComplaint();
 //		LOGGER.debug("Saving: " + complaint);
 		
-
 				
 		partnerId = partnerDao.findPartnerByName(transferObject.getPartner());
 		

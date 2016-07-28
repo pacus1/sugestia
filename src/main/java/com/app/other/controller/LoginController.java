@@ -23,7 +23,7 @@ public class LoginController {
 
 	// true if email and password exists
 	@Autowired
-	UserDao databaseDao;
+	UserDao userDao;
 
 	@Autowired
 	SuggestionService suggestionService;
@@ -55,14 +55,14 @@ public class LoginController {
 
 				modelAndView = new ModelAndView("/logged/loggedIndex");
 
-				if (databaseDao.checkUserLogin(currentUserEmail, currentUserPassword))
+				if (userDao.checkUserLogin(currentUserEmail, currentUserPassword))
 
 					httpServletRequest.getSession().setAttribute("currentUser",
-							databaseDao.getCurrentUser(currentUserEmail, currentUserPassword));
+							userDao.getCurrentUser(currentUserEmail, currentUserPassword));
 
-				if (databaseDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
+				if (userDao.checkPartnerLogin(currentUserPassword, currentUserPassword)) {
 					httpServletRequest.getSession().setAttribute("currentPartner",
-							databaseDao.getCurrentPartner(currentUserEmail, currentUserPassword));
+							userDao.getCurrentPartner(currentUserEmail, currentUserPassword));
 
 				}
 
@@ -91,7 +91,7 @@ public class LoginController {
 		ModelAndView modelAndView = null;
 		ArrayList<Complaint> complaintsList = new ArrayList<>();
 
-		if (databaseDao.checkUserLogin(email, password)) {
+		if (userDao.checkUserLogin(email, password)) {
 
 			if (request.getParameter("rememberMe") != null) {
 
@@ -107,19 +107,25 @@ public class LoginController {
 				response.addCookie(emailCookie);
 				response.addCookie(passwordCookie);
 
-				request.getSession().setAttribute("currentUser", databaseDao.getCurrentUser(email, password));
+				request.getSession().setAttribute("currentUser", userDao.getCurrentUser(email, password));
 
 				modelAndView = new ModelAndView("/logged/loggedIndex");
+				complaintsList = suggestionService.listComplaintsForIndexPage();
+				modelAndView.addObject("complaints", complaintsList);
+				return modelAndView;
 
-			}
-			if (request.getParameter("rememberMe") == null) {
+			}else {                    
 
 				modelAndView = new ModelAndView("/logged/loggedIndex");
-
-				request.getSession().setAttribute("currentUser", databaseDao.getCurrentUser(email, password));
+				request.getSession().setAttribute("currentUser", userDao.getCurrentUser(email, password));
+				
+				complaintsList = suggestionService.listComplaintsForIndexPage();
+				modelAndView.addObject("complaints", complaintsList);
+				return modelAndView;
 			}
 
-		} else if (databaseDao.checkPartnerLogin(email, password)) {
+		 //if (userDao.checkPartnerLogin(email, password))
+		} else {
 
 			if (request.getParameter("rememberMe") != null) {
 
@@ -135,31 +141,27 @@ public class LoginController {
 				response.addCookie(emailCookie);
 				response.addCookie(passwordCookie);
 
-				request.getSession().setAttribute("currentPartner", databaseDao.getCurrentPartner(email, password));
+				request.getSession().setAttribute("currentPartner", userDao.getCurrentPartner(email, password));
 
 				modelAndView = new ModelAndView("/logged/loggedIndex");
+				complaintsList = suggestionService.listComplaintsForIndexPage();
+				modelAndView.addObject("complaints", complaintsList);
+				return modelAndView;
 
-			}
-
-			if (request.getParameter("rememberMe") == null) {
-				modelAndView = new ModelAndView("/logged/loggedIndex");
-
-				request.getSession().setAttribute("currentPartner", databaseDao.getCurrentPartner(email, password));
+			}else{
+//				modelAndView = new ModelAndView("/logged/loggedIndex");
+				modelAndView = new ModelAndView("/login");
+				modelAndView.addObject("message", "Invalid User or Password!");
+				return modelAndView;
+				//request.getSession().setAttribute("currentPartner", userDao.getCurrentPartner(email, password));
 			}
 
 		}
-
-		else {
-			modelAndView = new ModelAndView("/login");
-			modelAndView.addObject("message", "Invalid User or Password!");
-		}
 		
-		
-		
-		modelAndView = new ModelAndView("/logged/loggedIndex");
-		complaintsList = suggestionService.listComplaintsForIndexPage();
-		modelAndView.addObject("complaints", complaintsList);
-		return modelAndView;
+//		modelAndView = new ModelAndView("/index");
+//		complaintsList = suggestionService.listComplaintsForIndexPage();
+//		modelAndView.addObject("complaints", complaintsList);
+//		return modelAndView;
 
 	}
 

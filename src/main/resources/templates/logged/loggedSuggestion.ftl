@@ -164,7 +164,7 @@
                                                <optgroup label="Servicii Private">
                                                   <option value="Telefonie">Telefonie</option>
                                                   <option value="Internet">Internet</option>
-                                                  <option value="Gunoi/Reciclare">Gunoi/Reciclare</option>
+                                                  <option value="Gunoaie/Reciclare">Gunoaie/Reciclare</option>
                                                   <option value="Taxi">Taxi</option>
                                                   <option value="Curierat">Curierat</option>
                                                </optgroup>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.app.user.dao.UserDao;
+import com.app.user.domain.User;
 
 
 @Controller
@@ -55,9 +56,12 @@ public class PartnerInformationController {
 			}
 
 		}
+		
+		User currentUser = new User();
+		currentUser = (User) httpServletRequest.getSession().getAttribute("currentUser");
 
-		if (httpServletRequest.getSession().getAttribute("currentUser") != null
-				|| httpServletRequest.getSession().getAttribute("currentPartner") != null) {
+		if (httpServletRequest.getSession().getAttribute("currentUser") != null 
+				&& currentUser.getUserRole().contentEquals("PARTNER")) {
 
 			modelAndView = new ModelAndView("/logged/loggedPartnerInformation");
 

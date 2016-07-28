@@ -33,16 +33,16 @@ public class SecurityFilter implements Filter {
 
 		User user = (User) ((HttpServletRequest) request).getSession().getAttribute("currentUser");
 
-		Partner partner = (Partner) ((HttpServletRequest) request).getSession().getAttribute("currentPartner");
+//		Partner partner = (Partner) ((HttpServletRequest) request).getSession().getAttribute("currentPartner");
 
 		System.out.println("Thread name: " + Thread.currentThread().getName() + ", current user: "
 				+ (user != null ? user.getUserEmail() : null));
 
-		System.out.println("Thread name: " + Thread.currentThread().getName() + ", current partner: "
-				+ (partner != null ? partner.getPartnerEmail() : null));
+//		System.out.println("Thread name: " + Thread.currentThread().getName() + ", current partner: "
+//				+ (partner != null ? partner.getPartnerEmail() : null));
 
 		securityService.setCurrentUser(user);
-		securityService.setCurrentPartner(partner);
+//		securityService.setCurrentPartner(partner);
 
 		chain.doFilter(request, response);
 
