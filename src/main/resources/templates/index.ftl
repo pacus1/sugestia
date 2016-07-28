@@ -127,57 +127,29 @@
              <h3 id=list-group-contextual-classes style="color:#337AB7; font-weight:200;">Cele mai noi:</h3></br> 
                    <div style="text-align:left;  overflow: scroll; overflow: -moz-scrollbars-vertical; overflow-y: scroll;  height:498px;"   > 
                       <div class=pre-scrollable bs-example data-example-id=panel-with-list-group style="max-height:494px;"> 
-                             <div class="panel panel-default"> 
-                                   <div class=panel-heading><span class="sugestie">SUGESTIE</span>Titlu Sugestie</div>
-                                        <div class=panel-body>
-                                                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
-                                        </div> 
-                                   </div>
-
+                            
+						<!-- begin iteration -->
+						[#if complaints??]
+						
+							[#list complaints as complaint] 
+								
+								<div class="panel panel-default"> 
+					                                   <div class=panel-heading><span class="sugestie">[#if complaint.complaintType??]${complaint.complaintType}[/#if]</span>[#if complaint.complaintTitle??]${complaint.complaintTitle}[/#if]</div>
+					                                        <div class=panel-body>
+					                                                <p>[#if complaint.complaintBody??]${complaint.complaintBody}[/#if]</p> 
+					                                        </div> 
+					           </div>
+									
+								</tr>
+							[/#list]
+							
+						[/#if]
+						<!-- end iteration -->			
                           
-                             <div class="panel panel-default"> 
-                                   <div class=panel-heading><span class="reclamatie">RECLAMATIE</span>Titlu Reclamatie</div>
-                                        <div class=panel-body>
-                                                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
-                                        </div> 
-                                   </div>
-
-                           
-                             <div class="panel panel-default"> 
-                                   <div class=panel-heading><span class="sugestie">SUGESTIE</span>Titlu Sugestie</div>
-                                        <div class=panel-body>
-                                                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
-                                        </div> 
-                                   </div>
-                              <div class="panel panel-default"> 
-                                   <div class=panel-heading><span class="sugestie">SUGESTIE</span>Titlu Sugestie</div>
-                                        <div class=panel-body>
-                                                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
-                                        </div> 
-                                   </div>
-
-                          
-                             <div class="panel panel-default"> 
-                                   <div class=panel-heading><span class="reclamatie">RECLAMATIE</span>Titlu Reclamatie</div>
-                                        <div class=panel-body>
-                                                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
-                                        </div> 
-                                   </div>
-
-                           
-                             <div class="panel panel-default"> 
-                                   <div class=panel-heading><span class="sugestie">SUGESTIE</span>Titlu Sugestie</div>
-                                        <div class=panel-body>
-                                                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p> 
-                                        </div> 
-                                   </div>
                              </div>
                      </div>
 </div>
-
-
-       
-
+                                   
         <div class="col-md-3">
              <div class="panel panel-primary" style="border-style:solid; border-color:#67BCDB; box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.47);"> 
                      <div class=panel-heading style="background-color:#67BCDB; border-style:solid; border-color:#67BCDB; "> 

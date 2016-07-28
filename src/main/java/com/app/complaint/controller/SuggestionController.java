@@ -1,6 +1,7 @@
 package com.app.complaint.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -45,10 +46,13 @@ public class SuggestionController {
 	UserDao userDao;
 	
 	@Autowired
-	SuggestionService complaintService;
+	SuggestionService suggestionService;
 
 	@Autowired
 	private SuggestionDao_old suggestionDao;
+	
+	private ArrayList<Complaint> complaintsList = new ArrayList<>();
+	private User userAdded = new User();
 	
 	@RequestMapping("/suggestion")
 	public ModelAndView partnerInformation(HttpServletRequest httpServletRequest) {
@@ -141,10 +145,11 @@ public class SuggestionController {
 				transferObject.getComplaint().setComplaintPartnerAsigneeName(transferObject.getPartner().getPartnerCompanyName());
 				
 				
-				complaintService.saveComplaint(transferObject);
+				suggestionService.saveComplaint(transferObject);
+				userAdded = transferObject.getUser();
 				
 				modelAndView = new ModelAndView();
-				modelAndView.setView(new RedirectView("/listall"));
+				modelAndView.setView(new RedirectView("/logged/listUserSuggestions"));
 				
 		} else {
 			hasErros=true;
@@ -160,19 +165,67 @@ public class SuggestionController {
 		
 	}
 
-	@RequestMapping("/listall")
-	public ModelAndView list(Complaint complaint) throws Exception {
-		ModelAndView modelAndView = new ModelAndView("/listall");
-		modelAndView.addObject("complaints", complaintService.listAll());
-		//modelAndView.addObject("currentUser", securityService.getCurrentUser());
-		return modelAndView;
+	@RequestMapping("/logged/listUserSuggestions")
+	public ModelAndView list(HttpServletRequest httpServletRequest) {
+		ModelAndView modelAndView = null;
+
+		User user = (User) httpServletRequest.getSession().getAttribute("currentUser");
+
+		if (user.getUserRole().equals("USER")) {
+			modelAndView = new ModelAndView("/logged/listUserSuggestions");
+			
+			complaintsList = suggestionService.listComplaintsByUser(user);
+			
+			modelAndView.addObject("complaints", complaintsList);
+			return modelAndView;
+		}
+		return new ModelAndView("/");
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	public ModelAndView list(Complaint complaint) throws Exception {
+//		ModelAndView modelAndView = new ModelAndView("/logger/listUserSuggestions");
+//		modelAndView.addObject("complaints", suggestionService.listAll());
+//		//modelAndView.addObject("currentUser", securityService.getCurrentUser());
+//		return modelAndView;
+//		
+//		
+//		
+//		ModelAndView modelAndView = null;
+//
+//		User user = (User) httpServletRequest.getSession().getAttribute("currentUser");
+//
+//		if (user.getUserRole().equals("ADMIN")) {
+//			modelAndView = new ModelAndView("/admin/listAllSuggestions");
+//			
+//			complaintsList = adminService.getAdminPendingList();
+//			
+//			modelAndView.addObject("complaints", complaintsList);
+//			return modelAndView;
+//		}
+//		return new ModelAndView("/");
+//		
+//	}
 	
 	
 	@RequestMapping("/save")
 	public ModelAndView save(Complaint complaint) throws Exception {
 		ModelAndView modelAndView = new ModelAndView("/listall");
-		modelAndView.addObject("complaints", complaintService.listAll());
+//		modelAndView.addObject("complaints", suggestionService.listAll());
 		//modelAndView.addObject("currentUser", securityService.getCurrentUser());
 		return modelAndView;
 	}

@@ -12,9 +12,6 @@ public class ConnectDBS {
 //	private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/sugestiaDB?user=postgres&password=admin";
 	
 	//connection to Heroku dbs
-	//private static final String DATABASE_URL = "jdbc:postgresql://ec2-54-228-219-2.eu-west-1.compute.amazonaws.com:5432/davlnk5ukati5r?sslmode=require&user=pxtvzlortfjhdh&password=QY9jN5mm1dMBMJqVGZ9RavILOe";
-
-	// 
 	private static final String DATABASE_URL = "jdbc:postgresql://ec2-54-75-238-7.eu-west-1.compute.amazonaws.com:5432/d7uspq8tpsf5g?sslmode=require&user=ruighabjkqpgan&password=P84k93A2Vvvu5pnXc31pHHoVPN";
 	
 	static Connection connection = null;

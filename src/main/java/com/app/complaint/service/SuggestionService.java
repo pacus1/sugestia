@@ -1,6 +1,7 @@
 package com.app.complaint.service;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -20,6 +21,7 @@ import org.springframework.util.StringUtils;
 
 import com.app.complaint.dao.*;
 import com.app.complaint.domain.Complaint;
+import com.app.complaint.domain.ComplaintStatusType;
 import com.app.other.domain.TransferObject;
 import com.app.other.service.SendMail;
 import com.app.partner.dao.PartnerClassificationDao;
@@ -91,8 +93,9 @@ public class SuggestionService {
 		
 	}
 	
-	public Collection<Complaint> listAll() {
-		return dao.getAll();
+	public ArrayList<Complaint> listComplaintsByUser(User user) {
+		
+		return dao.listAllComplaintsByUser(user);
 	}
 
 	public Complaint get(Long id) {
@@ -101,6 +104,10 @@ public class SuggestionService {
 
 	}
 
+	public ArrayList<Complaint> listComplaintsForIndexPage() {
+		
+		return dao.listAllComplaintsByStatus(ComplaintStatusType.APPROVED);
+	}
 
 
 

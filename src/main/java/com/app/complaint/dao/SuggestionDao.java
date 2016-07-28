@@ -92,9 +92,30 @@ public class SuggestionDao {
 		complaintsList = new ArrayList<>();
 		
 				try {
-					preparedStatement = connection.prepareStatement("SELECT * from complaint WHERE status_type = ?");
+					preparedStatement = connection.prepareStatement("SELECT * from complaint WHERE status_type = ? ORDER BY timestamp DESC");
 					String test = complaintStatusType.toString();
 					preparedStatement.setString(1, complaintStatusType.toString());
+					
+					rs = preparedStatement.executeQuery();
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+
+				complaintsList = addResultsetToArrayList(rs);
+				     	
+				return complaintsList;
+			}	
+	
+public ArrayList<Complaint> listAllComplaintsByUser(User user)   {
+		
+		connection = ConnectDBS.connectDatabase();
+		complaintsList = new ArrayList<>();
+		
+				try {
+					preparedStatement = connection.prepareStatement("SELECT * from complaint WHERE sender_email_address = ? ORDER BY timestamp DESC ");
+					
+					preparedStatement.setString(1, user.getUserEmail());
 					
 					rs = preparedStatement.executeQuery();
 					
@@ -109,6 +130,7 @@ public class SuggestionDao {
 //	        	}        		        	
 				return complaintsList;
 			}	
+	
 	
 	public boolean updateComplaintStatus(int id, ComplaintStatusType complaintStatusType)   {
 			
@@ -169,29 +191,6 @@ public ArrayList<Complaint> listAllComplaintsOrderByTimeStamp()   {
 	        	
 				return complaintsList;
 			}	
-
-	public ArrayList<Complaint> listAllComplaintsByUserEmail(String userEmail)   {
-	
-	connection = ConnectDBS.connectDatabase();
-	complaintsList = new ArrayList<>();
-	
-		
-			try {
-				preparedStatement = connection.prepareStatement("SELECT * from complaint WHERE sender_email_address = ?");
-				
-				preparedStatement.setString(1, userEmail);
-				
-				rs = preparedStatement.executeQuery();
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-        	complaintsList = addResultsetToArrayList(rs);	
-        		        	
-			return complaintsList;
-	}	
-
 	
 	//------------------------------------------------------------------------
 	//       the method below is under development
