@@ -145,77 +145,80 @@
 			    	<h3 class="panel-title" align="center">Va rugam sa introduceti urmatoarele informatii:</h3>
 			 	</div>
 			  	<div class="panel-body">
-			    	<form accept-charset="UTF-8" role="form">
+			    	<form accept-charset="UTF-8" role="form" action="/logged/loggedComplaint/submit" method="POST">
                     <fieldset>
-                                        <div class="form-group" style="padding-top:12px;" align="center">
-                                        <label for="selectcategorie">Alege categoria din care face parte compania/institutia caruia vreti sa-i trimiteti reclamatia:</label>
-			    		    <select name="categorie" id="selectcategorie" required style="font-size:25px;">
+                                       <div class="form-group" style="padding-top:12px;" align="center">
+                                        <label for="selectcategorie">Alege categoria din care face parte compania/institutia caruia vreti sa-i trimiteti sugestia:</label>
+			    		    <select name="partnerClassification.partnerType" id="selectcategorie" required style="font-size:16px;">
                                                <optgroup label="Institutii Publice">
-                                                  <option value="volvo">Primaria</option>
-                                                  <option value="saab">Consiliul Local</option>
-                                                  <option value="saab">Politie</option>
+                                                  <option value="Primaria">Primaria</option>
+                                                  <option value="Consiliul Local">Consiliul Local</option>
+                                                  <option value="Politie">Politie</option>
                                                </optgroup>
                                                <optgroup label="Servicii Publice">
-                                                  <option value="volvo">Cluj Bike</option>
-                                                  <option value="saab">Parcuri</option>
-                                                  <option value="saab">ADP</option>
-                                                  <option value="saab">RATUC</option>
+                                                  <option value="Cluj Bike">Cluj Bike</option>
+                                                  <option value="Parcuri">Parcuri</option>
+                                                  <option value="ADP">ADP</option>
+                                                  <option value="RATUC">RATUC</option>
                                                </optgroup>
                                                <optgroup label="Servicii Private">
-                                                  <option value="volvo">Telefonie</option>
-                                                  <option value="saab">Internet</option>
-                                                  <option value="saab">Gunoi/Reciclare</option>
-                                                  <option value="saab">Taxi</option>
-                                                  <option value="saab">Curierat</option>
+                                                  <option value="Telefonie">Telefonie</option>
+                                                  <option value="Internet">Internet</option>
+                                                  <option value="Gunoi/Reciclare">Gunoi/Reciclare</option>
+                                                  <option value="Taxi">Taxi</option>
+                                                  <option value="Curierat">Curierat</option>
                                                </optgroup>
                                                <optgroup label="Utilitati">
-                                                  <option value="volvo">Apa</option>
-                                                  <option value="saab">Gaze</option>
-                                                  <option value="saab">Electricitate</option>
+                                                  <option value="Apa">Apa</option>
+                                                  <option value="Gaze">Gaze</option>
+                                                  <option value="Electricitate">Electricitate</option>
                                                </optgroup>
                                                <optgroup label="Localuri">
-                                                  <option value="volvo">Cafenele</option>
-                                                  <option value="saab">Restaurante</option>
-                                                  <option value="saab">Baruri</option>
+                                                  <option value="Cafenele">Cafenele</option>
+                                                  <option value="Restaurante">Restaurante</option>
+                                                  <option value="Baruri">Baruri</option>
                                                </optgroup>
                                                <optgroup label="Cazare">
                                                   <option value="volvo">Hotele</option>
                                                   <option value="saab">Pensiuni</option>
                                                </optgroup>
                                                <optgroup label="Evenimente">
-                                                  <option value="volvo">Festivaluri</option>
-                                                  <option value="saab">Targuri</option>
-                                                  <option value="saab">Concerte</option>
+                                                  <option value="Festivaluri">Festivaluri</option>
+                                                  <option value="Targuri">Targuri</option>
+                                                  <option value="Concerte">Concerte</option>
                                                </optgroup>
                                                <optgroup label="Cultura">
-                                                  <option value="volvo">Teatru</option>
-                                                  <option value="saab">Opera</option>
-                                                  <option value="saab">Film</option>
+                                                  <option value="Teatru">Teatru</option>
+                                                  <option value="Opera">Opera</option>
+                                                  <option value="Film">Film</option>
                                                </optgroup>
                                                <optgroup label="Evenimente">
-                                                  <option value="volvo">Mall-uri</option>
-                                                  <option value="saab">Centre Comerciale</option>
-                                                  <option value="saab">Second-Hand</option>
-                                                  <option value="volvo">Outlet-uri</option>
-                                                  <option value="saab">Electronice</option>
-                                                  <option value="saab">Farmacii</option>
+                                                  <option value="Mall-uri">Mall-uri</option>
+                                                  <option value="Centre Comerciale">Centre Comerciale</option>
+                                                  <option value="Second-Hand">Second-Hand</option>
+                                                  <option value="Outlet-uri">Outlet-uri</option>
+                                                  <option value="Electronice">Electronice</option>
+                                                  <option value="Farmacii">Farmacii</option>
                                                </optgroup>
                                                <optgroup label="Sanatate">
-                                                  <option value="volvo">Clinici</option>
-                                                  <option value="saab">Spitale</option>
-                                                  <option value="saab">Cabinete individuale</option>
+                                                  <option value="Clinici">Clinici</option>
+                                                  <option value="Spitaleb">Spitale</option>
+                                                  <option value="Cabinete individuale">Cabinete individuale</option>
                                                </optgroup>
                                             </select>
 			    		</div>
 			    	  	<div class="form-group">
-			    		    <input class="form-control" placeholder="Numele Companiei / Institutiei" name="nume" type="text">
+			    		    <input class="form-control" placeholder="Numele Companiei / Institutiei" name="partner.partnerCompanyName" type="text"/>
 			    		</div>
-                                        <div class="form-group">
-			    		    <input class="form-control" placeholder="Titlul Sugestiei *" name="titlu" type="text" required>
+                        <div class="form-group">
+			    		     <input class="form-control" placeholder="Titlul Sugestiei *" name="complaint.complaintTitle" type="text" required >
 			    		</div>
-                                        <div class="form-group">
-			    		    <textarea class="form-control" placeholder="Descriere *" name="descriere" type="textarea" rows="4" required></textarea>
+                        <div class="form-group">
+			    		    <textarea class="form-control" placeholder="Descriere *" name="complaint.complaintBody" type="text" rows="4"  required >
+			    		    </textarea>
 			    		</div>
+			    		<div class="form-group" name="complaintType"></div>
+
                                         <p>Adauga poze: (optional)</p>
 			    		<input type="file" name="pic1" accept="image/*" style="padding-top:10px; padding-bottom:10px;">
 			    		<input type="file" name="pic2" accept="image/*" style="padding-top:10px; padding-bottom:10px;">

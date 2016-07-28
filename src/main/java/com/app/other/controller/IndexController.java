@@ -30,7 +30,7 @@ public class IndexController {
 	public ModelAndView index(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) {
 		ModelAndView modelAndView = null;
 
-
+	ArrayList<Complaint> complaintsList = new ArrayList<>();
 
 		if (httpServletRequest.getCookies() != null && httpServletRequest.getCookies().length > 1
 				&& (httpServletRequest.getSession().getAttribute("currentUser") == null
@@ -61,7 +61,8 @@ public class IndexController {
 
 				}
 
-				
+				complaintsList = suggestionService.listComplaintsForIndexPage();
+				modelAndView.addObject("complaints", complaintsList);
 				
 				return modelAndView;
 			}
@@ -73,18 +74,20 @@ public class IndexController {
 
 			modelAndView = new ModelAndView("/logged/loggedIndex");
 
-			modelAndView.addObject("currentUser", httpServletRequest.getAttribute("currentUser"));
-			modelAndView.addObject("currentPartner", httpServletRequest.getAttribute("currentPartner"));
+//			modelAndView.addObject("currentUser", httpServletRequest.getAttribute("currentUser"));
+//			modelAndView.addObject("currentPartner", httpServletRequest.getAttribute("currentPartner"));
+			
+			complaintsList = suggestionService.listComplaintsForIndexPage();
+			modelAndView.addObject("complaints", complaintsList);
 
+			
+			
+			
 			return modelAndView;
 		}
 			
 			modelAndView = new ModelAndView("/index");
-
-			ArrayList<Complaint> complaintsList = new ArrayList<>();
-			
 			complaintsList = suggestionService.listComplaintsForIndexPage();
-			
 			modelAndView.addObject("complaints", complaintsList);
 			return modelAndView;
 		

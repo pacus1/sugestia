@@ -1,5 +1,7 @@
 package com.app.other.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.app.complaint.domain.Complaint;
+import com.app.complaint.service.SuggestionService;
 import com.app.user.dao.UserDao;
 
 @Controller
@@ -21,9 +25,17 @@ public class LoginController {
 	@Autowired
 	UserDao databaseDao;
 
+	@Autowired
+	SuggestionService suggestionService;
+
+//	private Complaint complaint;
+	
+//	private ArrayList<Complaint> complaintsList = new ArrayList<>();
+	
 	@RequestMapping("/login")
 	public ModelAndView login(HttpServletRequest httpServletRequest) {
 		ModelAndView modelAndView = null;
+		ArrayList<Complaint> complaintsList = new ArrayList<>();
 
 		if (httpServletRequest.getCookies() != null && httpServletRequest.getCookies().length > 1
 				&& (httpServletRequest.getSession().getAttribute("currentUser") == null
@@ -77,6 +89,7 @@ public class LoginController {
 	public ModelAndView validateLogin(@RequestParam("email") String email, @RequestParam("password") String password,
 			HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView modelAndView = null;
+		ArrayList<Complaint> complaintsList = new ArrayList<>();
 
 		if (databaseDao.checkUserLogin(email, password)) {
 
@@ -140,7 +153,12 @@ public class LoginController {
 			modelAndView = new ModelAndView("/login");
 			modelAndView.addObject("message", "Invalid User or Password!");
 		}
-
+		
+		
+		
+		modelAndView = new ModelAndView("/logged/loggedIndex");
+		complaintsList = suggestionService.listComplaintsForIndexPage();
+		modelAndView.addObject("complaints", complaintsList);
 		return modelAndView;
 
 	}

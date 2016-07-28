@@ -87,12 +87,7 @@ public class SuggestionController {
 
 				}
 				
-				modelAndView.addObject("suggestion", new Complaint()); // added
-																		// code
-																		// from
-																		// Ovi's
-																		// SugestionController
-																		// class
+				modelAndView.addObject("suggestion", new Complaint());
 
 				return modelAndView;
 			}
@@ -111,15 +106,11 @@ public class SuggestionController {
 			return modelAndView;
 		} else if (httpServletRequest.getSession().getAttribute("currentUser") != null) {
 			modelAndView = new ModelAndView("/logged/loggedSuggestion");
-//			modelAndView = new ModelAndView();
-//			modelAndView.setView(new RedirectView("/logged/loggedSuggestion"));
 			return modelAndView;
 		}
 		return new ModelAndView("/suggestion");
 	}
 
-	
-// from this line down, added code from Ovi's SuggestionController class 
 	@RequestMapping("/logged/loggedSuggestion/submit")
 	public ModelAndView submit(
 			@Valid @ModelAttribute("suggestion") TransferObject transferObject, HttpServletRequest httpServletRequest,
@@ -160,9 +151,7 @@ public class SuggestionController {
 			modelAndView.addObject("complaint", transferObject.getComplaint());
 			modelAndView.addObject("errors", bindingResult.getAllErrors());
 		}
-		
 		return modelAndView;	
-		
 	}
 
 	@RequestMapping("/logged/listUserSuggestions")
@@ -181,19 +170,6 @@ public class SuggestionController {
 		}
 		return new ModelAndView("/");
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
