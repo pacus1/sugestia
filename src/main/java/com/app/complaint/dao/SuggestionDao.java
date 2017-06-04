@@ -195,16 +195,25 @@ public ArrayList<Complaint> listAllComplaintsOrderByTimeStamp()   {
 	//------------------------------------------------------------------------
 	//       the method below is under development
 	//------------------------------------------------------------------------
-	public ArrayList<Complaint> listAllComplaintsBySelection(String userEmail)   {
+	public ArrayList<Complaint> listAllComplaintsBySelection(String suggestionType, String suggestionCategory, String sortTimestampType)   {
 	
 	connection = ConnectDBS.connectDatabase();
 	complaintsList = new ArrayList<>();
-		
+	
+	
+	//SELECT STATEMENT PREPARATION
+	
 			try {
-				preparedStatement = connection.prepareStatement("SELECT * from complaint,partner WHERE sender_email_address = ?");
-				
-				preparedStatement.setString(1, userEmail);
-				
+				if (suggestionType=="ALL"){
+					preparedStatement = connection.prepareStatement("SELECT * from complaint ORDER BY timestamp " + sortTimestampType);
+//					preparedStatement.setString(1, sortTimestampType);
+				}else{
+					
+					preparedStatement = connection.prepareStatement("SELECT * from complaint WHERE suggestion_type = ? ORDER BY timestamp " + sortTimestampType);
+					preparedStatement.setString(1, suggestionType);
+//					preparedStatement.setString(1, sortTimestampType);
+				}
+					
 				rs = preparedStatement.executeQuery();
 				
 			} catch (SQLException e) {
@@ -238,7 +247,7 @@ public ArrayList<Complaint> listAllComplaintsOrderByTimeStamp()   {
 	        		timeStamp = rs.getTimestamp("timestamp");
 	        		complaint.setComplaintTimeStamp(rs.getTimestamp("timestamp"));
 	        		
-	        	//	System.out.println(complaint.toString());
+	        		System.out.println(complaint.toString());
 	        		
 	        		complaintsList.add(complaint);
         		}
@@ -246,8 +255,7 @@ public ArrayList<Complaint> listAllComplaintsOrderByTimeStamp()   {
         	} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
-        		        	
+			        		        	
 			return complaintsList;
 		}	
 	
