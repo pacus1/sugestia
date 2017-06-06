@@ -17,8 +17,8 @@ public class SendMail {
         // Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
          final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
          
-         String username = "sugestiainfo@gmail.com";
-         String password = "Project.12";
+         String username = "sergiulast@gmail.com";
+         String password = "nusuntacasa";
          
          // Get a Properties object
          Properties props = System.getProperties();

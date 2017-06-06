@@ -89,7 +89,7 @@ public class SuggestionService {
 		}
 		
 		SendMail.SiteMailSend(emailComplaintSender, "", emailTitle, emailBody);
-		
+
 	}
 	
 	public ArrayList<Complaint> listComplaintsByUser(User user) {
